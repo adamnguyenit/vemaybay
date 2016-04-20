@@ -4,9 +4,26 @@ namespace app\controllers;
 
 use app\models\News;
 use yii\web\BadRequestHttpException;
+use yii\filters\VerbFilter;
 
 class NewsController extends Controller
 {
+
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['verbs'] = [
+            'class' => VerbFilter::className(),
+            'actions' => [
+                'create' => ['POST'],
+                'info' => ['GET'],
+                'update' => ['PUT'],
+                'delete' => ['DELETE'],
+                'list' => ['GET'],
+            ],
+        ];
+        return $behaviors;
+    }
 
     public function actionCreate()
     {
@@ -17,12 +34,6 @@ class NewsController extends Controller
             throw new BadRequestHttpException();
         }
         return $model;
-    }
-
-    public function actionListNews()
-    {
-        $promotionsNewses = News::find()->orderBy(['created_at' => SORT_DESC])->all();
-        return $promotionsNewses;
     }
 
     public function actionInfo($id)
@@ -50,4 +61,18 @@ class NewsController extends Controller
         return $model;
     }
 
+    public function actionDelete($id)
+    {
+        $model = News::findOne($id);
+        if ($model === null || !$model->delete()) {
+            throw new BadRequestHttpException();
+        }
+        return [];
+    }
+
+    public function actionList()
+    {
+        $promotionsNewses = News::find()->orderBy(['created_at' => SORT_DESC])->all();
+        return $promotionsNewses;
+    }
 }

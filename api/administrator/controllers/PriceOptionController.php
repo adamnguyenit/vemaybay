@@ -2,8 +2,23 @@
 
 namespace app\controllers;
 
+use yii\filters\VerbFilter;
+
 class PriceOptionController extends Controller
 {
+
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['verbs'] = [
+            'class' => VerbFilter::className(),
+            'actions' => [
+                'update' => ['PUT'],
+                'list' => ['GET'],
+            ],
+        ];
+        return $behaviors;
+    }
 
     public function actionList()
     {
@@ -21,5 +36,4 @@ class PriceOptionController extends Controller
         \Yii::$app->atservice->updatePriceOption($id, $params);
         return [];
     }
-
 }

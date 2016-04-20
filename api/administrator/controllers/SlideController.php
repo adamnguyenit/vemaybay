@@ -4,9 +4,26 @@ namespace app\controllers;
 
 use app\models\Slide;
 use yii\web\BadRequestHttpException;
+use yii\filters\VerbFilter;
 
 class SlideController extends Controller
 {
+
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['verbs'] = [
+            'class' => VerbFilter::className(),
+            'actions' => [
+                'create' => ['POST'],
+                'info' => ['GET'],
+                'update' => ['PUT'],
+                'delete' => ['DELETE'],
+                'list' => ['GET'],
+            ],
+        ];
+        return $behaviors;
+    }
 
     public function actionCreate()
     {
@@ -17,12 +34,6 @@ class SlideController extends Controller
             throw new BadRequestHttpException();
         }
         return $model;
-    }
-
-    public function actionList()
-    {
-        $models = Slide::find()->orderBy(['index' => SORT_ASC])->all();
-        return $models;
     }
 
     public function actionUpdate($id)
@@ -39,15 +50,6 @@ class SlideController extends Controller
         return $model;
     }
 
-    public function actionDelete()
-    {
-        $model = Slide::findOne($id);
-        if ($model === null || !$model->delete()) {
-            throw new BadRequestHttpException();
-        }
-        return [];
-    }
-
     public function actionInfo($id)
     {
         $model = Slide::findOne($id);
@@ -57,4 +59,18 @@ class SlideController extends Controller
         return $model;
     }
 
+    public function actionDelete()
+    {
+        $model = Slide::findOne($id);
+        if ($model === null || !$model->delete()) {
+            throw new BadRequestHttpException();
+        }
+        return [];
+    }
+
+    public function actionList()
+    {
+        $models = Slide::find()->orderBy(['index' => SORT_ASC])->all();
+        return $models;
+    }
 }

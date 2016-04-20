@@ -93,7 +93,7 @@ class UserController extends Controller
         return [];
     }
 
-    public function actionListUsers()
+    public function actionList()
     {
         $role = \Yii::$app->request->get('role', 'collaborator');
         $users = User::find()->where(['role' => $role])->all();
