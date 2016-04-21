@@ -7,7 +7,7 @@ $db = require __DIR__ . '/db.php';
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 
 $config = [
-    'id' => 'haiphiyen-api',
+    'id' => 'haiphiyen-api-administrator',
     'basePath' => dirname(__DIR__),
     'modules' => $modules,
     'components' => [
@@ -37,7 +37,7 @@ $config = [
             'class' => 'app\components\atservice\Service',
             'username' => 'vmbhaiphiyen',
             'password' => 'WEtDGEwa',
-        ]
+        ],
     ],
 ];
 

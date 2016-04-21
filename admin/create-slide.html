@@ -148,6 +148,7 @@
                                     <div class="form-group">
                                         <label class="control-label" for="image">Ảnh <span class="required">*</span></label>
                                         <input type="file" id="link" name="image" required="required">
+                                    </div>
                                     <div class="ln_solid"></div>
                                     <div class="form-group">
                                         <button id="create-btn" type="button" class="btn btn-success">Tạo slide</button>
@@ -221,7 +222,10 @@
                 $('#create-btn').html('Tạo slide');
                 alert('Đã có lỗi xảy ra');
             };
-            request('POST', 'slides', formData, null, onSuccess, onError, {processData: false, contentType: false});
+            request('POST', 'slides', formData, null, onSuccess, onError, {
+                processData: false,
+                contentType: false
+            });
         }
 
         $(document).ready(function() {

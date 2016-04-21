@@ -31,7 +31,7 @@ function getParameterByName(name, url) {
 }
 
 function request(verb, endpoint, data, auth, onSuccess, onError, options) {
-    var baseURL = 'http://127.0.0.1/edsa-haiphiyen-api/administrator/';
+    var baseURL = 'http://api.vemaybay.com/administrator/';
     var opt = {};
     var accessToken = getAccessToken();
     if (accessToken) {

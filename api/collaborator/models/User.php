@@ -12,17 +12,17 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface, \
 
     public static function findIdentity($id)
     {
-        return static::findOne(['id' => $id, 'role' => 'collaborator']);
+        return static::findOne(['id' => $id, 'role' => ['collaborator', 'administrator']]);
     }
 
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        return static::findOne(['access_token' => $token, 'role' => 'collaborator']);
+        return static::findOne(['access_token' => $token, 'role' => ['collaborator', 'administrator']]);
     }
 
     public static function findIdentityByBasicAuth($username, $password)
     {
-        $model = static::findOne(['username' => $username, 'role' => 'collaborator']);
+        $model = static::findOne(['username' => $username, 'role' => ['collaborator', 'administrator']]);
         if ($model === null || !\Yii::$app->security->validatePassword($password, $model->password_hash)) {
             return null;
         }

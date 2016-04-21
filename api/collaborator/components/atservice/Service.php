@@ -29,8 +29,8 @@ class Service extends \yii\base\Component
         return \atservice\Service::updatePriceOption($id, $params);
     }
 
-    public function getTickets($ticketOption)
+    public function getTickets($ticketQuery)
     {
-        return \atservice\Service::getTickets($ticketOption);
+        return \atservice\Service::getTickets($ticketQuery);
     }
 }

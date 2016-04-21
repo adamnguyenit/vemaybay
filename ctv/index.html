@@ -3,16 +3,13 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>HAI PHI YEN | Admin panel</title>
-    <!-- Bootstrap core CSS -->
+    <title>HAI PHI YEN | Cộng tác viên</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="fonts/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
-    <!-- Custom styling plus plugins -->
     <link href="css/custom.css" rel="stylesheet">
     <link href="css/icheck/flat/green.css" rel="stylesheet" />
     <link href="css/floatexamples.css" rel="stylesheet" type="text/css" />
@@ -34,7 +31,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa fa-dashboard"></i> <span>HAI PHI YEN Co.</span></a>
+                        <a href="index.html" class="site_title"><i class="fa fa-plane"></i> <span>HAI PHI YEN CO., LTD</span></a>
                     </div>
                     <div class="clearfix"></div>
                     <br />
@@ -45,8 +42,8 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-ticket"></i> Đặt vé <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
-                                        <li><a href="chartjs.html">Danh sách</a></li>
-                                        <li><a href="chartjs.html">Đặt vé</a></li>
+                                        <li><a href="list-orders.html">Danh sách</a></li>
+                                        <li><a href="order.html">Đặt vé</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -64,10 +61,9 @@
                         </div>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
-                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><img src="images/picture.jpg" alt="">Ms. Dao <span class=" fa fa-angle-down"></span></a>
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><img src="images/avatar.png" alt=""><span id="user-name"></span> <span class=" fa fa-angle-down"></span></a>
                                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-                                    <li><a href="javascript:;">  Thông tin cá nhân</a></li>
-                                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Đăng xuất</a></li>
+                                    <li><a id="logout-btn" href="javascript:;"><i class="fa fa-sign-out pull-right"></i> Đăng xuất</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -89,14 +85,34 @@
             <!-- /page content -->
         </div>
     </div>
-    <script src="js/bootstrap.min.js"></script>>
+    <script src="js/bootstrap.min.js"></script>
     <!-- bootstrap progress js -->
     <script src="js/progressbar/bootstrap-progressbar.min.js"></script>
     <script src="js/nicescroll/jquery.nicescroll.min.js"></script>
     <script src="js/custom.js"></script>
-    <script src="js/script.js"></script>
     <script>
         NProgress.done();
+    </script>
+    <script src="js/script.js"></script>
+    <script>
+        function checkMe() {
+            request('GET', 'me');
+        }
+
+        function logout() {
+            var onComplete = function() {
+                resetUser();
+                redirect('login.html');
+            };
+            request('POST', 'users/logout', null, null, onComplete, onComplete);
+        }
+        $(document).ready(function() {
+            checkMe();
+            $('#logout-btn').click(function() {
+                logout();
+            });
+            $('#user-name').html(getUserName());
+        });
     </script>
     <!-- /footer content -->
 </body>
