@@ -2,7 +2,9 @@
 
 namespace app\controllers;
 
+use yii\web\BadRequestHttpException;
 use atservice\TicketQuery;
+use app\models\Place;
 
 class TicketController extends Controller
 {
@@ -14,29 +16,21 @@ class TicketController extends Controller
         } elseif ($params['roundTrip'] === 'false') {
             $params['roundTrip'] = false;
         }
-        // $params = [
-        //     'RoundTrip' => false,
-        //     'FromPlace' => 'SGN',
-        //     'ToPlace' => 'HAN',
-        //     'DepartDate' => '2016-06-16',
-        //     'ReturnDate' => '2016-06-16',
-        //     'CurrencyType' => 'VND',
-        //     'Adult' => 1,
-        //     'Child' => 0,
-        //     'Infant' => 0,
-        //     'Sources' => $params['source'],//'JetStar,VietJetAir,VietnamAirlines',
-        //     'FlightType' => 'DirectAndContinue',
-        // ];
-        // \yii\helpers\VarDumper::dump($params, 10, true); exit;
-        $ticketQuery = new TicketQuery($params);
-        try {
-            $tickets = \Yii::$app->atservice->getTickets($ticketQuery);
-        } catch (\exception $e) {
-            \yii\helpers\VarDumper::dump($e, 10, true); exit;
+        $fromPlace = $params['fromPlace'];
+        $toPlace = $params['toPlace'];
+        $fromPlaceModel = Place::find()->where(['code' => $fromPlace])->limit(1)->one();
+        if ($fromPlace === $toPlace || empty($fromPlaceModel)) {
+            throw new BadRequestHttpException();
         }
+        $ticketQuery = new TicketQuery($params);
+        $tickets = \Yii::$app->atservice->getTickets($ticketQuery);
         $result = [];
         foreach ($tickets as $ticket) {
-            $result[] = $ticket->toArray();
+            if ($ticket->fromPlaceId == $fromPlaceModel->id) {
+                $result['depart'][] = $ticket->toArray();
+            } else {
+                $result['return'][] = $ticket->toArray();
+            }
         }
 
         return $result;
