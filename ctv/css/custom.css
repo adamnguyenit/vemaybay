@@ -5391,10 +5391,6 @@ ul.notifications {
 .copyright-info {
     padding: 8px 0;
 }
-.ticket.disabled {
-    background-color: #aaaaaa !important;
-}
 .ticket.current {
-    background-color: #2A3F54 !important;
-    color: #ffffff;
+    background-color: #FFFFA8 !important;
 }

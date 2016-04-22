@@ -91,11 +91,11 @@
                                 <form id="create-form" data-parsley-validate class="form-horizontal form-label-left">
                                     <div class="form-group">
                                         <label class="control-label" for="from">Đi từ <span class="required">*</span></label>
-                                        <select class="form-control places" name="from" id="from" required="required"></select>
+                                        <select class="form-control places input-sm" name="from" id="from" required="required"></select>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label" for="to">Đến <span class="required">*</span></label>
-                                        <select class="form-control places" name="to" id="to" required="required"></select>
+                                        <select class="form-control places input-sm" name="to" id="to" required="required"></select>
                                     </div>
                                     <div class="form-group">
                                         <label class="radio-inline">
@@ -247,7 +247,7 @@
                                 </br>
                                 <div class="tab-content">
                                     <div id="depart" class="tab-pane fade in active">
-                                        <table id="datatable-depart" class="table table-striped table-bordered" style="width: 100%">
+                                        <table id="datatable-depart" class="table" style="width: 100%">
                                             <thead>
                                                 <tr>
                                                     <th>Hãng</th>
@@ -262,7 +262,7 @@
                                         </table>
                                     </div>
                                     <div id="return" class="tab-pane fade">
-                                        <table id="datatable-return" class="table table-striped table-bordered" style="width: 100%">
+                                        <table id="datatable-return" class="table" style="width: 100%">
                                             <thead>
                                                 <tr>
                                                     <th>Hãng</th>
@@ -350,7 +350,7 @@
                 startDate: moment(),
                 endDate: moment().add(3, 'days'),
                 minDate: today,
-                maxDate: '12/31/2100',
+                maxDate: '2100-12-31',
                 dateLimit: {
                     days: 60
                 },
@@ -362,11 +362,11 @@
                 ranges: {
                     'Hôm nay': [moment(), moment()]
                 },
-                opens: 'left',
+                opens: 'right',
                 buttonClasses: ['btn btn-default'],
                 applyClass: 'btn-small btn-primary',
                 cancelClass: 'btn-small',
-                format: 'MM/DD/YYYY',
+                format: 'YYYY-MM-DD',
                 separator: ' - ',
                 locale: {
                     applyLabel: 'OK',
@@ -655,10 +655,6 @@
                     $(row).addClass('ticket');
                     $(row).attr('data-airline', data.airlineCode);
                     $(row).attr('data-trip', 'return');
-                    if (departAirlineCode != null && data.airlineCode != departAirlineCode) {
-                        $(row).addClass('disabled');
-                        $(row).find('input[name=ticket-return]').prop('disabled', true);
-                    }
                 }
             }).api();
 
@@ -724,24 +720,42 @@
                 }
             });
             $('#datatable-depart').on('click', 'input[name=ticket-depart]', function() {
-                departAirlineCode = $(this).data('airline');
-                if ($(this).is(':checked')) {
+                if ($(this).data('checked') == 0 || $(this).data('checked') == null) {
+                    departAirlineCode = $(this).data('airline');
                     var ticketId = $(this).data('ticket');
                     departTicket = tickets['depart'][ticketId];
                     $('#datatable-depart .ticket').removeClass('current');
                     $('#' + ticketId.replace('@', '\\@')).addClass('current');
-                    $('#datatable-return .ticket').addClass('disabled');
-                    $('#datatable-return .ticket input[name=ticket-return]').prop('disabled', true);
-                    $('#datatable-return .ticket[data-airline=' + departAirlineCode + ']').removeClass('disabled');
-                    $('#datatable-return .ticket[data-airline=' + departAirlineCode + '] input[name=ticket-return]').prop('disabled', false);
+                    $.fn.dataTable.ext.search.push(
+                        function(settings, data, dataIndex) {
+                            if (settings.sTableId != 'datatable-return') return true;
+                            return $(tableReturn.row(dataIndex).node()).attr('data-airline') == departAirlineCode;
+                        }
+                    );
+                    tableReturn.draw();
+                    $(this).prop('checked', true);
+                    $(this).data('checked', 1);
+                } else {
+                    departTicket = null;
+                    $('#datatable-depart .ticket').removeClass('current');
+                    $(this).data('checked', 0);
+                    $(this).prop('checked', false);
+                    $.fn.dataTable.ext.search.pop();
+                    tableReturn.draw();
                 }
             });
             $('#datatable-return').on('click', 'input[name=ticket-return]', function() {
-                if ($(this).is(':checked')) {
+                if ($(this).data('checked') == 0 || $(this).data('checked') == null) {
                     var ticketId = $(this).data('ticket');
                     returnTicket = tickets['return'][ticketId];
                     $('#datatable-return .ticket').removeClass('current');
                     $('#' + ticketId.replace('@', '\\@')).addClass('current');
+                    $(this).prop('checked', true);
+                    $(this).data('checked', 1);
+                } else {
+                    $('#datatable-return .ticket').removeClass('current');
+                    $(this).data('checked', 0);
+                    $(this).prop('checked', false);
                 }
             });
             $('#datatable-return').on('click', 'button.view-btn', function() {
