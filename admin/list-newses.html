@@ -272,7 +272,7 @@
             $('#delete-btn-' + id).addClass('disabled');
             $('#delete-btn-' + id).html('<i class="fa fa-spinner fa-spin"></i> Đang xóa...');
             var onComplete = function() {
-                redirect('list-users.html');
+                redirect('list-newses.html');
                 $('#delete-btn-' + id).removeClass('disabled');
                 $('#delete-btn-' + id).html('xóa');
             }
@@ -298,7 +298,7 @@
                     $('#view-news-modal').find('.modal-body').html(data.content);
                 };
                 request('GET', 'newses/' + newsNewsId, null, null, onSuccess, null);
-            })
+            });
         });
     </script>
     <!-- /footer content -->

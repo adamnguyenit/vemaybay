@@ -245,7 +245,8 @@
             var onSuccess = function(data) {
                 $('#datatable').find('tbody').html(null);
                 for (i = 0; i < data.length; i++) {
-                    $('#datatable').find('tbody').append('<tr><td>' + (i + 1) + '</td><td>' + data[i].airlineCode + '</td><td>' + data[i].agentTicketCharge + '</td><td>' + data[i].internationalTicketCharge + '</td><td><a id="update-btn-' + data[i]
+                    $('#datatable').find('tbody').append('<tr><td>' + (i + 1) + '</td><td>' + data[i].airlineCode + '</td><td>' + data[i].agentTicketCharge + '</td><td>' + data[i].internationalTicketCharge + '</td><td><a id="update-btn-' + data[
+                            i]
                         .id +
                         '" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#update-price-options-modal" data-id="' + data[i].id + '" data-agent="' + data[i].agentTicketCharge + '" data-international="' + data[i].internationalTicketCharge +
                         '" data-airline="' + data[i].airlineCode + '" role="button">sửa</a></td></tr>');
@@ -271,6 +272,14 @@
                     columnDefs: [{
                         orderable: false,
                         targets: -1
+                    }, {
+                        targets: -2,
+                        type: 'num-fmt',
+                        render: $.fn.dataTable.render.number('.', ',', 0, 'VND ')
+                    }, {
+                        targets: -3,
+                        type: 'num-fmt',
+                        render: $.fn.dataTable.render.number('.', ',', 0, 'VND ')
                     }]
                 });
                 $('#hide-when-done').hide();
