@@ -10,3 +10,6 @@
 .carousel-control {
     width: 10%;
 }
+.form-group label.control-label {
+    color: #000000;
+}
