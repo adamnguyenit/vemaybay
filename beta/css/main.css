@@ -1,0 +1,38 @@
+#top-page {
+    background-color: #ffffff;
+}
+#top-page #logo img {
+    height: 100px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+#contact #contact-phone {
+    margin-top: 40px;
+}
+#bottom-page {
+    padding-top: 20px;
+    background-color: #3b89c9;
+}
+#bottom-page .row {
+    padding-bottom: 10px;
+}
+#bottom-page h4 {
+    font-weight: bold;
+}
+#bottom-page div, #bottom-page h4, #bottom-page input, #bottom-page li, #bottom-page a {
+    color: #ffffff;
+}
+@media (min-width: 768px) {
+    .show-if-min-768 {
+        display: block;
+    }
+}
+@media (max-width: 767px) {
+    .show-if-min-768 {
+        display: none;
+    }
+    #top-page #logo img {
+        width: 200px;
+        height: auto;
+    }
+}
