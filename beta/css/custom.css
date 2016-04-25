@@ -1,20 +1,10 @@
 .navbar {
     margin-bottom: 0;
 }
-.navbar, .navbar.navbar-default {
-    background-color: #3b89c9;
-    color: #ffffff;
-}
 @media (min-width: 768px) {
     .navbar-collapse {
         padding-left: 0;
         padding-right: 0;
-    }
-}
-@media (max-width: 767px) {
-    .navbar-collapse {
-        padding-left: 30px;
-        padding-right: 30px;
     }
 }
 .carousel-control {

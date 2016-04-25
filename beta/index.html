@@ -45,13 +45,13 @@
         }(document, 'script', 'facebook-jssdk'));
     </script>
     <div id="page">
-        <div id="top-page" class="container-fluid">
+        <div id="top-page" class="container-fluid bg-white">
             <div class="container">
                 <div class="row">
                     <div id="logo" class="col-sm-6">
                         <img src="images/logo.png">
                     </div>
-                    <div id="contact" class="col-sm-6 show-if-min-768">
+                    <div id="contact" class="col-sm-6 hidden-xs">
                         <div id="contact-phone" class="pull-right">
                             <p><span class="text-info">Hotline</span>: <a href="tel:0913 642 748">0913.642.748</a> - <a href="tel:0914 650 511">0914.650.511</a></p>
                             <p><span class="text-info">Điện thoại</span>: <a href="tel:0511 3846 707">0511 3.846.707</a></p>
@@ -62,20 +62,21 @@
         </div>
         <div id="nav-page" class="container-fluid">
             <div class="row">
-                <nav class="navbar navbar-default">
+                <nav class="navbar navbar-default bg-blue color-white">
                     <div class="container">
                         <!-- Brand and toggle get grouped for better mobile display -->
                         <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main" aria-expanded="false">
                                 <span class="sr-only">Toggle navigation</span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
+                            <span id="navbar-phone" class="visible-xs-block"><span class="fa fa-phone"></span> <a class="color-white" href="tel:0913 642 748">0913.642.748</a></span>
                         </div>
 
                         <!-- Collect the nav links, forms, and other content for toggling -->
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <div id="navbar-main" class="collapse navbar-collapse">
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="#"><span class="fa fa-plane"></span> Vé máy bay <span class="sr-only">(current)</span></a></li>
                                 <li><a href="#"><span class="fa fa-bar-chart-o"></span> Khuyến mãi</span></a></li>
@@ -87,7 +88,7 @@
             </div>
         </div>
         <div id="content-page" class="container-fluid">
-            <div class="row">
+            <div class="row hidden-sm">
                 <div id="promotions-slider" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
@@ -128,10 +129,10 @@
                 </div>
             </div>
         </div>
-        <footer id="bottom-page" class="container-fluid">
+        <footer id="bottom-page" class="container-fluid bg-blue">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-6 show-if-min-768">
+                    <div class="col-sm-6 hidden-xs">
                         <div class="fb-page" data-href="https://www.facebook.com/vemaybayhaiphiyen" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false">
                             <div class="fb-xfbml-parse-ignore">
                                 <blockquote cite="https://www.facebook.com/vemaybayhaiphiyen"><a href="https://www.facebook.com/vemaybayhaiphiyen">vemaybayhaiphiyen.com</a></blockquote>
@@ -139,21 +140,21 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="row">
+                        <div class="row color-white">
                             <!-- <div class="pull-right"> -->
-                                <h4>Đại lý vé máy bay Hải Phi Yến</h4>
-                                <ul>
-                                    <li>Địa chỉ: 665 Nguyễn Hữu Thọ, Q. Cẩm Lệ, TP. Đà Nẵng</li>
-                                    <li>Hotline: <a href="tel:0913 642 748">0913.642.748</a> - <a href="tel:0914 650 511">0914.650.511</a></li>
-                                    <li>Điện thoại: <a href="tel:0511 3846 707">0511 3.846.707</a></li>
-                                    <li>Zalo: 0913.642.748</li>
-                                    <li>Email: <a href="mailto:vemaybayhaiphiyen@gmail.com">vemaybayhaiphiyen@gmail.com</a></li>
-                                </ul>
+                            <h4>Đại lý vé máy bay Hải Phi Yến</h4>
+                            <ul>
+                                <li>Địa chỉ: 665 Nguyễn Hữu Thọ, Q. Cẩm Lệ, TP. Đà Nẵng</li>
+                                <li>Hotline: <a class="color-white" href="tel:0913 642 748">0913.642.748</a> - <a href="tel:0914 650 511">0914.650.511</a></li>
+                                <li>Điện thoại: <a class="color-white" href="tel:0511 3846 707">0511 3.846.707</a></li>
+                                <li>Zalo: 0913.642.748</li>
+                                <li>Email: <a class="color-white" href="mailto:vemaybayhaiphiyen@gmail.com">vemaybayhaiphiyen@gmail.com</a></li>
+                            </ul>
                             <!-- </div> -->
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row color-white">
                     <div class="col-md-12"><i><span class="fa fa-copyright"></span> 2016 - Bản quyền của Công Ty Hải Phi Yến</i></div>
                 </div>
             </div>
