@@ -659,7 +659,7 @@ footer {
     background: #fff;
     padding: 5px 20px 0;
     height: 45px;
-    margin: 0 -17px;
+    /*margin: 0 -17px;*/
 }
 .tile-stats.sparkline {
     padding: 10px;
@@ -2432,7 +2432,7 @@ input.parsley-error, textarea.parsley-error, select.parsley-error {
 
 
 /* *********  calender dropdown  **************************** */
-
+/*
 .daterangepicker.dropdown-menu {
     font-size: 13px;
     padding: 0;
@@ -2681,7 +2681,7 @@ input.parsley-error, textarea.parsley-error, select.parsley-error {
     float: left;
     margin: 4px;
 }
-
+*/
 /* *********  /calender dropdown  **************************** */
 
 

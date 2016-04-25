@@ -79,7 +79,7 @@ function dateDecode(date, toString) {
         return hour + ':' + min + ' ' + day + '/' + month + '/' + year;
     }
     return {
-        hour: time,
+        hour: hour,
         min: min,
         day: day,
         month: month,

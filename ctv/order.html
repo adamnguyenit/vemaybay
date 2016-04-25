@@ -11,15 +11,8 @@
     <link href="fonts/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
-    <link href="css/icheck/flat/green.css" rel="stylesheet" />
-    <link href="css/floatexamples.css" rel="stylesheet" type="text/css" />
-
-    <link href="js/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
-    <link href="js/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="js/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="js/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
-
+    <link href="js/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+    <link href="css/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css">
     <script src="js/jquery.min.js"></script>
     <script src="js/nprogress.js"></script>
     <!--[if lt IE 9]>
@@ -105,11 +98,14 @@
                                             <input type="radio" name="roundTrip" value="true"> Khứ hồi
                                         </label>
                                     </div>
-                                    <div id="flightdate" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                                    <div id="flightdate-single" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
                                         <i class="glyphicon glyphicon-calendar fa fa-calendar"></i> <span>Chọn ngày</span> <b class="caret"></b>
-                                        <input name="departDate" type="hidden">
-                                        <input name="returnDate" type="hidden">
                                     </div>
+                                    <div id="flightdate" style="display: none; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i> <span>Chọn ngày</span> <b class="caret"></b>
+                                    </div>
+                                    <input name="departDate" type="hidden">
+                                    <input name="returnDate" type="hidden">
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <div class="form-group">
@@ -235,7 +231,7 @@
                             <div class="x_title">
                                 <h2>Kết quả <small>Chọn vé</small></h2>
                                 <ul class="nav navbar-right panel_toolbox">
-                                    <li><a href="#" style="display: none; padding: 5px !important; font-size: 12px" id="info-btn" class="btn btn-sm btn-success" data-toggle="modal" data-target="#info-modal" role="button">Đặt vé</a></li>
+                                    <li><a href="#" style="padding: 5px !important; font-size: 12px" id="info-btn" class="btn btn-sm btn-success" data-toggle="modal" data-target="#info-modal" data-backdrop="static" role="button">Đặt vé</a></li>
                                     <li style="display: none" id="hide-when-done"><i class="fa fa-spinner fa-spin"></i> Đang tải...</li>
                                 </ul>
                                 <div class="clearfix"></div>
@@ -248,7 +244,7 @@
                                 </br>
                                 <div class="tab-content">
                                     <div id="depart" class="tab-pane fade in active">
-                                        <table id="datatable-depart" class="table" style="width: 100%">
+                                        <table id="datatable-depart" class="table dt-responsive nowrap" style="width: 100%">
                                             <thead>
                                                 <tr>
                                                     <th>Hãng</th>
@@ -263,7 +259,7 @@
                                         </table>
                                     </div>
                                     <div id="return" class="tab-pane fade">
-                                        <table id="datatable-return" class="table" style="width: 100%">
+                                        <table id="datatable-return" class="table dt-responsive nowrap" style="width: 100%">
                                             <thead>
                                                 <tr>
                                                     <th>Hãng</th>
@@ -284,7 +280,7 @@
                 </div>
                 <!-- Modal -->
                 <div id="info-modal" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-lg">
                         <!-- Modal content-->
                         <div class="modal-content">
                             <div class="modal-header">
@@ -321,21 +317,11 @@
     <!-- form validation -->
     <script type="text/javascript" src="js/parsley/parsley.min.js"></script>
     <script src="js/typeahead/bootstrap3-typeahead.js"></script>
+
     <!-- Datatables-->
     <script src="js/datatables/jquery.dataTables.min.js"></script>
     <script src="js/datatables/dataTables.bootstrap.js"></script>
-    <script src="js/datatables/dataTables.buttons.min.js"></script>
-    <script src="js/datatables/buttons.bootstrap.min.js"></script>
-    <script src="js/datatables/jszip.min.js"></script>
-    <script src="js/datatables/pdfmake.min.js"></script>
-    <script src="js/datatables/vfs_fonts.js"></script>
-    <script src="js/datatables/buttons.html5.min.js"></script>
-    <script src="js/datatables/buttons.print.min.js"></script>
-    <script src="js/datatables/dataTables.fixedHeader.min.js"></script>
-    <script src="js/datatables/dataTables.keyTable.min.js"></script>
     <script src="js/datatables/dataTables.responsive.min.js"></script>
-    <script src="js/datatables/responsive.bootstrap.min.js"></script>
-    <script src="js/datatables/dataTables.scroller.min.js"></script>
 
     <!-- daterangepicker -->
     <script type="text/javascript" src="js/moment/moment.min.js"></script>
@@ -355,23 +341,57 @@
             if (mm < 10) {
                 mm = '0' + mm
             }
-            today = yyyy + '-' + mm + '-' + dd;
+            today = mm + '/' + dd + '/' + yyyy;
             $('input[name=departDate]').val(moment().format('YYYY-MM-DD'));
-            $('input[name=returnDate]').val(moment().add(3, 'days').format('YYYY-MM-DD'));
+            $('input[name=returnDate]').val(moment().format('YYYY-MM-DD'));
             var cb = function(start, end, label) {
-                console.log(start.toISOString(), end.toISOString(), label);
-                $('#flightdate span').html(start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD'));
+                $('#flightdate span').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
             }
-            var daterangeOpt = {
-                startDate: moment(),
-                endDate: moment().add(3, 'days'),
+            var dateOpt = {
+                singleDatePicker: true,
                 minDate: today,
-                maxDate: '2100-12-31',
+                maxDate: '12/31/2200',
                 showDropdowns: true,
                 showWeekNumbers: false,
                 timePicker: false,
                 opens: 'right',
-                drops: 'up',
+                autoApply: true,
+                buttonClasses: ['btn btn-default'],
+                applyClass: 'btn-small btn-primary',
+                cancelClass: 'btn-small',
+                format: 'YYYY-MM-DD',
+                alwaysShowCalendars: true,
+                locale: {
+                    applyLabel: 'OK',
+                    cancelLabel: 'Trở về',
+                    fromLabel: 'Ngày đi',
+                    toLabel: 'Ngày về',
+                    customRangeLabel: 'Chọn ngày',
+                    daysOfWeek: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
+                    monthNames: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+                    firstDay: 1
+                }
+            };
+            $('#flightdate-single').daterangepicker(dateOpt, cb);
+            $('#flightdate-single').on('show.daterangepicker', function() {});
+            $('#flightdate-single').on('hide.daterangepicker', function() {});
+            $('#flightdate-single').on('apply.daterangepicker', function(ev, picker) {
+                $('#flightdate-single span').html(picker.startDate.format('DD/MM/YYYY'));
+                $('input[name=departDate]').val(picker.startDate.format('YYYY-MM-DD'));
+                $('input[name=departDate]').data('picker', picker.startDate.format('MM/DD/YYYY'));
+                $('input[name=returnDate]').val(picker.endDate.format('YYYY-MM-DD'));
+                $('input[name=returnDate]').data('picker', picker.endDate.format('MM/DD/YYYY'));
+            });
+            $('#flightdate-single').on('cancel.daterangepicker', function(ev, picker) {});
+
+            var daterangeOpt = {
+                minDate: today,
+                maxDate: '12/31/2200',
+                showDropdowns: true,
+                showWeekNumbers: false,
+                timePicker: false,
+                opens: 'right',
+                autoApply: true,
                 buttonClasses: ['btn btn-default'],
                 applyClass: 'btn-small btn-primary',
                 cancelClass: 'btn-small',
@@ -390,14 +410,29 @@
                 }
             };
             $('#flightdate').daterangepicker(daterangeOpt, cb);
-            $('#flightdate span').html(moment().format('YYYY-MM-DD') + ' - ' + moment().add(3, 'days').format('YYYY-MM-DD'));
             $('#flightdate').on('show.daterangepicker', function() {});
             $('#flightdate').on('hide.daterangepicker', function() {});
             $('#flightdate').on('apply.daterangepicker', function(ev, picker) {
+                $('#flightdate span').html(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
                 $('input[name=departDate]').val(picker.startDate.format('YYYY-MM-DD'));
+                $('input[name=departDate]').data('picker', picker.startDate.format('MM/DD/YYYY'));
                 $('input[name=returnDate]').val(picker.endDate.format('YYYY-MM-DD'));
+                $('input[name=returnDate]').data('picker', picker.endDate.format('MM/DD/YYYY'));
             });
             $('#flightdate').on('cancel.daterangepicker', function(ev, picker) {});
+
+            $('input[name=roundTrip]').click(function() {
+                if ($(this).val() == 'true') {
+                    $('#flightdate-single').hide();
+                    $('#flightdate').show();
+                } else {
+                    $('#flightdate').hide();
+                    $('#flightdate-single').show();
+                    if ($('input[name=departDate]').data('picker')) {
+                        $('#flightdate-single').data('daterangepicker').setStartDate($('input[name=departDate]').data('picker'));
+                    }
+                }
+            });
         });
     </script>
     <script>
@@ -409,6 +444,8 @@
         var departAirlineCode = null;
         var departTicket = null;
         var returnTicket = null;
+        var departFare = null;
+        var returnFare = null;
 
         function checkMe() {
             request('GET', 'me');
@@ -438,13 +475,15 @@
                     $.each(data['depart'], function() {
                         tickets['depart'][this.id] = this;
                     });
-                    tableDepart.rows.add(data['depart']).draw(false);
+                    tableDepart.rows.add(data['depart']).draw();
+                    tableDepart.columns.adjust().draw();
                 }
                 if (data.hasOwnProperty('return') && data['return'].length > 0) {
                     $.each(data['return'], function() {
                         tickets['return'][this.id] = this;
                     });
-                    tableReturn.rows.add(data['return']).draw(false);
+                    tableReturn.rows.add(data['return']).draw();
+                    tableReturn.columns.adjust().draw();
                 }
                 done++;
                 if (done == sources.length) {
@@ -489,6 +528,10 @@
                 returnDate: returnDate
             };
             return request('POST', 'tickets', data, null, onSuccess, onError);
+        }
+
+        function formatDescription(str) {
+            return str.replace('người lớn', 'Ng.lớn').replace('trẻ em', 'Tr.em').replace('em bé', 'E.bé').replace('Thuế và phí dịch vụ', 'Thuế + phí');
         }
 
         $(document).ready(function() {
@@ -560,8 +603,10 @@
                     orderable: false,
                     targets: -1,
                     data: null,
-                    defaultContent: '<button class="btn btn-default btn-xs view-btn">Chi tiết</button>'
+                    defaultContent: '<button class="btn btn-default btn-xs view-btn">Xem</button>'
                 }],
+                dom: 'tip',
+                responsive: true,
                 paging: false,
                 aaSorting: [],
                 columns: [{
@@ -583,9 +628,11 @@
                     data: 'flightNumber'
                 }, {
                     data: 'departTime',
-                    type: 'date',
+                    type: 'html',
                     render: function(data, type, full, meta) {
-                        return dateDecode(data, true);
+                        // return dateDecode(data, true);
+                        var d = dateDecode(data);
+                        return d.hour + ':' + d.min;
                     }
                 }, {
                     data: 'flightDuration',
@@ -596,7 +643,7 @@
                 }, {
                     data: 'priceFrom',
                     type: 'num-fmt',
-                    render: $.fn.dataTable.render.number('.', ',', 0, 'VND ')
+                    render: $.fn.dataTable.render.number('.', ',', 0)
                 }, null],
                 createdRow: function(row, data, index) {
                     $(row).attr('id', data.id);
@@ -628,8 +675,10 @@
                     orderable: false,
                     targets: -1,
                     data: null,
-                    defaultContent: '<button class="btn btn-default btn-xs view-btn">Chi tiết</button>'
+                    defaultContent: '<button class="btn btn-default btn-xs view-btn">Xem</button>'
                 }],
+                dom: 'tip',
+                responsive: true,
                 paging: false,
                 aaSorting: [],
                 columns: [{
@@ -651,9 +700,11 @@
                     data: 'flightNumber'
                 }, {
                     data: 'departTime',
-                    type: 'date',
+                    type: 'html',
                     render: function(data, type, full, meta) {
-                        return dateDecode(data, true);
+                        // return dateDecode(data, true);
+                        var d = dateDecode(data);
+                        return d.hour + ':' + d.min;
                     }
                 }, {
                     data: 'flightDuration',
@@ -664,7 +715,7 @@
                 }, {
                     data: 'priceFrom',
                     type: 'num-fmt',
-                    render: $.fn.dataTable.render.number('.', ',', 0, 'VND ')
+                    render: $.fn.dataTable.render.number('.', ',', 0)
                 }, null],
                 createdRow: function(row, data, index) {
                     $(row).attr('id', data.id);
@@ -680,46 +731,43 @@
                     '<tr><td style="padding-right: 20px">Điểm đi: ' + ticket.fromPlace + '</td><td>Điểm đến: ' + ticket.toPlace + '</td></tr>' +
                     '<tr><td style="padding-right: 20px">' + dateDecode(ticket.departTime, true) + '</td><td>' + dateDecode(ticket.landingTime, true) + '</td></tr>' +
                     '<tr><td colspan="2">Mã chuyến bay: <b>' + ticket.airline + '</b> ' + ticket.flightNumber + '</td></tr>' +
-                    '</table></br><table class="table"><thead><tr><th>Loại</th><th>Giá</th><th>Phí</th><th>Tổng</th><th>Chọn</th></tr></thead>';
+                    '<tr><td colspan="2">Thời gian bay: ' + ticket.flightDuration.match(/PT(.*)/)[1].replace('H', ' giờ ').replace('M', ' phút') + '</td></tr>' +
+                    '</table></br><table class="table"><thead><tr><th>Loại</th><th>Giá</th><th>Tổng</th><th></th></tr></thead>';
                 var temp;
-                var currentOption;;
+                var currentOption;
+                var types = ['adult', 'child', 'infant'];
                 for (var i = 0; i < ticket.ticketOptions.length; i++) {
                     currentOption = ticket.ticketOptions[i];
-                    html += '<tr><td style="padding-right: 10px">' + currentOption.ticketType + '</td><td style="white-space: pre; padding-right: 10px">';
+                    html += '<tr><td>' + currentOption.ticketType + '</td><td>';
                     if (currentOption.priceSummary.hasOwnProperty('net')) {
                         if (currentOption.priceSummary['net'].hasOwnProperty('adult')) {
-                            temp = currentOption.priceSummary['net']['adult'];
-                            html += '<b>' + temp.description + '</b>: ' + parseInt(temp.price).formatMoney(0, ',', '.') + ' x ' + temp['quantity'] + '</br>';
-                        }
-                        if (currentOption.priceSummary['net'].hasOwnProperty('child')) {
-                            temp = currentOption.priceSummary['net']['child'];
-                            html += '<b>' + temp.description + '</b>: ' + parseInt(temp.price).formatMoney(0, ',', '.') + ' x ' + temp['quantity'] + '</br>';
-                        }
-                        if (currentOption.priceSummary['net'].hasOwnProperty('infant')) {
-                            temp = currentOption.priceSummary['net']['infant'];
-                            html += '<b>' + temp.description + '</b>: ' + parseInt(temp.price).formatMoney(0, ',', '.') + ' x ' + temp['quantity'] + '</br>';
+                            html += parseInt(currentOption.priceSummary['net']['adult'].price).formatMoney(0, ',', '.');
                         }
                     }
-                    html += '</td><td style="white-space: pre; padding-right: 10px">';
-                    if (currentOption.priceSummary.hasOwnProperty('tax')) {
-                        if (currentOption.priceSummary['tax'].hasOwnProperty('adult')) {
-                            temp = currentOption.priceSummary['tax']['adult'];
-                            html += '<b>' + temp.description + '</b>: ' + parseInt(temp.price).formatMoney(0, ',', '.') + ' x ' + temp['quantity'] + '</br>';
-                        }
-                        if (currentOption.priceSummary['tax'].hasOwnProperty('child')) {
-                            temp = currentOption.priceSummary['tax']['child'];
-                            html += '<b>' + temp.description + '</b>: ' + parseInt(temp.price).formatMoney(0, ',', '.') + ' x ' + temp['quantity'] + '</br>';
-                        }
-                        if (currentOption.priceSummary['tax'].hasOwnProperty('infant')) {
-                            temp = currentOption.priceSummary['tax']['infant'];
-                            html += '<b>' + temp.description + '</b>: ' + parseInt(temp.price).formatMoney(0, ',', '.') + ' x ' + temp['quantity'] + '</br>';
-                        }
-                    }
-                    html += '</td><td>' + parseInt(currentOption.totalPrice).formatMoney(0, ',', '.') + '</td><td><input type="radio" name="ticket-' + type + '" data-airline="' + ticket.airlineCode + '" data-ticket="' + ticket.id + '"';
+                    html += '</td><td>' + parseInt(currentOption.totalPrice).formatMoney(0, ',', '.') + '</td><td><input type="radio" name="ticket-' + type + '" data-airline="' + ticket.airlineCode +
+                        '" data-ticket="' +
+                        ticket.id + '" data-fare="' + currentOption.fareBasis + '"';
                     if ((type == 'depart' && departTicket != null && departTicket.id.localeCompare(ticket.id) == 0) || (type == 'return' && returnTicket != null && returnTicket.id.localeCompare(ticket.id) == 0)) {
                         html += ' checked';
                     }
-                    html += '></td></tr>';
+                    html += '></td></tr><tr><td colspan="4" style="border-top: 0"><ul class="list-group">';
+                    if (currentOption.priceSummary.hasOwnProperty('net')) {
+                        for (var j = 0; j < types.length; j++) {
+                            if (currentOption.priceSummary['net'].hasOwnProperty(types[j])) {
+                                temp = currentOption.priceSummary['net'][types[j]];
+                                html += '<li class="list-group-item"><b>' + formatDescription(temp.description) + '</b>: ' + parseInt(temp.price).formatMoney(0, ',', '.') + ' x ' + temp['quantity'] + '</br></li>';
+                            }
+                        }
+                    }
+                    if (currentOption.priceSummary.hasOwnProperty('tax')) {
+                        for (var j = 0; j < types.length; j++) {
+                            if (currentOption.priceSummary['tax'].hasOwnProperty(types[j])) {
+                                temp = currentOption.priceSummary['tax'][types[j]];
+                                html += '<li class="list-group-item"><b>' + formatDescription(temp.description) + '</b>: ' + parseInt(temp.price).formatMoney(0, ',', '.') + ' x ' + temp['quantity'] + '</br></li>';
+                            }
+                        }
+                    }
+                    html += '</ul></td></tr>'
                 };
                 html += '</table>';
                 return html;
@@ -729,7 +777,7 @@
                 var row = tableDepart.row(tr);
                 if (row.child.isShown()) {
                     row.child.hide();
-                    $(this).html('Chi tiết');
+                    $(this).html('Xem');
                 } else {
                     row.child(format(tr.attr('id'), 'depart')).show();
                     $(this).html('Ẩn');
@@ -740,6 +788,7 @@
                     departAirlineCode = $(this).data('airline');
                     var ticketId = $(this).data('ticket');
                     departTicket = tickets['depart'][ticketId];
+                    departFare = $(this).data('fare');
                     $('#datatable-depart .ticket').removeClass('current');
                     $('#' + ticketId.replace('@', '\\@')).addClass('current');
                     $.fn.dataTable.ext.search.push(
@@ -770,6 +819,7 @@
                 if ($(this).data('checked') == 0 || $(this).data('checked') == null) {
                     var ticketId = $(this).data('ticket');
                     returnTicket = tickets['return'][ticketId];
+                    returnFare = $(this).data('fare');
                     $('#datatable-return .ticket').removeClass('current');
                     $('#' + ticketId.replace('@', '\\@')).addClass('current');
                     $(this).prop('checked', true);
@@ -790,7 +840,7 @@
                 var row = tableReturn.row(tr);
                 if (row.child.isShown()) {
                     row.child.hide();
-                    $(this).html('Chi tiết');
+                    $(this).html('Xem');
                 } else {
                     row.child(format(tr.attr('id'), 'return')).show();
                     $(this).html('Ẩn');
@@ -802,14 +852,134 @@
                 var infant = $('select[name=infant]').val();
                 var instance = $('#info-modal').find('.modal-body');
                 instance.html(null);
-                var i;
-                if (adult > 0) {
-                    for (i = 0; i < adult; i++) {
-                        instance.append('<form><div class="form-group">adult</div></form>');
+                var types = ['adult', 'child', 'infant'];
+                var personTitle = {
+                    adult: ['Mr', 'Ms'],
+                    child: ['Mstr', 'Miss'],
+                    infant: ['Mstr', 'Miss']
+                };
+                var typesVi = {
+                    adult: 'Người lớn',
+                    child: 'Trẻ em',
+                    infant: 'Em bé'
+                };
+                var personTitleVi = {
+                    'Mr': 'Ông',
+                    'Ms': 'Bà',
+                    'Mstr': 'Anh',
+                    'Miss': 'Chị'
+                };
+                var temp = 0;
+                var titleHtml = '';
+                var html = '<form><div class="col-md-7" style="border-right: 1px solid #eeeeee">';
+                for (var i = 0; i < types.length; i++) {
+                    temp = parseInt($('select[name=' + types[i] + ']').val());
+                    titleHtml = '';
+                    for (z = 0; z < personTitle[types[i]].length; z++) {
+                        titleHtml += '<option value="' + personTitle[types[i]][z] + '">' + personTitleVi[personTitle[types[i]][z]] + '</option>';
+                    }
+                    if (temp > 0) {
+                        html += '<div class="row"><div class="col-xs-12"><h5>' + typesVi[types[i]] + '</h5></div></div>';
+                        for (var j = 1; j <= temp; j++) {
+                            html +=
+                                '<div class="row">' +
+                                '<div class="col-xs-4">' +
+                                '<div class="form-group">' +
+                                '<select name="' + types[i] + '-title" data-index="' + j + '" class="form-control input-sm">' + titleHtml + '</select>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="col-xs-8">' +
+                                '<div class="form-group">' +
+                                '<input name="' + types[i] + '-name" data-index="' + j + '" type="name" class="form-control input-sm" placeholder="Họ và tên">' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="col-xs-5">' +
+                                '<div class="form-group">' +
+                                '<input name="' + types[i] + '-birth" data-index="' + j + '" type="text" class="form-control input-sm" placeholder="Ngày sinh (dd/mm/yyyy)">' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="col-xs-7">' +
+                                '<div class="from-group">' +
+                                '<select name="' + types[i] + '-badge" data-index="' + j + '" class="form-control input-sm"><option value="0">Hành lý</option></select>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>';
+                        }
                     }
                 }
-            })
+                html += '</div></div>';
+                html += '<div class="col-md-5">';
+                html += '<table class="table" width="100%"><thead><tr><th></th><th>Tiền</th><th>Số lượng</th><th>Tổng</th></tr></thead>';
+                var departOption;
+                var returnOption;
+                var prices = ['net', 'tax'];
+                var types = ['adult', 'child', 'infant'];
+                if (departTicket != null) {
+                  html += '<tr><td colspan="4"><b>Chiều đi</b></td></tr>';
+                    departOption = departTicket.ticketOptions[0];
+                    for (i = 0; i < departTicket.ticketOptions.length; i++) {
+                        if (departTicket.ticketOptions[i].fareBasis == departFare) {
+                            departOption = departTicket.ticketOptions[i];
+                            break;
+                        }
+                    }
+                    for (i = 0; i < prices.length; i++) {
+                        for (j = 0; j < types.length; j++) {
+                            if (departOption.priceSummary[prices[i]].hasOwnProperty(types[j])) {
+                                temp = departOption.priceSummary[prices[i]][types[j]];
+                                html += '<tr>';
+                                html += '<td>' + formatDescription(temp.description) + '</td>';
+                                html += '<td align="right">' + parseInt(temp.price).formatMoney(0, ',', '.') + '</td>';
+                                html += '<td align="right">' + temp.quantity + '</td>';
+                                html += '<td align="right">' + parseInt(temp.total).formatMoney(0, ',', '.') + '</td>';
+                                html += '</tr>';
+                            }
+                        }
+                    }
+                }
+                if (returnTicket != null) {
+                  html += '<tr><td colspan="4"><b>Chiều về</b></td></tr>';
+                    returnTicket = departTicket.ticketOptions[0];
+                    for (i = 0; i < departTicket.ticketOptions.length; i++) {
+                        if (departTicket.ticketOptions[i].fareBasis == departFare) {
+                            returnOption = departTicket.ticketOptions[i];
+                            break;
+                        }
+                    }
+                    for (i = 0; i < prices.length; i++) {
+                        for (j = 0; j < types.length; j++) {
+                            if (returnOption.priceSummary[prices[i]].hasOwnProperty(types[j])) {
+                                temp = returnOption.priceSummary[prices[i]][types[j]];
+                                html += '<tr>';
+                                html += '<td>' + formatDescription(temp.description) + '</td>';
+                                html += '<td align="right">' + parseInt(temp.price).formatMoney(0, ',', '.') + '</td>';
+                                html += '<td align="right">' + temp.quantity + '</td>';
+                                html += '<td align="right">' + parseInt(temp.total).formatMoney(0, ',', '.') + '</td>';
+                                html += '</tr>';
+                            }
+                        }
+                    }
+                }
+                html += '</table>';
+                html += '</div></form>';
+                instance.html(html);
+            });
+            resizeTable();
         });
+        $(window).resize(function() {
+            resizeTable();
+        });
+
+        function resizeTable() {
+            var visible = false;
+            if ($(window).width() > 960) {
+                visible = true;
+            }
+            tableDepart.column(1).visible(visible);
+            tableDepart.column(3).visible(visible);
+            tableReturn.column(1).visible(visible);
+            tableReturn.column(3).visible(visible);
+        }
     </script>
     <!-- /footer content -->
 </body>
