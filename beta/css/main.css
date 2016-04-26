@@ -10,6 +10,12 @@
 .color-black {
     color: #000000 !important;
 }
+.color-blue {
+    color: #3b89c9 !important;
+}
+.color-red {
+    color: #f03e44 !important;
+}
 #top-page #logo img {
     height: 100px;
     padding-bottom: 10px;
@@ -20,7 +26,7 @@
     margin-top: 15px;
 }
 #contact #contact-phone {
-    margin-top: 50px;
+    margin-top: 70px;
 }
 #bottom-page {
     padding-top: 20px;
