@@ -32,24 +32,3 @@
     margin-top: 0;
     font-weight: bold;
 }
-#content-page-container {
-    position: relative;
-}
-#book-form-large {
-    position: absolute;
-    top: 15px;
-    right: 12%;
-    min-width: 350px;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 5px 15px;
-    z-index: 99999;
-}
-#book-form-large .form-group {
-    padding-bottom: 0;
-}
-#book-form-large .radio {
-    display: inline-block;
-    font-size: normal;
-    font-weight: normal;
-    margin-bottom: 5px;
-}

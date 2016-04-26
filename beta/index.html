@@ -44,7 +44,7 @@
             if (d.getElementById(id)) return;
             js = d.createElement(s);
             js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=1571146886505381";
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
@@ -134,12 +134,12 @@
                             <div class="col-sm-12">
                                 <div class="radio">
                                     <label class="color-black">
-                                        <input type="radio" name="round-trip" value="0" checked>Một chiều
+                                        <input class="linked" type="radio" name="round-trip" value="0" checked>Một chiều
                                     </label>
                                 </div>
                                 <div class="radio">
                                     <label class="color-black">
-                                        <input type="radio" name="round-trip" value="1">Khứ hồi
+                                        <input class="linked" type="radio" name="round-trip" value="1">Khứ hồi
                                     </label>
                                 </div>
                             </div>
@@ -149,13 +149,13 @@
                                 <div class="form-group label-floating col-sm-6">
                                     <div class="row" style="margin-right: 5px">
                                         <label class="control-label">Điểm đi</label>
-                                        <input class="form-control" type="text" name="place-from">
+                                        <input class="form-control linked" type="text" name="place-from">
                                     </div>
                                 </div>
                                 <div class="form-group label-floating col-sm-6">
                                     <div class="row">
                                         <label class="control-label">Điểm đến</label>
-                                        <input class="form-control" type="text" name="place-to">
+                                        <input class="form-control linked" type="text" name="place-to">
                                     </div>
                                 </div>
                             </div>
@@ -166,7 +166,7 @@
                                     <div class="row" style="margin-right: 5px">
                                         <label class="control-label">Ngày đi</label>
                                         <div class="input-group date" data-provide="datepicker">
-                                            <input class="form-control datepicker" type="text" readonly name="date-depart" data-date-format="dd/mm/yyyy">
+                                            <input class="form-control datepicker linked" type="text" readonly name="date-depart">
                                             <div class="input-group-addon">
                                                 <span class="fa fa-calendar"></span>
                                             </div>
@@ -177,7 +177,7 @@
                                     <div class="row show-unless-round-trip" style="display: none">
                                         <label class="control-label">Ngày về</label>
                                         <div class="input-group date" data-provide="datepicker">
-                                            <input class="form-control datepicker" type="text" readonly name="date-return" data-date-format="dd/mm/yyyy">
+                                            <input class="form-control datepicker linked" type="text" readonly name="date-return">
                                             <div class="input-group-addon">
                                                 <span class="fa fa-calendar"></span>
                                             </div>
@@ -191,7 +191,7 @@
                                 <div class="form-group label-static col-sm-4">
                                     <div class="row" style="margin-right: 5px">
                                         <label class="control-label color-black">Người lớn</label>
-                                        <select class="select form-control" name="adult">
+                                        <select class="select form-control linked" name="adult">
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
@@ -228,7 +228,7 @@
                                 <div class="form-group label-static col-sm-4">
                                     <div class="row" style="margin-right: 5px">
                                         <label class="control-label color-black">Trẻ em</label>
-                                        <select class="select form-control" name="child">
+                                        <select class="select form-control linked" name="child">
                                             <option value="0">0</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
@@ -266,7 +266,182 @@
                                 <div class="form-group label-static col-sm-4">
                                     <div class="row">
                                         <label class="control-label color-black">Em bé</label>
-                                        <select class="select form-control" name="infant">
+                                        <select class="select form-control linked" name="infant">
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button class="btn btn-primary btn-raised pull-right" role="button">Tìm vé</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="book-form-small" class="visible-xs-block">
+                    <form role="form">
+                        <div class="row">
+                            <div class="form-group col-sm-12">
+                                <div class="radio">
+                                    <label class="color-black">
+                                        <input class="linked" type="radio" name="round-trip" value="0" checked>Một chiều
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label class="color-black">
+                                        <input class="linked" type="radio" name="round-trip" value="1">Khứ hồi
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group label-floating col-sm-6">
+                                    <div class="row">
+                                        <label class="control-label">Điểm đi</label>
+                                        <input class="form-control linked" type="text" name="place-from">
+                                    </div>
+                                </div>
+                                <div class="form-group label-floating col-sm-6">
+                                    <div class="row">
+                                        <label class="control-label">Điểm đến</label>
+                                        <input class="form-control linked" type="text" name="place-to">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group label-floating col-sm-6">
+                                    <div class="row">
+                                        <label class="control-label">Ngày đi</label>
+                                        <div class="input-group date" data-provide="datepicker">
+                                            <input class="form-control datepicker linked" type="text" readonly name="date-depart">
+                                            <div class="input-group-addon">
+                                                <span class="fa fa-calendar"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group label-floating col-sm-6">
+                                    <div class="row show-unless-round-trip" style="display: none">
+                                        <label class="control-label">Ngày về</label>
+                                        <div class="input-group date" data-provide="datepicker">
+                                            <input class="form-control datepicker linked" type="text" readonly name="date-return">
+                                            <div class="input-group-addon">
+                                                <span class="fa fa-calendar"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group label-static col-sm-4">
+                                    <div class="row">
+                                        <label class="control-label color-black">Người lớn</label>
+                                        <select class="select form-control linked" name="adult">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group label-static col-sm-4">
+                                    <div class="row">
+                                        <label class="control-label color-black">Trẻ em</label>
+                                        <select class="select form-control linked" name="child">
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group label-static col-sm-4">
+                                    <div class="row">
+                                        <label class="control-label color-black">Em bé</label>
+                                        <select class="select form-control linked" name="infant">
                                             <option value="0">0</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
@@ -310,7 +485,6 @@
                         </div>
                     </form>
                 </div>
-            </div>
         </div>
         <footer id="bottom-page" class="container-fluid bg-blue">
             <div class="container">
@@ -324,7 +498,6 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="row color-white">
-                            <!-- <div class="pull-right"> -->
                             <h4>Đại lý vé máy bay Hải Phi Yến</h4>
                             <ul>
                                 <li>Địa chỉ: 665 Nguyễn Hữu Thọ, Q. Cẩm Lệ, TP. Đà Nẵng</li>
@@ -333,7 +506,6 @@
                                 <li>Zalo: 0913.642.748</li>
                                 <li>Email: <a class="color-white" href="mailto:vemaybayhaiphiyen@gmail.com">vemaybayhaiphiyen@gmail.com</a></li>
                             </ul>
-                            <!-- </div> -->
                         </div>
                     </div>
                 </div>
