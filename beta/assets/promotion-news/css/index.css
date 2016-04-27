@@ -1,0 +1,45 @@
+#content-page {
+    padding-top: 15px;
+    padding-bottom: 20px;
+}
+#panel-box {
+    margin-top: 5px;
+}
+.panel {
+    margin-bottom: 5px;
+}
+.panel img {
+    width: 100%;
+}
+#promotion-news-box {
+    padding-top: 5px;
+}
+.promotion-news {
+    position: relative;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+.promotion-news img {
+    width: 100%;
+}
+.promotion-news h2 {
+    font-size: 24px;
+}
+.promotion-news h2, .promotion-news p {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.promotion-news .btn {
+    position: absolute;
+    right: 30px;
+    top: 40px;
+}
+@media (max-width: 767px) {
+    #content-page {
+        padding-top: 0;
+        padding-bottom: 5px;
+    }
+    .promotion-news h2 {
+        font-size: 24px;
+    }
+}

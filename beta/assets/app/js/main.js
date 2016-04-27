@@ -35,4 +35,5 @@ $(document).ready(function() {
             }
         }
     });
+    $('.nav a[href="' + this.location.pathname + '"]').parent().addClass('active');
 });

@@ -1,3 +1,6 @@
 /api/vendor
 /api/composer.lock
 /api/composer.phar
+vendor
+/beta/composer.phar
+/beta/composer.lock

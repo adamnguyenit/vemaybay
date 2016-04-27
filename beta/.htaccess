@@ -1,0 +1,12 @@
+Header set Access-Control-Allow-Origin "*"
+Header set Access-Control-Allow-Methods "GET,POST,PUT,DELETE,OPTIONS"
+Header set Access-Control-Allow-Headers "Accept, Content-Type, Access-Token, Role, Authorization"
+
+RewriteEngine on
+# If a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# Otherwise forward it to index.php
+RewriteRule . index.php
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]

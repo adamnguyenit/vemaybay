@@ -1,33 +1,20 @@
+<?php
+use yii\helpers\Html;
+use yii\helpers\Url;
+use app\assets\AppAsset;
+
+$bundle = AppAsset::register($this);
+?>
+<?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Vé máy bay Hải Phi Yến</title>
-
-    <!-- FontAwesome -->
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-    <!-- Material Design fonts -->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
-    <!-- Bootstrap -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <!-- Bootstrap Material Design -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-material-design.min.css">
-    <link rel="stylesheet" type="text/css" href="css/ripples.min.css">
-    <!-- Dropdown -->
-    <link rel="stylesheet" type="text/css" href="css/jquery.dropdown.css">
-    <!-- Datepicker -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker3.min.css">
-    <!-- Customize style -->
-    <link rel="stylesheet" type="text/css" href="css/custom.css">
-    <!-- Main style -->
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <!-- Current page style -->
-    <link rel="stylesheet" type="text/css" href="css/khuyen-mai.css">
-
+    <?= Html::csrfMetaTags() ?>
+    <title><?= Html::encode(Yii::t('app', $this->title)) ?></title>
+    <?php $this->head() ?>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -35,8 +22,8 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-
 <body>
+    <?php $this->beginBody() ?>
     <div id="fb-root"></div>
     <script>
         (function(d, s, id) {
@@ -53,11 +40,13 @@
             <div class="container">
                 <div class="row">
                     <div id="logo" class="col-sm-6">
-                        <img src="images/logo.png">
+                        <img src="<?= \Yii::getAlias("$bundle->baseUrl/images/logo.png") ?>">
                     </div>
                     <div id="contact" class="col-sm-6 hidden-xs">
-                        <div id="contact-phone" class="pull-right">
-                            <p style="margin-bottom: 0"><span class="text-info">Hotline</span>: <a class="text-danger" href="tel:0913 642 748">0913.642.748</a> - <a class="text-danger" href="tel:0914 650 511">0914.650.511</a></p>
+                        <div class="row">
+                            <div id="contact-phone" class="pull-right">
+                                <p style="margin-bottom: 0"><span class="text-info">Hotline</span>: <a class="text-danger" href="tel:0913 642 748">0913.642.748</a> - <a class="text-danger" href="tel:0914 650 511">0914.650.511</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -67,7 +56,6 @@
             <div class="row">
                 <nav class="navbar navbar-default bg-blue color-white">
                     <div class="container">
-                        <!-- Brand and toggle get grouped for better mobile display -->
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main" aria-expanded="false">
                                 <span class="sr-only">Toggle navigation</span>
@@ -77,20 +65,19 @@
                             </button>
                             <span id="navbar-phone" class="visible-xs-block"><span class="fa fa-phone"></span> <a class="color-white" href="tel:0913 642 748">0913.642.748</a></span>
                         </div>
-
-                        <!-- Collect the nav links, forms, and other content for toggling -->
                         <div id="navbar-main" class="collapse navbar-collapse">
                             <ul class="nav navbar-nav">
                                 <li><a href="/"><span class="fa fa-plane"></span> Vé máy bay <span class="sr-only">(current)</span></a></li>
-                                <li class="active"><a href="/khuyen-mai.html"><span class="fa fa-bar-chart-o"></span> Khuyến mãi</span></a></li>
-                                <li><a href="/tin-tuc.html"><span class="fa fa-newspaper-o"></span> Tin tức</a></li>
+                                <li><a href="<?= Url::toRoute(['promotion-news/index']) ?>"><span class="fa fa-bar-chart-o"></span> Khuyến mãi</span></a></li>
+                                <li><a href="<?= Url::toRoute(['news/index']) ?>"><span class="fa fa-newspaper-o"></span> Tin tức</a></li>
                             </ul>
                         </div>
                     </div>
                 </nav>
             </div>
         </div>
-        <div id="content-page" class="container-fluid">
+        <div id="content-page">
+            <?= $content ?>
         </div>
         <footer id="bottom-page" class="container-fluid bg-blue">
             <div class="container">
@@ -120,22 +107,7 @@
             </div>
         </footer>
     </div>
-    <!-- jQuery -->
-    <script src="js/jquery.min.js"></script>
-    <!-- Bootsrap -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Material Boostrap -->
-    <script src="js/material.min.js"></script>
-    <script src="js/ripples.min.js"></script>
-    <!-- Dropdown -->
-    <script src="js/jquery.dropdown.js"></script>
-    <!-- Datepicker -->
-    <script src="js/bootstrap-datepicker.min.js"></script>
-    <script src="locales/bootstrap-datepicker.vi.min.js"></script>
-    <!-- Main JS -->
-    <script src="js/main.js"></script>
-    <!-- Current page JS -->
-    <script src="js/khuyen-mai.js"></script>
+    <?php $this->endBody() ?>
 </body>
-
 </html>
+<?php $this->endPage() ?>
