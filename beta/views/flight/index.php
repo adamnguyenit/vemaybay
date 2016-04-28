@@ -1,5 +1,6 @@
 <?php
 use app\assets\FlightIndexAsset;
+use yii\helpers\Url;
 
 $bundle = FlightIndexAsset::register($this);
 $this->title = 'Vé máy bay Hải Phi Yến';
@@ -7,31 +8,26 @@ $this->title = 'Vé máy bay Hải Phi Yến';
 <div class="container-fluid">
     <div id="content-page-container" class="row hidden-xs">
         <div id="promotions-slider" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
             <ol class="carousel-indicators">
                 <li data-target="#promotions-slider" data-slide-to="0" class="active"></li>
                 <li data-target="#promotions-slider" data-slide-to="1"></li>
                 <li data-target="#promotions-slider" data-slide-to="2"></li>
                 <li data-target="#promotions-slider" data-slide-to="3"></li>
             </ol>
-
-            <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
-                    <img src="http://placehold.it/1600x600" alt="Chania">
+                    <a href="<?= Url::toRoute(['promotion-news/info', 'alias' => 'lorem-ipsum-dolor-sit-amet-consectetuer-adipiscing-elit']) ?>"><img src="http://placehold.it/1600x600"></a>
                 </div>
                 <div class="item">
-                    <img src="http://placehold.it/1600x600" alt="Chania">
+                    <a href="<?= Url::toRoute(['promotion-news/info', 'alias' => 'lorem-ipsum-dolor-sit-amet-consectetuer-adipiscing-elit']) ?>"><img src="http://placehold.it/1600x600"></a>
                 </div>
                 <div class="item">
-                    <img src="http://placehold.it/1600x600" alt="Flower">
+                    <a href="<?= Url::toRoute(['promotion-news/info', 'alias' => 'lorem-ipsum-dolor-sit-amet-consectetuer-adipiscing-elit']) ?>"><img src="http://placehold.it/1600x600"></a>
                 </div>
                 <div class="item">
-                    <img src="http://placehold.it/1600x600" alt="Flower">
+                    <a href="<?= Url::toRoute(['promotion-news/info', 'alias' => 'lorem-ipsum-dolor-sit-amet-consectetuer-adipiscing-elit']) ?>"><img src="http://placehold.it/1600x600"></a>
                 </div>
             </div>
-
-            <!-- Left and right controls -->
             <a class="left carousel-control" href="#promotions-slider" role="button" data-slide="prev">
                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                 <span class="sr-only">Trước</span>
@@ -42,7 +38,7 @@ $this->title = 'Vé máy bay Hải Phi Yến';
             </a>
         </div>
         <div id="book-form-large" class="col-sm-3">
-            <form role="form">
+            <form action="<?= Url::toRoute(['flight/search']) ?>" role="form">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="radio">
@@ -145,7 +141,7 @@ $this->title = 'Vé máy bay Hải Phi Yến';
         </div>
     </div>
     <div id="book-form-small" class="visible-xs-block">
-            <form role="form">
+            <form action="<?= Url::toRoute(['flight/search']) ?>" role="form">
                 <div class="row">
                     <div class="form-group col-sm-12">
                         <div class="radio">

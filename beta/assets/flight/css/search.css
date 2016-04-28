@@ -1,0 +1,48 @@
+#content-page {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+#book-form .radio {
+    display: inline-block;
+    font-size: normal;
+    font-weight: normal;
+    margin-bottom: 5px;
+}
+#tabs-progress {
+    margin-top: 0;
+}
+#depart-table, #return-table {
+    width: 100%;
+}
+table.dataTable {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+table.table-hover tbody tr {
+    cursor: pointer;
+}
+table.ticket-detail tbody tr td {
+    padding-right: 5px;
+}
+table.ticket-detail tbody tr td:last-child {
+    padding-right: 0;
+}
+table.price-detail tbody tr td {
+    padding-right: 10px;
+}
+table.price-detail tbody tr td:last-child {
+    padding-right: 0;
+}
+#promotions-slider {
+    margin-top: 5px;
+}
+#panel-box {
+    margin-top: 15px;
+}
+.panel {
+    margin-bottom: 5px;
+    box-shadow: none;
+}
+.panel img {
+    width: 100%;
+}

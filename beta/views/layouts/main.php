@@ -40,7 +40,7 @@ $bundle = AppAsset::register($this);
             <div class="container">
                 <div class="row">
                     <div id="logo" class="col-sm-6">
-                        <img src="<?= \Yii::getAlias("$bundle->baseUrl/images/logo.png") ?>">
+                        <a href="<?= Url::toRoute(['flight/index']) ?>"><img src="<?= \Yii::getAlias("$bundle->baseUrl/images/logo.png") ?>"></a>
                     </div>
                     <div id="contact" class="col-sm-6 hidden-xs">
                         <div class="row">
@@ -67,8 +67,8 @@ $bundle = AppAsset::register($this);
                         </div>
                         <div id="navbar-main" class="collapse navbar-collapse">
                             <ul class="nav navbar-nav">
-                                <li><a href="/"><span class="fa fa-plane"></span> Vé máy bay <span class="sr-only">(current)</span></a></li>
-                                <li><a href="<?= Url::toRoute(['promotion-news/index']) ?>"><span class="fa fa-bar-chart-o"></span> Khuyến mãi</span></a></li>
+                                <li><a href="<?= Url::toRoute(['flight/index']) ?>"><span class="fa fa-plane"></span> Vé máy bay <span class="sr-only">(current)</span></a></li>
+                                <li><a href="<?= Url::toRoute(['promotion-news/index']) ?>"><span class="fa fa-gift"></span> Khuyến mãi</span></a></li>
                                 <li><a href="<?= Url::toRoute(['news/index']) ?>"><span class="fa fa-newspaper-o"></span> Tin tức</a></li>
                             </ul>
                         </div>

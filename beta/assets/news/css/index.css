@@ -8,7 +8,6 @@
 }
 .news img {
     height: 250px;
-    width: 250px;
     margin-right: 15px;
 }
 .news h3 {
@@ -39,6 +38,7 @@
 }
 .panel {
     margin-bottom: 5px;
+    box-shadow: none;
 }
 .panel img {
     width: 100%;

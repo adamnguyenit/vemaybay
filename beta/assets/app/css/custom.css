@@ -22,3 +22,10 @@
 .form-group .help-block {
     display: inline-block;
 }
+.nav-tabs {
+    border: 0;
+    padding-bottom: 1px;
+}
+.nav-tabs > li.active {
+    background-color: #f03e44 !important;
+}

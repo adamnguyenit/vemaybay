@@ -31,6 +31,7 @@
 }
 .panel {
     margin-bottom: 5px;
+    box-shadow: none;
 }
 .panel img {
     width: 100%;

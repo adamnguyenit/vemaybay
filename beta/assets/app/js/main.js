@@ -1,9 +1,6 @@
 $(document).ready(function() {
     // Material
     $.material.init();
-    $('.select').dropdown({
-        autoinit: '.select'
-    });
 
     // Date picker
     var nowDate = new Date();
