@@ -10,7 +10,7 @@ $config = [
             'class' => 'yii\web\UrlManager',
             'showScriptName' => false,
             'enablePrettyUrl' => true,
-            'suffix' => '',
+            'suffix' => '.html',
             'rules' => $routes,
         ],
         'request' => [

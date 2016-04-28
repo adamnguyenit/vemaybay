@@ -170,37 +170,37 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                             <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td><span class="label label-primary">VNA</span></td>
+                                    <td><span class="label label-primary">VN</span></td>
                                     <td>08:30</td>
-                                    <td>VNA 327</td>
+                                    <td>VN 327</td>
                                     <td class="color-red">1.299.000</td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
-                                    <td><span class="label label-primary">VNA</span></td>
+                                    <td><span class="label label-primary">VN</span></td>
                                     <td>08:30</td>
-                                    <td>VNA 327</td>
+                                    <td>VN 327</td>
                                     <td class="color-red">299.000</td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
-                                    <td><span class="label label-primary">VNA</span></td>
+                                    <td><span class="label label-primary">VN</span></td>
                                     <td>08:30</td>
-                                    <td>VNA 327</td>
+                                    <td>VN 327</td>
                                     <td class="color-red">299.000</td>
                                 </tr>
                                 <tr>
                                     <td>4</td>
-                                    <td><span class="label label-primary">VNA</span></td>
+                                    <td><span class="label label-primary">VN</span></td>
                                     <td>08:30</td>
-                                    <td>VNA 327</td>
+                                    <td>VN 327</td>
                                     <td class="color-red">299.000</td>
                                 </tr>
                                 <tr>
                                     <td>5</td>
-                                    <td><span class="label label-primary">VNA</span></td>
+                                    <td><span class="label label-primary">VN</span></td>
                                     <td>08:30</td>
-                                    <td>VNA 327</td>
+                                    <td>VN 327</td>
                                     <td class="color-red">299.000</td>
                                 </tr>
                                 <tr>
@@ -332,37 +332,37 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                             <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td><span class="label label-primary">VNA</span></td>
+                                    <td><span class="label label-primary">VN</span></td>
                                     <td>08:30</td>
-                                    <td>VNA 327</td>
+                                    <td>VN 327</td>
                                     <td class="color-red">1.299.000</td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
-                                    <td><span class="label label-primary">VNA</span></td>
+                                    <td><span class="label label-primary">VN</span></td>
                                     <td>08:30</td>
-                                    <td>VNA 327</td>
+                                    <td>VN 327</td>
                                     <td class="color-red">299.000</td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
-                                    <td><span class="label label-primary">VNA</span></td>
+                                    <td><span class="label label-primary">VN</span></td>
                                     <td>08:30</td>
-                                    <td>VNA 327</td>
+                                    <td>VN 327</td>
                                     <td class="color-red">299.000</td>
                                 </tr>
                                 <tr>
                                     <td>4</td>
-                                    <td><span class="label label-primary">VNA</span></td>
+                                    <td><span class="label label-primary">VN</span></td>
                                     <td>08:30</td>
-                                    <td>VNA 327</td>
+                                    <td>VN 327</td>
                                     <td class="color-red">299.000</td>
                                 </tr>
                                 <tr>
                                     <td>5</td>
-                                    <td><span class="label label-primary">VNA</span></td>
+                                    <td><span class="label label-primary">VN</span></td>
                                     <td>08:30</td>
-                                    <td>VNA 327</td>
+                                    <td>VN 327</td>
                                     <td class="color-red">299.000</td>
                                 </tr>
                                 <tr>
