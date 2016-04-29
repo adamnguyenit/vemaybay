@@ -34,3 +34,25 @@ $(document).ready(function() {
     });
     $('.nav a[href="' + this.location.pathname + '"]').parent().addClass('active');
 });
+
+const API_URL = 'http://api.vemaybay.com/app/';
+
+function getList(endpoint, handle) {
+    $.ajax({
+        type: 'GET',
+        url: API_URL + endpoint,
+        success: function(data, textStatus, jqXHR) {
+            handle(data.items, data._links.next);
+        }
+    });
+}
+
+function getItem(endpoint, handle) {
+    $.ajax({
+        type: 'GET',
+        url: API_URL + endpoint,
+        success: function(data, textStatus, jqXHR) {
+            handle(data);
+        }
+    });
+}

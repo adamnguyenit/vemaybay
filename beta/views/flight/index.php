@@ -75,7 +75,7 @@ $this->title = 'Vé máy bay Hải Phi Yến';
                             <div class="row" style="margin-right: 5px">
                                 <label class="control-label">Ngày đi</label>
                                 <div class="input-group date" data-provide="datepicker">
-                                    <input class="form-control datepicker linked" type="text" readonly name="date-depart">
+                                    <input class="form-control datepicker linked" type="text" name="date-depart" value="<?= empty($defaults['departDate']) ? null : $defaults['departDate'] ?>" readonly>
                                     <div class="input-group-addon">
                                         <span class="fa fa-calendar"></span>
                                     </div>
@@ -86,7 +86,7 @@ $this->title = 'Vé máy bay Hải Phi Yến';
                             <div class="row show-unless-round-trip" style="display: none">
                                 <label class="control-label">Ngày về</label>
                                 <div class="input-group date" data-provide="datepicker">
-                                    <input class="form-control datepicker linked" type="text" readonly name="date-return">
+                                    <input class="form-control datepicker linked" type="text" name="date-return" value="<?= empty($defaults['returnDate']) ? null : $defaults['returnDate'] ?>" readonly>
                                     <div class="input-group-addon">
                                         <span class="fa fa-calendar"></span>
                                     </div>

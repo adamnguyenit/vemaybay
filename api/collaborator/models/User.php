@@ -46,7 +46,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface, \
 
     public function getRateLimit($request, $action)
     {
-        return [$this->rateLimit, 1];
+        return [$this->rate_limit, 1];
     }
 
     public function loadAllowance($request, $action)

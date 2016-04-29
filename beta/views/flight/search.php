@@ -9,7 +9,7 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
     <div class="row">
         <div class="col-md-4">
             <div class="row" style="margin-right: 5px">
-                <div id="book-form" class="col-md-12 hidden-xs bg-white">
+                <div id="book-form" class="col-md-12 hidden-xs hidden-sm bg-white">
                     <form action="<?= Url::toRoute(['flight/search']) ?>" role="form">
                         <div class="row">
                             <div class="form-group col-sm-12">
@@ -109,7 +109,7 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                     </form>
                 </div>
             </div>
-            <div class="row hidden-xs" style="margin-right: 5px">
+            <div class="row hidden-xs hidden-sm" style="margin-right: 5px">
                 <div id="promotions-slider" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
                         <div class="item active">
@@ -135,7 +135,7 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                     </a>
                 </div>
             </div>
-            <div class="row hidden-xs" style="margin-right: 5px">
+            <div class="row hidden-xs hidden-sm" style="margin-right: 5px">
                 <div id="panel-box">
                     <div class="panel">
                         <img src="http://placehold.it/600x900">
@@ -153,10 +153,28 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                 </div>
                 <ul id="tabs-panel" class="nav nav-tabs">
                     <li class="active"><a id="depart-tab-trigger" data-toggle="tab" href="#depart-box">Chiều đi</a></li>
-                    <li class="show-unless-round-trip"<?= $params['round-trip'] == 0 ? ' style="display: none"' : null ?>><a id="return-tab-trigger" data-toggle="tab" href="#return-box">Chiều về</a></li>
+                    <li <?= $params['round-trip'] == 0 ? ' style="display: none"' : null ?>><a id="return-tab-trigger" data-toggle="tab" href="#return-box">Chiều về</a></li>
                 </ul>
                 <div id="tabs-content" class="tab-content bg-white">
                     <div id="depart-box" class="tab-pane fade in active">
+                        <div class="col-md-12 hidden-xs hidden-sm">
+                            <div class="row">
+                                <div id="depart-dates">
+                                <?php if (!empty($dates['depart'])) : ?>
+                                <?php foreach ($dates['depart'] as $date) : ?>
+                                    <div class="col-xs-1 text-center">
+                                        <a class="color-black" href="<?= Url::current(['date-depart' => $date['date']]) ?>">
+                                            <div class="row flight-date<?= empty($date['active']) ? null : ' active' ?>">
+                                                <p><?= $date['title'] ?></p>
+                                                <p><?= $date['date_short'] ?></p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                <?php endforeach ?>
+                                <?php endif ?>
+                                </div>
+                            </div>
+                        </div>
                         <table id="depart-table" class="table table-hover">
                             <thead>
                                 <tr>
@@ -319,6 +337,24 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                         </table>
                     </div>
                     <div id="return-box" class="tab-pane fade">
+                        <div class="col-md-12 hidden-xs hidden-sm">
+                            <div class="row">
+                                <div id="return-dates">
+                                <?php if (!empty($dates['return'])) : ?>
+                                <?php foreach ($dates['return'] as $date) : ?>
+                                    <div class="col-xs-1 text-center">
+                                        <a class="color-black" href="<?= Url::current(['date-return' => $date['date']]) ?>">
+                                            <div class="row flight-date<?= empty($date['active']) ? null : ' active' ?>">
+                                                <p><?= $date['title'] ?></p>
+                                                <p><?= $date['date_short'] ?></p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                <?php endforeach ?>
+                                <?php endif ?>
+                                </div>
+                            </div>
+                        </div>
                         <table id="return-table" class="table table-hover">
                             <thead>
                                 <tr>

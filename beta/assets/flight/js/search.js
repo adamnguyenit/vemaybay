@@ -7,6 +7,8 @@ function resizeTable() {
         flightTables['depart'].column(this).visible(visible);
         flightTables['return'].column(this).visible(visible);
     });
+    $('#depart-table').css('width', '100%');
+    $('#return-table').css('width', '100%');
 }
 var flightTablesHidedColumn = [0];
 var flightTablesHidedWidth = 480;

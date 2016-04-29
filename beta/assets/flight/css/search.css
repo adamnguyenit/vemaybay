@@ -14,6 +14,17 @@
 #depart-table, #return-table {
     width: 100%;
 }
+.flight-date {
+    padding-top: 10px;
+    cursor: pointer;
+}
+.flight-date:hover {
+    background-color: #dddddd;
+}
+.flight-date.active {
+    color: #ffffff;
+    background-color: #3b89c9;
+}
 table.dataTable {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
