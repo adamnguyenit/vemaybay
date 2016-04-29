@@ -39,6 +39,10 @@ class NewsController extends Controller
 
     public function actionView($alias)
     {
-        return News::find()->where(['alias' => $alias])->limit(1)->one();
+        $news = News::find()->where(['alias' => $alias])->limit(1)->one();
+        $news->views++;
+        $news->save();
+
+        return $news;
     }
 }

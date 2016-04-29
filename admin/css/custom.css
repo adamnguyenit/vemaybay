@@ -5388,3 +5388,6 @@ ul.notifications {
 #editor {
     border: 1px solid #dddddd;
 }
+.modal-body img {
+    max-width: 100%;
+}
