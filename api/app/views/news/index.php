@@ -1,6 +1,5 @@
 <?php
 use yii\helpers\Html;
-use yii\helpers\Url;
 ?>
 <?php if (isset($dataProvider)) : ?>
     <?php foreach ($dataProvider->getModels() as $model) : ?>
@@ -20,7 +19,7 @@ use yii\helpers\Url;
     $pagination = $dataProvider->getPagination();
     $currentPage = $pagination->getPage();
 ?>
-    <?php if ($currentPage < $pagination->getPageCount()) : ?>
-<a class="btn jscroll-next" href="<?= $pagination->createUrl($currentPage + 1, null, true) ?>" role="button">Xem thêm</a>
+    <?php if ($currentPage < $pagination->getPageCount() - 1) : ?>
+<div class="row"><a class="btn btn-primary btn-raised jscroll-next" href="<?= $pagination->createUrl($currentPage + 1, null, true) ?>" style="width: 100%" role="button">Xem thêm</a></div>
     <?php endif ?>
 <?php endif ?>

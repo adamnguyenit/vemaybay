@@ -4,7 +4,7 @@ namespace app\models;
 
 use yii\helpers\StringHelper;
 
-class News extends \yii\db\ActiveRecord
+class PromotionNews extends \yii\db\ActiveRecord
 {
 
     public function fields()

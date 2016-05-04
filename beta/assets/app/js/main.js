@@ -34,10 +34,9 @@ $(document).ready(function() {
     });
     $('.nav a[href="' + this.location.pathname + '"]').parent().addClass('active');
     $('.jscroll').jscroll({
-      debug: true,
         autoTrigger: true,
         nextSelector: 'a.jscroll-next:last',
-        loadingHtml: '<i class="fa fa-refresh fa-spin fa-3x fa-fw margin-bottom"></i><span class="sr-only">Loading...</span>'
+        loadingHtml: '<div class="text-center"><i class="fa fa-refresh fa-spin fa-3x fa-fw margin-bottom"></i><span class="sr-only">Đang tải...</span></div>'
     });
 });
 

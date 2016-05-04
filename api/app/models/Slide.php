@@ -2,11 +2,9 @@
 
 namespace app\models;
 
-use yii\helpers\Url;
-
-class Panel extends \yii\db\ActiveRecord
+class Slide extends \yii\db\ActiveRecord
 {
-    const UPLOAD_DIR = '../administrator/upload/panel';
+    const UPLOAD_DIR = 'upload/slide';
 
     public function fields()
     {

@@ -25,7 +25,7 @@ class AppAsset extends \yii\web\AssetBundle
         'js/ripples.min.js',
         'js/bootstrap-datepicker.min.js',
         'locales/bootstrap-datepicker.vi.min.js',
-        'js/jquery.jscroll.min.js',
+        'js/jquery.jscroll.js',
         'js/main.js'
     ];
 }

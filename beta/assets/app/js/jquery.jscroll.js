@@ -10,7 +10,7 @@
  * http://www.gnu.org/licenses/gpl-2.0.html
  *
  * @author Philip Klauzinski
- * @version 2.3.5
+ * @version 2.3.0
  * @requires jQuery v1.4.3+
  * @preserve
  */
@@ -25,7 +25,6 @@
             autoTrigger: true,
             autoTriggerUntil: false,
             loadingHtml: '<small>Loading...</small>',
-            loadingFunction: false,
             padding: 0,
             nextSelector: 'a:last',
             contentSelector: '',
@@ -57,7 +56,7 @@
                 }
             },
 
-            // Wrap inner content, if it isn't already
+            // Wrapper inner content, if it isn't already
             _wrapInnerContent = function() {
                 if (!$e.find('.jscroll-inner').length) {
                     $e.contents().wrapAll('<div class="jscroll-inner" />');
@@ -87,22 +86,20 @@
 
             // Observe the scroll event for when to trigger the next load
             _observe = function() {
-                if ($e.is(':visible')) {
-                    _wrapInnerContent();
-                    var $inner = $e.find('div.jscroll-inner').first(),
-                        data = $e.data('jscroll'),
-                        borderTopWidth = parseInt($e.css('borderTopWidth'), 10),
-                        borderTopWidthInt = isNaN(borderTopWidth) ? 0 : borderTopWidth,
-                        iContainerTop = parseInt($e.css('paddingTop'), 10) + borderTopWidthInt,
-                        iTopHeight = _isWindow ? _$scroll.scrollTop() : $e.offset().top,
-                        innerTop = $inner.length ? $inner.offset().top : 0,
-                        iTotalHeight = Math.ceil(iTopHeight - innerTop + _$scroll.height() + iContainerTop);
+                _wrapInnerContent();
+                var $inner = $e.find('div.jscroll-inner').first(),
+                    data = $e.data('jscroll'),
+                    borderTopWidth = parseInt($e.css('borderTopWidth'), 10),
+                    borderTopWidthInt = isNaN(borderTopWidth) ? 0 : borderTopWidth,
+                    iContainerTop = parseInt($e.css('paddingTop'), 10) + borderTopWidthInt,
+                    iTopHeight = _isWindow ? _$scroll.scrollTop() : $e.offset().top,
+                    innerTop = $inner.length ? $inner.offset().top : 0,
+                    iTotalHeight = Math.ceil(iTopHeight - innerTop + _$scroll.height() + iContainerTop);
 
-                    if (!data.waiting && iTotalHeight + _options.padding >= $inner.outerHeight()) {
-                        //data.nextHref = $.trim(data.nextHref + ' ' + _options.contentSelector);
-                        _debug('info', 'jScroll:', $inner.outerHeight() - iTotalHeight, 'from bottom. Loading next request...');
-                        return _load();
-                    }
+                if (!data.waiting && iTotalHeight + _options.padding >= $inner.outerHeight()) {
+                    //data.nextHref = $.trim(data.nextHref + ' ' + _options.contentSelector);
+                    _debug('info', 'jScroll:', $inner.outerHeight() - iTotalHeight, 'from bottom. Loading next request...');
+                    return _load();
                 }
             },
 
@@ -121,15 +118,9 @@
 
             _setBindings = function() {
                 var $next = $e.find(_options.nextSelector).first();
-                if (!$next.length) {
-                    return;
-                }
                 if (_options.autoTrigger && (_options.autoTriggerUntil === false || _options.autoTriggerUntil > 0)) {
                     _nextWrap($next);
-                     var scrollingBodyHeight = _$body.height() - $e.offset().top,
-                    	scrollingHeight = ($e.height() < scrollingBodyHeight) ? $e.height() : scrollingBodyHeight,
-                    	windowHeight = ($e.offset().top - _$window.scrollTop() > 0) ? _$window.height() - ($e.offset().top - $(window).scrollTop()) : _$window.height();
-                    if (scrollingHeight <= windowHeight) {
+                    if (_$body.height() <= _$window.height()) {
                         _observe();
                     }
                     _$scroll.unbind('.jscroll').bind('scroll.jscroll', function() {
@@ -156,13 +147,7 @@
                 data.waiting = true;
                 $inner.append('<div class="jscroll-added" />')
                     .children('.jscroll-added').last()
-                    .html('<div class="jscroll-loading" id="jscroll-loading">' + _options.loadingHtml + '</div>')
-                    .promise()
-                    .done(function(){
-                        if (_options.loadingFunction) {
-                            _options.loadingFunction();
-                        }
-                    });
+                    .html('<div class="jscroll-loading">' + _options.loadingHtml + '</div>');
 
                 return $e.animate({scrollTop: $inner.outerHeight()}, 0, function() {
                     $inner.find('div.jscroll-added').last().load(data.nextHref, function(r, status) {

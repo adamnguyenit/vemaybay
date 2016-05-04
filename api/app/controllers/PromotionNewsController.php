@@ -3,15 +3,15 @@
 namespace app\controllers;
 
 use yii\data\ActiveDataProvider;
-use app\models\News;
+use app\models\PromotionNews;
 
-class NewsController extends Controller
+class PromotionNewsController extends Controller
 {
 
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => News::find(),
+            'query' => PromotionNews::find(),
             'sort' => [
                 'defaultOrder' => [
                     'created_at' => SORT_DESC,
@@ -24,28 +24,9 @@ class NewsController extends Controller
         return $dataProvider;
     }
 
-    public function actionPopular()
-    {
-        $dataProvider = new ActiveDataProvider([
-            'query' => News::find(),
-            'pagination' => [
-                'pageSize' => 3,
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'views' => SORT_DESC,
-                ],
-            ],
-        ]);
-        if (\Yii::$app->response->format == 'html') {
-            return $this->render('popular', ['dataProvider' => $dataProvider]);
-        }
-        return $dataProvider;
-    }
-
     public function actionView($alias)
     {
-        $news = News::find()->where(['alias' => $alias])->limit(1)->one();
+        $news = PromotionNews::find()->where(['alias' => $alias])->limit(1)->one();
         $news->views++;
         $news->save();
 
