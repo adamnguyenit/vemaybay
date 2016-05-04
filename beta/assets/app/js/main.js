@@ -33,6 +33,12 @@ $(document).ready(function() {
         }
     });
     $('.nav a[href="' + this.location.pathname + '"]').parent().addClass('active');
+    $('.jscroll').jscroll({
+      debug: true,
+        autoTrigger: true,
+        nextSelector: 'a.jscroll-next:last',
+        loadingHtml: '<i class="fa fa-refresh fa-spin fa-3x fa-fw margin-bottom"></i><span class="sr-only">Loading...</span>'
+    });
 });
 
 const API_URL = 'http://api.vemaybay.com/app/';
@@ -41,8 +47,11 @@ function getList(endpoint, handle) {
     $.ajax({
         type: 'GET',
         url: API_URL + endpoint,
+        headers: {
+            Accept: 'text/html'
+        },
         success: function(data, textStatus, jqXHR) {
-            handle(data.items, data._links.next);
+            handle(data);
         }
     });
 }
@@ -51,6 +60,9 @@ function getItem(endpoint, handle) {
     $.ajax({
         type: 'GET',
         url: API_URL + endpoint,
+        headers: {
+            Accept: 'text/html'
+        },
         success: function(data, textStatus, jqXHR) {
             handle(data);
         }

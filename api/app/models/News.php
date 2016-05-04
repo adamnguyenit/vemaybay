@@ -15,11 +15,14 @@ class News extends \yii\db\ActiveRecord
             'content',
             'image',
             'images',
-            'description' => function () {
-                return empty($this->content) ? null : StringHelper::truncateWords(strip_tags($this->content), 50);
-            },
+            'description',
             'createdAt'
         ];
+    }
+
+    public function getDescription()
+    {
+        return empty($this->content) ? null : StringHelper::truncateWords(strip_tags($this->content), 50);
     }
 
     public function getImages()

@@ -9,7 +9,7 @@ class PanelController extends Controller
 {
     public function actionIndex()
     {
-        return new ActiveDataProvider([
+        $dataProvider = new ActiveDataProvider([
             'query' => Panel::find(),
             'pagination' => [
                 'pageSize' => \Yii::$app->request->get('limit', 8),
@@ -20,5 +20,9 @@ class PanelController extends Controller
                 ],
             ],
         ]);
+        if (\Yii::$app->response->format == 'html') {
+            return $this->render('index', ['dataProvider' => $dataProvider]);
+        }
+        return $dataProvider;
     }
 }

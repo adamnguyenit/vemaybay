@@ -9,7 +9,7 @@ class NewsController extends Controller
 {
     public function actionPopular()
     {
-        return new ActiveDataProvider([
+        $dataProvider = new ActiveDataProvider([
             'query' => News::find(),
             'pagination' => [
                 'pageSize' => 3,
@@ -20,14 +20,18 @@ class NewsController extends Controller
                 ],
             ],
         ]);
+        if (\Yii::$app->response->format == 'html') {
+            return $this->render('popular', ['dataProvider' => $dataProvider]);
+        }
+        return $dataProvider;
     }
 
     public function actionIndex()
     {
-        return new ActiveDataProvider([
+        $dataProvider = new ActiveDataProvider([
             'query' => News::find(),
             'pagination' => [
-                'pageSize' => \Yii::$app->request->get('limit', 8),
+                'pageSize' => \Yii::$app->request->get('per-page', 8),
             ],
             'sort' => [
                 'defaultOrder' => [
@@ -35,6 +39,10 @@ class NewsController extends Controller
                 ],
             ],
         ]);
+        if (\Yii::$app->response->format == 'html') {
+            return $this->render('index', ['dataProvider' => $dataProvider]);
+        }
+        return $dataProvider;
     }
 
     public function actionView($alias)
@@ -43,6 +51,9 @@ class NewsController extends Controller
         $news->views++;
         $news->save();
 
+        if (\Yii::$app->response->format == 'html') {
+            return $this->render('view', ['model' => $news]);
+        }
         return $news;
     }
 }
