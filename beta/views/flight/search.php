@@ -136,14 +136,7 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                 </div>
             </div>
             <div class="row hidden-xs hidden-sm" style="margin-right: 5px">
-                <div id="panel-box">
-                    <div class="panel">
-                        <img src="http://placehold.it/600x900">
-                    </div>
-                    <div class="panel">
-                        <img src="http://placehold.it/600x900">
-                    </div>
-                </div>
+                <div id="panel-box"></div>
             </div>
         </div>
         <div class="col-md-8">

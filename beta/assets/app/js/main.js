@@ -14,17 +14,10 @@ $(document).ready(function() {
     $('.linked').change(function() {
         var name = $(this).attr('name');
         if (name) {
-            var type = $(this).attr('type');
             var value = $(this).val();
             var instance = null;
-            if (type == 'radio' || type == 'checkbox') {
-                var isChecked = $(this).is(':checked');
-                instance = $('.linked[name=' + name + '][value=' + value + ']');
-                instance.prop('checked', isChecked);
-            } else {
-                instance = $('.linked[name=' + name + ']');
-                instance.val(value);
-            }
+            instance = $('.linked[name=' + name + ']');
+            instance.val(value);
             if (value) {
                 instance.closest('.form-group').removeClass('is-empty');
             } else {

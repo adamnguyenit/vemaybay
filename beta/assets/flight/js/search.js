@@ -93,6 +93,10 @@ function childOfTicket() {
     return html;
 }
 
+function addPanel(panel) {
+    $('#panel-box').append(panel);
+}
+
 $(document).ready(function() {
     // Show/hide some element for trip
     $('input[name=round-trip]').click(function() {
@@ -130,6 +134,12 @@ $(document).ready(function() {
     });
 
     resizeTable();
+
+    getList('panels', function(data) {
+        if (data) {
+          addPanel(data);
+        }
+    });
 });
 
 $(window).resize(function() {
