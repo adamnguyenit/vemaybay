@@ -1,3 +1,8 @@
+function addSlide(slide) {
+    $('#promotions-slider').prepend(slide);
+    $('#promotions-slider').carousel();
+}
+
 $(document).ready(function() {
     $('[name=round-trip]').change(function() {
         var value = $(this).val();
@@ -11,6 +16,12 @@ $(document).ready(function() {
             $('.show-unless-round-trip').hide();
         } else {
             $('.show-unless-round-trip').show();
+        }
+    });
+
+    getList('slides?per-page=100', function (data) {
+        if (data) {
+            addSlide(data);
         }
     });
 });

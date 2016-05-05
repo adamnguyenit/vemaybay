@@ -13,18 +13,33 @@ function addPromotionNews(news) {
 function addPanel(panel) {
     $('#panel-box').append(panel);
 }
+
+function addSlide(slide) {
+    $('#promotions-slider').prepend(slide);
+    $('#promotions-slider').carousel();
+}
+
 $(document).ready(function() {
     fixFloatButton();
+
     getList('promotion-news?per-page=100', function(data) {
         if (data) {
             addPromotionNews(data);
         }
     });
+
     getList('panels', function(data) {
         if (data) {
             addPanel(data);
         }
     });
+
+    getList('slides?per-page=100', function (data) {
+        if (data) {
+            addSlide(data);
+        }
+    });
+
     $('[name=round-trip]').change(function() {
         var value = $(this).val();
         if (value == 0) {

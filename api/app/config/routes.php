@@ -7,4 +7,5 @@ return [
     'GET panels' => 'panel/index',
     'GET promotion-news' => 'promotion-news/index',
     'GET promotion-news/<alias>' => 'promotion-news/view',
+    'GET slides' => 'slide/index',
 ];

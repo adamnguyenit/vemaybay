@@ -3,15 +3,15 @@
 namespace app\controllers;
 
 use yii\data\ActiveDataProvider;
-use app\models\Panel;
+use app\models\Slide;
 
-class PanelController extends Controller
+class SlideController extends Controller
 {
 
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Panel::find(),
+            'query' => Slide::find(),
             'sort' => [
                 'defaultOrder' => [
                     'index' => SORT_ASC,
