@@ -26,13 +26,13 @@ class PromotionNewsController extends Controller
 
     public function actionView($alias)
     {
-        $news = PromotionNews::find()->where(['alias' => $alias])->limit(1)->one();
-        $news->views++;
-        $news->save();
+        $model = PromotionNews::find()->where(['alias' => $alias])->limit(1)->one();
+        $model->views++;
+        $model->save();
 
         if (\Yii::$app->response->format == 'html') {
-            return $this->render('view', ['model' => $news]);
+            return $this->render('view', ['model' => $model]);
         }
-        return $news;
+        return $model;
     }
 }

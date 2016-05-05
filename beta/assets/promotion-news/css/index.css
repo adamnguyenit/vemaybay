@@ -33,7 +33,13 @@
 .promotion-news .btn {
     position: absolute;
     right: 30px;
-    top: 40px;
+    bottom: 0;
+}
+#book-form .radio {
+    display: inline-block;
+    font-size: normal;
+    font-weight: normal;
+    margin-bottom: 5px;
 }
 @media (max-width: 767px) {
     #content-page {
@@ -41,6 +47,7 @@
         padding-bottom: 5px;
     }
     .promotion-news h2 {
-        font-size: 24px;
+        padding-top: 10px;
+        font-size: 20px;
     }
 }

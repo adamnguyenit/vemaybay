@@ -83,9 +83,11 @@ $bundle = AppAsset::register($this);
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 hidden-xs">
-                        <div class="fb-page" data-href="https://www.facebook.com/vemaybayhaiphiyen" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false">
-                            <div class="fb-xfbml-parse-ignore">
-                                <blockquote cite="https://www.facebook.com/vemaybayhaiphiyen"><a href="https://www.facebook.com/vemaybayhaiphiyen">vemaybayhaiphiyen.com</a></blockquote>
+                        <div class="row">
+                            <div class="fb-page" data-href="https://www.facebook.com/vemaybayhaiphiyen" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false">
+                                <div class="fb-xfbml-parse-ignore">
+                                    <blockquote cite="https://www.facebook.com/vemaybayhaiphiyen"><a href="https://www.facebook.com/vemaybayhaiphiyen">vemaybayhaiphiyen.com</a></blockquote>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -102,7 +104,11 @@ $bundle = AppAsset::register($this);
                     </div>
                 </div>
                 <div class="row color-white">
-                    <div class="col-md-12"><i><span class="fa fa-copyright"></span> 2016 - Bản quyền của Công Ty Hải Phi Yến</i></div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <i><span class="fa fa-copyright"></span> 2016 - Bản quyền của Công Ty Hải Phi Yến</i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </footer>

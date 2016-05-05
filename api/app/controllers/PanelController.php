@@ -11,9 +11,6 @@ class PanelController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Panel::find(),
-            'pagination' => [
-                'pageSize' => \Yii::$app->request->get('limit', 8),
-            ],
             'sort' => [
                 'defaultOrder' => [
                     'index' => SORT_ASC,
