@@ -19,24 +19,35 @@ function addSlide(slide) {
     $('#promotions-slider').carousel();
 }
 
+function isPageLoaded() {
+    return isPromotionNewsLoaded && isSlidesLoaded && isPanelsLoaded;
+}
+
+var isPromotionNewsLoaded = false;
+var isSlidesLoaded = false;
+var isPanelsLoaded = false;
+
 $(document).ready(function() {
     fixFloatButton();
 
     getList('promotion-news?per-page=100', function(data) {
         if (data) {
             addPromotionNews(data);
+            isPromotionNewsLoaded = true;
         }
     });
 
-    getList('panels', function(data) {
+    getList('panels?per-page=100', function(data) {
         if (data) {
             addPanel(data);
+            isPanelsLoaded = true;
         }
     });
 
-    getList('slides?per-page=100', function (data) {
+    getList('slides?per-page=100', function(data) {
         if (data) {
             addSlide(data);
+            isSlidesLoaded = true;
         }
     });
 
@@ -49,6 +60,7 @@ $(document).ready(function() {
         }
     });
 });
+
 $(window).resize(function() {
     fixFloatButton();
 });

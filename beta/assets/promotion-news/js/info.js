@@ -10,14 +10,23 @@ function addPanel(panel) {
     $('#panel-box').append(panel);
 }
 
+function isPageLoaded() {
+    return isPromotionNewsLoaded && isPanelsLoaded;
+}
+
+var isPromotionNewsLoaded = false;
+var isPanelsLoaded = false;
+
 $(document).ready(function() {
     getItem('promotion-news/' + getAliasFromUrl(), function(news) {
         setPromotionNews(news);
+        isPromotionNewsLoaded = true;
     });
 
-    getList('panels', function(data) {
+    getList('panels?per-page=100', function(data) {
         if (data) {
             addPanel(data);
+            isPanelsLoaded = true;
         }
     });
 

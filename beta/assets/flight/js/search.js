@@ -97,6 +97,10 @@ function addPanel(panel) {
     $('#panel-box').append(panel);
 }
 
+function isPageLoaded() {
+    return true;
+}
+
 $(document).ready(function() {
     // Show/hide some element for trip
     $('input[name=round-trip]').click(function() {
@@ -137,7 +141,7 @@ $(document).ready(function() {
 
     getList('panels', function(data) {
         if (data) {
-          addPanel(data);
+            addPanel(data);
         }
     });
 });

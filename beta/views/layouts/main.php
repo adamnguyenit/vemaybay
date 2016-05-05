@@ -36,6 +36,15 @@ $bundle = AppAsset::register($this);
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
+    <div id="loading">
+        <div id="loading-center">
+            <div id="loading-center-absolute">
+                <div class="object" id="object_one"></div>
+                <div class="object" id="object_two"></div>
+                <div class="object" id="object_three"></div>
+            </div>
+        </div>
+    </div>
     <div id="page">
         <div id="top-page" class="container-fluid bg-white">
             <div class="row">

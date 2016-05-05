@@ -3,6 +3,12 @@ function addSlide(slide) {
     $('#promotions-slider').carousel();
 }
 
+function isPageLoaded() {
+    return isSlidesLoaded;
+}
+
+var isSlidesLoaded = false;
+
 $(document).ready(function() {
     $('[name=round-trip]').change(function() {
         var value = $(this).val();
@@ -22,10 +28,7 @@ $(document).ready(function() {
     getList('slides?per-page=100', function(data) {
         if (data) {
             addSlide(data);
+            isSlidesLoaded = true;
         }
     });
-
-    setTimeout(function() {
-        $('#loading').fadeOut();
-    }, 2000);
 });
