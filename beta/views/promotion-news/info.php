@@ -117,6 +117,12 @@ $this->title = 'Vé máy bay Hải Phi Yến | Khuyến mãi';
             <div class="row">
                 <div id="promotion-news-box" class="bg-white"></div>
             </div>
+            </br>
+            <div class="row bg-white">
+                <div id="comments-box">
+                    <div class="fb-comments" data-href="<?= Url::current([], true) ?>" data-numposts="5" data-width="100%"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
