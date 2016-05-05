@@ -163,7 +163,7 @@
                 </div>
                 <!-- Modal -->
                 <div id="view-modal" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-lg">
                         <!-- Modal content-->
                         <div class="modal-content">
                             <div class="modal-header">
@@ -178,7 +178,7 @@
                     </div>
                 </div>
                 <div id="update-modal" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-lg">
                         <!-- Modal content-->
                         <div class="modal-content">
                             <div class="modal-header">
@@ -256,7 +256,7 @@
             var onSuccess = function(data) {
                 $('#datatable').find('tbody').html(null);
                 for (i = 0; i < data.length; i++) {
-                    $('#datatable').find('tbody').append('<tr><td>' + (i + 1) + '</td><td><img class="img-resposive" src="' + data[i].image + '"></td><td><a target="_blank" href="' + data[i].link + '">' + data[i].link + '</a></td><td>' + data[i]
+                    $('#datatable').find('tbody').append('<tr><td>' + (i + 1) + '</td><td><img class="img-resposive" style="max-width: 300px" src="' + data[i].image + '"></td><td><a target="_blank" href="' + data[i].link + '">' + data[i].link + '</a></td><td>' + data[i]
                         .createdAt + '</td><td><a id="view-btn-' + data[i].id +
                         '" class="btn btn-xs btn-info" data-toggle="modal" data-target="#view-modal" data-slide-id="' + data[i].id + '" role="button">xem</a><a id="update-btn-' + data[i].id +
                         '" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#update-modal" data-slide-id="' + data[i].id + '" data-index="' + data[i].index + '" role="button">sửa</a><a id="delete-btn-' + data[i].id +
