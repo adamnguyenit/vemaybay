@@ -10,7 +10,7 @@ function resizeTable() {
     $('#depart-table').css('width', '100%');
     $('#return-table').css('width', '100%');
 }
-var flightTablesHidedColumn = [0];
+var flightTablesHidedColumn = [4];
 var flightTablesHidedWidth = 480;
 var flightTableOption = {
     paging: false,
@@ -20,7 +20,45 @@ var flightTableOption = {
     language: {
         sProcessing: "Đang xử lý...",
         sZeroRecords: "Không tìm thấy dữ liệu phù hợp"
-    }
+    },
+    columns: [{
+        data: 'airline',
+        type: 'html',
+        render: function(data, type, full, meta) {
+            switch (data) {
+                case 'JetStar':
+                    return '<span class="label label-danger">JS</span>';
+                case 'VietnamAirlines':
+                    return '<span class="label label-primary">VN</span>';
+                case 'VietJetAir':
+                    return '<span class="label label-warning">VJ</span>';
+                default:
+                    return '<span class="label label-default">' + data + '</span>';
+            }
+        }
+    }, {
+        data: 'departTime',
+        type: 'html',
+        render: function(data, type, full, meta) {
+            var d = dateDecode(data);
+            return d.hour + ':' + d.min;
+        }
+    }, {
+        data: 'flightNumber'
+    }, {
+        data: 'priceFrom',
+        type: 'num-fmt',
+        render: $.fn.dataTable.render.number('.', ',', 0),
+        className: 'text-right color-red'
+    }, {
+        data: 'seatAvailable',
+        render: function(data, type, full, meta) {
+            if (data > 0 && data <= 4) {
+                return '<span class="label label-danger">Sắp hết</span>';
+            }
+            return '<span class="label label-primary">Còn nhiều</span>';
+        }
+    }]
 };
 var flightTables = {};
 
@@ -109,6 +147,36 @@ function isPageLoaded() {
 var isSlidesLoaded = false;
 var isPanelsLoaded = false;
 
+function getSearchData(s) {
+    var roundTrip = parseInt(getParameterByName('round-trip'));
+    var fromPlace = getParameterByName('place-from').split(' - ');
+    var toPlace = getParameterByName('place-to').split(' - ');
+    var departDate = getParameterByName('date-depart').split('/');
+    var returnDate = getParameterByName('date-return').split('/');
+    var adult = parseInt(getParameterByName('adult'));
+    var child = parseInt(getParameterByName('child'));
+    var infant = parseInt(getParameterByName('infant'));
+    var sources = s.join(',');
+    fromPlace = fromPlace[fromPlace.length - 1];
+    toPlace = toPlace[toPlace.length - 1];
+    departDate = departDate[2] + '-' + departDate[1] + '-' + departDate[0];
+    returnDate = returnDate[2] + '-' + returnDate[1] + '-' + returnDate[0];
+    if (roundTrip) {
+        returnDate = departDate;
+    }
+    return {
+        roundTrip: roundTrip,
+        fromPlace: fromPlace,
+        toPlace: toPlace,
+        departDate: departDate,
+        returnDate: returnDate,
+        adult: adult,
+        child: child,
+        infant: infant,
+        sources: sources
+    };
+}
+
 $(document).ready(function() {
     // Show/hide some element for trip
     $('input[name=round-trip]').click(function() {
@@ -159,6 +227,20 @@ $(document).ready(function() {
             addSlide(data);
             isSlidesLoaded = true;
         }
+    });
+
+    startSearch();
+    $.each(_sources, function() {
+        searchTickets(getSearchData([this]), function(data) {
+            if (data.hasOwnProperty('depart')) {
+                flightTables['depart'].rows.add(data['depart']).draw();
+                flightTables['depart'].columns.adjust().draw();
+            }
+            if (data.hasOwnProperty('return')) {
+                flightTables['return'].rows.add(data['return']).draw();
+                flightTables['return'].columns.adjust().draw();
+            }
+        });
     });
 });
 

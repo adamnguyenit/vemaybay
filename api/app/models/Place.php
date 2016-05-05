@@ -26,6 +26,6 @@ class Place extends \yii\db\ActiveRecord
         if ($this->country_code == 'VN') {
             return 'Quốc Nội';
         }
-        return 'Quốc Ngoại';
+        return 'Quốc Tế';
     }
 }

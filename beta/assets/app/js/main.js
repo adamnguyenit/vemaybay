@@ -26,7 +26,62 @@ function getItem(endpoint, handle) {
     });
 }
 
+function searchTickets(data, handle) {
+    $.ajax({
+        type: 'POST',
+        url: API_URL + 'tickets/search',
+        data: data,
+        success: function(data, textStatus, jqXHR) {
+            handle(data);
+        }
+    });
+}
+
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+function dateDecode(date, toString) {
+    var split = date.split('T');
+    var time = split[1].split(':');
+    var hour = time[0];
+    var min = time[1];
+    var date = split[0].split('-');
+    var day = date[2];
+    var month = date[1];
+    var year = date[0];
+    if (toString) {
+        return hour + ':' + min + ' ' + day + '/' + month + '/' + year;
+    }
+    return {
+        hour: hour,
+        min: min,
+        day: day,
+        month: month,
+        year: year
+    };
+}
+
+Number.prototype.formatMoney = function(c, d, t) {
+    var n = this,
+        c = isNaN(c = Math.abs(c)) ? 2 : c,
+        d = d == undefined ? "." : d,
+        t = t == undefined ? "," : t,
+        s = n < 0 ? "-" : "",
+        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+        j = (j = i.length) > 3 ? j % 3 : 0;
+    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+};
+
+
 var _interval;
+var _sources = ['JetStar', 'VietJetAir', 'VietnamAirlines'];
 
 $(document).ready(function() {
     // Material

@@ -127,9 +127,6 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
         </div>
         <div class="col-md-8">
             <div class="row">
-                <div id="tabs-progress" class="progress progress-striped active">
-                    <div class="progress-bar progress-bar-info" style="width: 45%"></div>
-                </div>
                 <ul id="tabs-panel" class="nav nav-tabs">
                     <li class="active"><a id="depart-tab-trigger" data-toggle="tab" href="#depart-box">Chiều đi</a></li>
                     <li <?= $params['round-trip'] == 0 ? ' style="display: none"' : null ?>><a id="return-tab-trigger" data-toggle="tab" href="#return-box">Chiều về</a></li>
@@ -157,162 +154,14 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                         <table id="depart-table" class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>#</th>
                                     <th>Hãng</th>
                                     <th>Giờ bay</th>
                                     <th>Chuyến</th>
                                     <th>Giá từ</th>
+                                    <th>Tình trạng</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td><span class="label label-primary">VN</span></td>
-                                    <td>08:30</td>
-                                    <td>VN 327</td>
-                                    <td class="color-red">1.299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td><span class="label label-primary">VN</span></td>
-                                    <td>08:30</td>
-                                    <td>VN 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td><span class="label label-primary">VN</span></td>
-                                    <td>08:30</td>
-                                    <td>VN 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td><span class="label label-primary">VN</span></td>
-                                    <td>08:30</td>
-                                    <td>VN 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td><span class="label label-primary">VN</span></td>
-                                    <td>08:30</td>
-                                    <td>VN 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td><span class="label label-warning">VJ</span></td>
-                                    <td>08:30</td>
-                                    <td>VJ 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td><span class="label label-warning">VJ</span></td>
-                                    <td>08:30</td>
-                                    <td>VJ 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td><span class="label label-warning">VJ</span></td>
-                                    <td>08:30</td>
-                                    <td>VJ 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td><span class="label label-warning">VJ</span></td>
-                                    <td>08:30</td>
-                                    <td>VJ 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td><span class="label label-warning">VJ</span></td>
-                                    <td>08:30</td>
-                                    <td>VJ 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>11</td>
-                                    <td><span class="label label-warning">VJ</span></td>
-                                    <td>08:30</td>
-                                    <td>VJ 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>12</td>
-                                    <td><span class="label label-danger">JS</span></td>
-                                    <td>08:30</td>
-                                    <td>JS 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>13</td>
-                                    <td><span class="label label-danger">JS</span></td>
-                                    <td>08:30</td>
-                                    <td>JS 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>14</td>
-                                    <td><span class="label label-danger">JS</span></td>
-                                    <td>08:30</td>
-                                    <td>JS 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>15</td>
-                                    <td><span class="label label-danger">JS</span></td>
-                                    <td>08:30</td>
-                                    <td>JS 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>16</td>
-                                    <td><span class="label label-danger">JS</span></td>
-                                    <td>08:30</td>
-                                    <td>JS 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>17</td>
-                                    <td><span class="label label-danger">JS</span></td>
-                                    <td>08:30</td>
-                                    <td>JS 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>18</td>
-                                    <td><span class="label label-danger">JS</span></td>
-                                    <td>08:30</td>
-                                    <td>JS 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>19</td>
-                                    <td><span class="label label-danger">JS</span></td>
-                                    <td>08:30</td>
-                                    <td>JS 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>20</td>
-                                    <td><span class="label label-danger">JS</span></td>
-                                    <td>08:30</td>
-                                    <td>JS 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>21</td>
-                                    <td><span class="label label-danger">JS</span></td>
-                                    <td>08:30</td>
-                                    <td>JS 327</td>
-                                    <td class="color-red">199.000</td>
-                                </tr>
-                            </tbody>
+                            <tbody></tbody>
                         </table>
                     </div>
                     <div id="return-box" class="tab-pane fade">
@@ -337,162 +186,14 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                         <table id="return-table" class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>#</th>
                                     <th>Hãng</th>
                                     <th>Giờ bay</th>
                                     <th>Chuyến</th>
                                     <th>Giá từ</th>
+                                    <th>Tình trạng</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td><span class="label label-primary">VN</span></td>
-                                    <td>08:30</td>
-                                    <td>VN 327</td>
-                                    <td class="color-red">1.299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td><span class="label label-primary">VN</span></td>
-                                    <td>08:30</td>
-                                    <td>VN 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td><span class="label label-primary">VN</span></td>
-                                    <td>08:30</td>
-                                    <td>VN 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td><span class="label label-primary">VN</span></td>
-                                    <td>08:30</td>
-                                    <td>VN 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td><span class="label label-primary">VN</span></td>
-                                    <td>08:30</td>
-                                    <td>VN 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td><span class="label label-warning">VJ</span></td>
-                                    <td>08:30</td>
-                                    <td>VJ 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td><span class="label label-warning">VJ</span></td>
-                                    <td>08:30</td>
-                                    <td>VJ 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td><span class="label label-warning">VJ</span></td>
-                                    <td>08:30</td>
-                                    <td>VJ 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td><span class="label label-warning">VJ</span></td>
-                                    <td>08:30</td>
-                                    <td>VJ 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td><span class="label label-warning">VJ</span></td>
-                                    <td>08:30</td>
-                                    <td>VJ 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>11</td>
-                                    <td><span class="label label-warning">VJ</span></td>
-                                    <td>08:30</td>
-                                    <td>VJ 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>12</td>
-                                    <td><span class="label label-danger">JS</span></td>
-                                    <td>08:30</td>
-                                    <td>JS 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>13</td>
-                                    <td><span class="label label-danger">JS</span></td>
-                                    <td>08:30</td>
-                                    <td>JS 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>14</td>
-                                    <td><span class="label label-danger">JS</span></td>
-                                    <td>08:30</td>
-                                    <td>JS 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>15</td>
-                                    <td><span class="label label-danger">JS</span></td>
-                                    <td>08:30</td>
-                                    <td>JS 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>16</td>
-                                    <td><span class="label label-danger">JS</span></td>
-                                    <td>08:30</td>
-                                    <td>JS 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>17</td>
-                                    <td><span class="label label-danger">JS</span></td>
-                                    <td>08:30</td>
-                                    <td>JS 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>18</td>
-                                    <td><span class="label label-danger">JS</span></td>
-                                    <td>08:30</td>
-                                    <td>JS 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>19</td>
-                                    <td><span class="label label-danger">JS</span></td>
-                                    <td>08:30</td>
-                                    <td>JS 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>20</td>
-                                    <td><span class="label label-danger">JS</span></td>
-                                    <td>08:30</td>
-                                    <td>JS 327</td>
-                                    <td class="color-red">299.000</td>
-                                </tr>
-                                <tr>
-                                    <td>21</td>
-                                    <td><span class="label label-danger">JS</span></td>
-                                    <td>08:30</td>
-                                    <td>JS 327</td>
-                                    <td class="color-red">199.000</td>
-                                </tr>
-                            </tbody>
+                            <tbody></tbody>
                         </table>
                     </div>
                 </div>

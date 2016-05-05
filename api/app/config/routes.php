@@ -9,4 +9,5 @@ return [
     'GET promotion-news/<alias>' => 'promotion-news/view',
     'GET slides' => 'slide/index',
     'GET places/suggestion' => 'place/suggestion',
+    'POST tickets/search' => 'ticket/search',
 ];
