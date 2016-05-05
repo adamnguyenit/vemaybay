@@ -19,9 +19,13 @@ $(document).ready(function() {
         }
     });
 
-    getList('slides?per-page=100', function (data) {
+    getList('slides?per-page=100', function(data) {
         if (data) {
             addSlide(data);
         }
     });
+
+    setTimeout(function() {
+        $('#loading').fadeOut();
+    }, 2000);
 });

@@ -5,6 +5,15 @@ use yii\helpers\Url;
 $bundle = FlightIndexAsset::register($this);
 $this->title = 'Vé máy bay Hải Phi Yến';
 ?>
+<div id="loading">
+    <div id="loading-center">
+        <div id="loading-center-absolute">
+            <div class="object" id="object_one"></div>
+            <div class="object" id="object_two"></div>
+            <div class="object" id="object_three"></div>
+        </div>
+    </div>
+</div>
 <div class="container-fluid">
     <div id="content-page-container" class="row hidden-xs">
         <div id="promotions-slider" class="carousel slide" data-ride="carousel">

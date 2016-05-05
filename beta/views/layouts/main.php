@@ -38,15 +38,21 @@ $bundle = AppAsset::register($this);
     </script>
     <div id="page">
         <div id="top-page" class="container-fluid bg-white">
-            <div class="container">
-                <div class="row">
-                    <div id="logo" class="col-sm-6">
-                        <a href="<?= Url::toRoute(['flight/index']) ?>"><img src="<?= \Yii::getAlias("$bundle->baseUrl/images/logo.png") ?>"></a>
-                    </div>
-                    <div id="contact" class="col-sm-6 hidden-xs">
+            <div class="row">
+                <div class="container">
+                    <div class="col-md-12">
                         <div class="row">
-                            <div id="contact-phone" class="pull-right">
-                                <p style="margin-bottom: 0"><span class="text-info">Hotline</span>: <a class="text-danger" href="tel:0913 642 748">0913.642.748</a> - <a class="text-danger" href="tel:0914 650 511">0914.650.511</a></p>
+                            <div id="logo" class="col-sm-6">
+                                <div class="row">
+                                    <a href="<?= Url::toRoute(['flight/index']) ?>"><img src="<?= \Yii::getAlias("$bundle->baseUrl/images/logo.png") ?>"></a>
+                                </div>
+                            </div>
+                            <div id="contact" class="col-sm-6 hidden-xs">
+                                <div class="row">
+                                    <div id="contact-phone" class="pull-right">
+                                        <p style="margin-bottom: 0"><span class="text-info">Hotline</span>: <a class="text-danger" href="tel:0913 642 748">0913.642.748</a> - <a class="text-danger" href="tel:0914 650 511">0914.650.511</a></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
