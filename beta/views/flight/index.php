@@ -38,13 +38,13 @@ $this->title = 'Vé máy bay Hải Phi Yến';
                         <div class="form-group label-floating col-sm-6">
                             <div class="row" style="margin-right: 5px">
                                 <label class="control-label">Điểm đi</label>
-                                <input class="form-control linked" type="text" name="place-from">
+                                <input class="form-control linked places-suggestion" type="text" name="place-from">
                             </div>
                         </div>
                         <div class="form-group label-floating col-sm-6">
                             <div class="row">
                                 <label class="control-label">Điểm đến</label>
-                                <input class="form-control linked" type="text" name="place-to">
+                                <input class="form-control linked places-suggestion" type="text" name="place-to">
                             </div>
                         </div>
                     </div>
@@ -137,13 +137,13 @@ $this->title = 'Vé máy bay Hải Phi Yến';
                         <div class="form-group label-floating col-sm-6" style="margin-top: 15px">
                             <div class="row">
                                 <label class="control-label">Điểm đi</label>
-                                <input class="form-control linked" type="text" name="place-from">
+                                <input class="form-control linked places-suggestion" type="text" name="place-from">
                             </div>
                         </div>
                         <div class="form-group label-floating col-sm-6" style="margin-top: 15px">
                             <div class="row">
                                 <label class="control-label">Điểm đến</label>
-                                <input class="form-control linked" type="text" name="place-to">
+                                <input class="form-control linked places-suggestion" type="text" name="place-to">
                             </div>
                         </div>
                     </div>

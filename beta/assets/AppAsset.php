@@ -26,6 +26,7 @@ class AppAsset extends \yii\web\AssetBundle
         'js/bootstrap-datepicker.min.js',
         'locales/bootstrap-datepicker.vi.min.js',
         'js/jquery.jscroll.js',
+        'js/jquery.autocomplete.min.js',
         'js/main.js'
     ];
 }

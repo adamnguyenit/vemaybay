@@ -30,13 +30,13 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                                 <div class="form-group label-floating col-sm-6">
                                     <div class="row" style="margin-right: 5px">
                                         <label class="control-label">Điểm đi</label>
-                                        <input class="form-control" type="text" name="place-from" value="<?= $params['place-from'] ?>">
+                                        <input class="form-control places-suggestion" type="text" name="place-from" value="<?= $params['place-from'] ?>">
                                     </div>
                                 </div>
                                 <div class="form-group label-floating col-sm-6">
                                     <div class="row">
                                         <label class="control-label">Điểm đến</label>
-                                        <input class="form-control" type="text" name="place-to" value="<?= $params['place-to'] ?>">
+                                        <input class="form-control places-suggestion" type="text" name="place-to" value="<?= $params['place-to'] ?>">
                                     </div>
                                 </div>
                             </div>
@@ -111,20 +111,6 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
             </div>
             <div class="row hidden-xs hidden-sm" style="margin-right: 5px">
                 <div id="promotions-slider" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner" role="listbox">
-                        <div class="item active">
-                            <a href="<?= Url::toRoute(['promotion-news/info', 'alias' => 'lorem-ipsum-dolor-sit-amet-consectetuer-adipiscing-elit']) ?>"><img src="http://placehold.it/1600x600"></a>
-                        </div>
-                        <div class="item">
-                            <a href="<?= Url::toRoute(['promotion-news/info', 'alias' => 'lorem-ipsum-dolor-sit-amet-consectetuer-adipiscing-elit']) ?>"><img src="http://placehold.it/1600x600"></a>
-                        </div>
-                        <div class="item">
-                            <a href="<?= Url::toRoute(['promotion-news/info', 'alias' => 'lorem-ipsum-dolor-sit-amet-consectetuer-adipiscing-elit']) ?>"><img src="http://placehold.it/1600x600"></a>
-                        </div>
-                        <div class="item">
-                            <a href="<?= Url::toRoute(['promotion-news/info', 'alias' => 'lorem-ipsum-dolor-sit-amet-consectetuer-adipiscing-elit']) ?>"><img src="http://placehold.it/1600x600"></a>
-                        </div>
-                    </div>
                     <a class="left carousel-control" href="#promotions-slider" role="button" data-slide="prev">
                         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                         <span class="sr-only">Trước</span>

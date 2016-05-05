@@ -8,4 +8,5 @@ return [
     'GET promotion-news' => 'promotion-news/index',
     'GET promotion-news/<alias>' => 'promotion-news/view',
     'GET slides' => 'slide/index',
+    'GET places/suggestion' => 'place/suggestion',
 ];

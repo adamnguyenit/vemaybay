@@ -40,13 +40,13 @@ $this->title = 'Vé máy bay Hải Phi Yến | Khuyến mãi';
                                 <div class="form-group label-floating col-sm-6">
                                     <div class="row" style="margin-right: 5px">
                                         <label class="control-label">Điểm đi</label>
-                                        <input class="form-control" type="text" name="place-from">
+                                        <input class="form-control places-suggestion" type="text" name="place-from">
                                     </div>
                                 </div>
                                 <div class="form-group label-floating col-sm-6">
                                     <div class="row">
                                         <label class="control-label">Điểm đến</label>
-                                        <input class="form-control" type="text" name="place-to">
+                                        <input class="form-control places-suggestion" type="text" name="place-to">
                                     </div>
                                 </div>
                             </div>

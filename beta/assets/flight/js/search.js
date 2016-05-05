@@ -93,13 +93,21 @@ function childOfTicket() {
     return html;
 }
 
+function addSlide(slide) {
+    $('#promotions-slider').prepend(slide);
+    $('#promotions-slider').carousel();
+}
+
 function addPanel(panel) {
     $('#panel-box').append(panel);
 }
 
 function isPageLoaded() {
-    return true;
+    return isSlidesLoaded && isPanelsLoaded;
 }
+
+var isSlidesLoaded = false;
+var isPanelsLoaded = false;
 
 $(document).ready(function() {
     // Show/hide some element for trip
@@ -139,9 +147,17 @@ $(document).ready(function() {
 
     resizeTable();
 
-    getList('panels', function(data) {
+    getList('panels?per-page=100', function(data) {
         if (data) {
             addPanel(data);
+            isPanelsLoaded = true;
+        }
+    });
+
+    getList('slides?per-page=100', function(data) {
+        if (data) {
+            addSlide(data);
+            isSlidesLoaded = true;
         }
     });
 });

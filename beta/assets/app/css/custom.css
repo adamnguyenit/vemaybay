@@ -29,3 +29,29 @@
 .nav-tabs > li.active {
     background-color: #f03e44 !important;
 }
+.autocomplete-suggestions {
+    z-index: 99999 !important;
+    overflow-y: auto;
+    background-color: #ffffff;
+    min-width: 200px;
+    -moz-box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.25);
+}
+.autocomplete-suggestions strong {
+    font-weight: normal;
+}
+.autocomplete-suggestions .autocomplete-suggestion {
+    padding: 7px;
+    cursor: pointer;
+    color: #000000;
+}
+.autocomplete-suggestions .autocomplete-suggestion.autocomplete-selected, .autocomplete-suggestions .autocomplete-suggestion:hover {
+    background-color: #3b89c9;
+    color: #ffffff;
+}
+.autocomplete-suggestions .autocomplete-group {
+    color: #f03e44;
+    padding: 7px 7px 0 7px;
+    border-bottom: 1px solid #dddddd;
+}
