@@ -7,12 +7,12 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
 ?>
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
-            <div class="row" style="margin-right: 5px">
+        <div class="col-md-3">
+            <div class="row" style="margin-right: -10px">
                 <div id="book-form" class="col-md-12 hidden-xs hidden-sm bg-white">
                     <form action="<?= Url::toRoute(['flight/search']) ?>" role="form">
                         <div class="row">
-                            <div class="form-group col-sm-12">
+                            <div class="form-group col-sm-12" style="margin-top: 5px">
                                 <div class="radio">
                                     <label class="color-black">
                                         <input type="radio" name="round-trip" value="0"<?= $params['round-trip'] == 0 ? ' checked' : null ?>>Một chiều
@@ -28,7 +28,7 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group label-floating col-sm-6">
-                                    <div class="row" style="margin-right: 5px">
+                                    <div class="row" style="margin-right: 0">
                                         <label class="control-label">Điểm đi</label>
                                         <input class="form-control places-suggestion" type="text" name="place-from" value="<?= $params['place-from'] ?>">
                                     </div>
@@ -44,7 +44,7 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group label-floating col-sm-6">
-                                    <div class="row" style="margin-right: 5px">
+                                    <div class="row" style="margin-right: -15px">
                                         <label class="control-label">Ngày đi</label>
                                         <div class="input-group date" data-provide="datepicker">
                                             <input class="form-control datepicker" type="text" readonly name="date-depart" value="<?= $params['date-depart'] ?>">
@@ -70,23 +70,25 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group label-static col-sm-4">
-                                    <div class="row" style="margin-right: 5px">
+                                    <div class="row" style="margin-right: -10px">
                                         <label class="control-label color-black">Người lớn</label>
                                         <select class="select form-control" name="adult" data-value="21">
                                             <?php foreach (range(1, 30) as $index) : ?>
                                             <option value="<?= $index ?>"<?= $index == $params['adult'] ? ' selected' : null ?>><?= $index ?></option>
                                             <?php endforeach ?>
                                         </select>
+                                        <code style="font-size: 10px">> 12 tuổi</code>
                                     </div>
                                 </div>
                                 <div class="form-group label-static col-sm-4">
-                                    <div class="row" style="margin-right: 5px">
+                                    <div class="row" style="margin-right: -10px">
                                         <label class="control-label color-black">Trẻ em</label>
                                         <select class="select form-control" name="child">
                                             <?php foreach (range(0, 30) as $index) : ?>
                                             <option value="<?= $index ?>"<?= $index == $params['child'] ? ' selected' : null ?>><?= $index ?></option>
                                             <?php endforeach ?>
                                         </select>
+                                        <code style="font-size: 10px">2 - 12 tuổi</code>
                                     </div>
                                 </div>
                                 <div class="form-group label-static col-sm-4">
@@ -97,6 +99,7 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                                             <option value="<?= $index ?>"<?= $index == $params['infant'] ? ' selected' : null ?>><?= $index ?></option>
                                             <?php endforeach ?>
                                         </select>
+                                        <code style="font-size: 10px">< 2 tuổi</code>
                                     </div>
                                 </div>
                             </div>
@@ -109,7 +112,7 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                     </form>
                 </div>
             </div>
-            <div class="row hidden-xs hidden-sm" style="margin-right: 5px">
+            <div class="row hidden-xs hidden-sm" style="margin-right: -10px">
                 <div id="promotions-slider" class="carousel slide" data-ride="carousel">
                     <a class="left carousel-control" href="#promotions-slider" role="button" data-slide="prev">
                         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -121,11 +124,11 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                     </a>
                 </div>
             </div>
-            <div class="row hidden-xs hidden-sm" style="margin-right: 5px">
+            <div class="row hidden-xs hidden-sm" style="margin-right: -10px">
                 <div id="panel-box"></div>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="row">
                 <ul id="tabs-panel" class="nav nav-tabs">
                     <li class="active"><a id="depart-tab-trigger" data-toggle="tab" href="#depart-box">Chiều đi</a></li>

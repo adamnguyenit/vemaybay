@@ -148,4 +148,22 @@ $(document).ready(function() {
         noSuggestionNotice: 'Không tìm thấy sân bay',
         orientation: 'auto'
     });
+
+    getList('places/agent', function(data) {
+        $('#places-box-from .agent').append(data);
+        $('#places-box-to .agent').append(data);
+    });
+    getList('places/international', function(data) {
+        $('#places-box-from .international').append(data);
+        $('#places-box-to .international').append(data);
+    });
+
+    $('#places-box-from').on('click', '.list-group-item', function() {
+        $('[name=place-from]').val($(this).text());
+        $('#places-box-from').modal('hide');
+    });
+    $('#places-box-to').on('click', '.list-group-item', function() {
+        $('[name=place-to]').val($(this).text());
+        $('#places-box-to').modal('hide');
+    });
 });

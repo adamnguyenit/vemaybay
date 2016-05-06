@@ -4,6 +4,7 @@ namespace app\controllers;
 
 class FlightController extends \yii\web\Controller
 {
+
     public $subDays = 5;
     public $addDays = 6;
     public $titles = [
@@ -19,6 +20,8 @@ class FlightController extends \yii\web\Controller
     public function actionIndex()
     {
         $defaults = [
+            'fromPlace' => 'Đà Nẵng - DAD',
+            'toPlace' => 'Singapore - SIN',
             'departDate' => date('d/m/Y', strtotime('+3 days')),
             'returnDate' => date('d/m/Y', strtotime('+5 days')),
         ];

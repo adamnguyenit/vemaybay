@@ -8,11 +8,11 @@ $this->title = 'Vé máy bay Hải Phi Yến | Khuyến mãi';
 <div class="container">
     <div class="row">
         <div id="left-side" class="col-md-3 hidden-sm hidden-xs">
-            <div class="row bg-white" style="margin-right: -7px; margin-top: 0">
+            <div class="row bg-white" style="margin-right: -5px; margin-top: 0">
                 <div id="book-form" class="col-md-12">
                     <form action="<?= Url::toRoute(['flight/search']) ?>" role="form">
                         <div class="row">
-                            <div class="form-group col-sm-12">
+                            <div class="form-group col-sm-12" style="margin-top: 5px">
                                 <div class="radio">
                                     <label class="color-black">
                                         <input type="radio" name="round-trip" value="0" checked>Một chiều
@@ -28,7 +28,7 @@ $this->title = 'Vé máy bay Hải Phi Yến | Khuyến mãi';
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group label-floating col-sm-6">
-                                    <div class="row" style="margin-right: 5px">
+                                    <div class="row" style="margin-right: 0">
                                         <label class="control-label">Điểm đi</label>
                                         <input class="form-control places-suggestion" type="text" name="place-from">
                                     </div>
@@ -44,7 +44,7 @@ $this->title = 'Vé máy bay Hải Phi Yến | Khuyến mãi';
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group label-floating col-sm-6">
-                                    <div class="row" style="margin-right: 5px">
+                                    <div class="row" style="margin-right: -15px">
                                         <label class="control-label">Ngày đi</label>
                                         <div class="input-group date" data-provide="datepicker">
                                             <input class="form-control datepicker" type="text" readonly name="date-depart">
@@ -70,23 +70,25 @@ $this->title = 'Vé máy bay Hải Phi Yến | Khuyến mãi';
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group label-static col-sm-4">
-                                    <div class="row" style="margin-right: 5px">
+                                    <div class="row" style="margin-right: -10px">
                                         <label class="control-label color-black">Người lớn</label>
                                         <select class="select form-control" name="adult" data-value="21">
                                             <?php foreach (range(1, 30) as $index) : ?>
                                             <option value="<?= $index ?>"><?= $index ?></option>
                                             <?php endforeach ?>
                                         </select>
+                                        <code style="font-size: 10px">> 12 tuổi</code>
                                     </div>
                                 </div>
                                 <div class="form-group label-static col-sm-4">
-                                    <div class="row" style="margin-right: 5px">
+                                    <div class="row" style="margin-right: -10px">
                                         <label class="control-label color-black">Trẻ em</label>
                                         <select class="select form-control" name="child">
                                             <?php foreach (range(0, 30) as $index) : ?>
                                             <option value="<?= $index ?>"><?= $index ?></option>
                                             <?php endforeach ?>
                                         </select>
+                                        <code style="font-size: 10px">2 - 12 tuổi</code>
                                     </div>
                                 </div>
                                 <div class="form-group label-static col-sm-4">
@@ -97,6 +99,7 @@ $this->title = 'Vé máy bay Hải Phi Yến | Khuyến mãi';
                                             <option value="<?= $index ?>"><?= $index ?></option>
                                             <?php endforeach ?>
                                         </select>
+                                        <code style="font-size: 10px">< 2 tuổi</code>
                                     </div>
                                 </div>
                             </div>
@@ -109,7 +112,7 @@ $this->title = 'Vé máy bay Hải Phi Yến | Khuyến mãi';
                     </form>
                 </div>
             </div>
-            <div class="row" style="margin-right: -7px">
+            <div class="row" style="margin-right: -5px">
                 <div id="panel-box"></div>
             </div>
         </div>

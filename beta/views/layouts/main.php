@@ -94,6 +94,64 @@ $bundle = AppAsset::register($this);
         </div>
         <div id="content-page">
             <?= $content ?>
+            <div id="places-box-from" class="places-box modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Chọn điểm đi</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        <div class="row agent" style="margin-right: -5px">
+                                            <h5 class="color-red">Quốc nội</h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row international"  style="margin-right: -5px">
+                                            <h5 class="color-red">Quốc tế</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="places-box-to" class="places-box modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Chọn điểm đến</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        <div class="row agent" style="margin-right: -5px">
+                                            <h5 class="color-red">Quốc nội</h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row international"  style="margin-right: -5px">
+                                            <h5 class="color-red">Quốc tế</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <footer id="bottom-page" class="container-fluid bg-blue">
             <div class="container">

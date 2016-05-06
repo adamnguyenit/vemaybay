@@ -55,3 +55,22 @@
     padding: 7px 7px 0 7px;
     border-bottom: 1px solid #dddddd;
 }
+.places-box {
+    z-index: 99999;
+}
+.places-box .list-group {
+    max-height: 300px;
+    overflow-y: auto;
+}
+.places-box .list-group .list-group-item {
+    padding: 5px 2px;
+    border-bottom: 1px solid #dddddd;
+    cursor: pointer;
+}
+.places-box .list-group .list-group-item:last-child {
+    border-bottom: 0;
+}
+.places-box .list-group .list-group-item:hover {
+    color: #ffffff;
+    background-color: #3b89c9;
+}

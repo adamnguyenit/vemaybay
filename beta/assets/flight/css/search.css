@@ -1,5 +1,5 @@
 #content-page {
-    padding-top: 15px;
+    padding-top: 5px;
     padding-bottom: 15px;
 }
 #book-form .radio {
@@ -51,7 +51,7 @@ table.price-detail tbody tr td:last-child {
     margin-top: 5px;
 }
 #panel-box {
-    margin-top: 15px;
+    margin-top: 5px;
 }
 .panel {
     margin-bottom: 5px;

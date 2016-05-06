@@ -38,13 +38,23 @@ $this->title = 'Vé máy bay Hải Phi Yến';
                         <div class="form-group label-floating col-sm-6">
                             <div class="row" style="margin-right: 5px">
                                 <label class="control-label">Điểm đi</label>
-                                <input class="form-control linked places-suggestion" type="text" name="place-from">
+                                <div class="input-group">
+                                    <input class="form-control linked places-suggestion" type="text" name="place-from" value="<?= empty($defaults['fromPlace']) ? null : $defaults['fromPlace'] ?>">
+                                    <div class="input-group-addon places-picker" data-toggle="modal" data-target="#places-box-from">
+                                        <span class="fa fa-map-o"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group label-floating col-sm-6">
                             <div class="row">
                                 <label class="control-label">Điểm đến</label>
-                                <input class="form-control linked places-suggestion" type="text" name="place-to">
+                                <div class="input-group">
+                                    <input class="form-control linked places-suggestion" type="text" name="place-to" value="<?= empty($defaults['toPlace']) ? null : $defaults['toPlace'] ?>">
+                                    <div class="input-group-addon places-picker" data-toggle="modal" data-target="#places-box-to">
+                                        <span class="fa fa-map-o"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -137,13 +147,23 @@ $this->title = 'Vé máy bay Hải Phi Yến';
                         <div class="form-group label-floating col-sm-6" style="margin-top: 15px">
                             <div class="row">
                                 <label class="control-label">Điểm đi</label>
-                                <input class="form-control linked places-suggestion" type="text" name="place-from">
+                                <div class="input-group">
+                                    <input class="form-control linked places-suggestion" type="text" name="place-from" value="<?= empty($defaults['fromPlace']) ? null : $defaults['fromPlace'] ?>">
+                                    <div class="input-group-addon places-picker" data-toggle="modal" data-target="#places-box-from">
+                                        <span class="fa fa-map-o"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group label-floating col-sm-6" style="margin-top: 15px">
                             <div class="row">
                                 <label class="control-label">Điểm đến</label>
-                                <input class="form-control linked places-suggestion" type="text" name="place-to">
+                                <div class="input-group">
+                                    <input class="form-control linked places-suggestion" type="text" name="place-to" value="<?= empty($defaults['toPlace']) ? null : $defaults['toPlace'] ?>">
+                                    <div class="input-group-addon places-picker" data-toggle="modal" data-target="#places-box-to">
+                                        <span class="fa fa-map-o"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
