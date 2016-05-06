@@ -17,6 +17,9 @@
 .flight-date {
     padding-top: 10px;
     cursor: pointer;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: #ffffff;
 }
 .flight-date:hover {
     background-color: #dddddd;
@@ -56,4 +59,13 @@ table.price-detail tbody tr td:last-child {
 }
 .panel img {
     width: 100%;
+}
+@media (max-width: 767px) {
+    #content-page {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .mobile-no-padding-left {
+        padding-left: 0 !important;
+    }
 }

@@ -26,13 +26,17 @@ function getItem(endpoint, handle) {
     });
 }
 
-function searchTickets(data, handle) {
+function searchTickets(data, handle, error) {
     $.ajax({
         type: 'POST',
         url: API_URL + 'tickets/search',
         data: data,
+        timeout: 60000,
         success: function(data, textStatus, jqXHR) {
             handle(data);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            error();
         }
     });
 }
@@ -78,7 +82,6 @@ Number.prototype.formatMoney = function(c, d, t) {
         j = (j = i.length) > 3 ? j % 3 : 0;
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 };
-
 
 var _interval;
 var _sources = ['JetStar', 'VietJetAir', 'VietnamAirlines'];

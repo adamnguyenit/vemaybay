@@ -130,8 +130,9 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                 <ul id="tabs-panel" class="nav nav-tabs">
                     <li class="active"><a id="depart-tab-trigger" data-toggle="tab" href="#depart-box">Chiều đi</a></li>
                     <li <?= $params['round-trip'] == 0 ? ' style="display: none"' : null ?>><a id="return-tab-trigger" data-toggle="tab" href="#return-box">Chiều về</a></li>
+                    <li class="pull-right color-white hide-when-done" style="margin-top: 5px; margin-right: 10px"><i class="fa fa-spinner fa-pulse fa-2x fa-fw margin-bottom"></i><span class="sr-only">Đang tải...</span></li>
                 </ul>
-                <div id="tabs-content" class="tab-content bg-white">
+                <div id="tabs-content" class="tab-content">
                     <div id="depart-box" class="tab-pane fade in active">
                         <div class="col-md-12 hidden-xs hidden-sm">
                             <div class="row">
@@ -151,14 +152,15 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                                 </div>
                             </div>
                         </div>
-                        <table id="depart-table" class="table table-hover">
+                        <table id="depart-table" class="table table-hover bg-white">
                             <thead>
                                 <tr>
-                                    <th>Hãng</th>
-                                    <th>Giờ bay</th>
-                                    <th>Chuyến</th>
-                                    <th>Giá từ</th>
-                                    <th>Tình trạng</th>
+                                    <th style="color: #000000 !important">Hãng</th>
+                                    <th style="color: #000000 !important">Giờ bay</th>
+                                    <th style="color: #000000 !important">Thời gian bay</th>
+                                    <th style="color: #000000 !important">Chuyến</th>
+                                    <th style="color: #000000 !important">Giá từ</th>
+                                    <th style="color: #000000 !important">Tình trạng</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -183,14 +185,15 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                                 </div>
                             </div>
                         </div>
-                        <table id="return-table" class="table table-hover">
+                        <table id="return-table" class="table table-hover bg-white">
                             <thead>
                                 <tr>
-                                    <th>Hãng</th>
-                                    <th>Giờ bay</th>
-                                    <th>Chuyến</th>
-                                    <th>Giá từ</th>
-                                    <th>Tình trạng</th>
+                                    <th style="color: #000000 !important">Hãng</th>
+                                    <th style="color: #000000 !important">Giờ bay</th>
+                                    <th style="color: #000000 !important">Thời gian bay</th>
+                                    <th style="color: #000000 !important">Chuyến</th>
+                                    <th style="color: #000000 !important">Giá từ</th>
+                                    <th style="color: #000000 !important">Tình trạng</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
