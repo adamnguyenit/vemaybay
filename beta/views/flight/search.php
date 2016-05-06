@@ -14,14 +14,10 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                         <div class="row">
                             <div class="form-group col-sm-12" style="margin-top: 5px">
                                 <div class="radio">
-                                    <label class="color-black">
-                                        <input type="radio" name="round-trip" value="0"<?= $params['round-trip'] == 0 ? ' checked' : null ?>>Một chiều
-                                    </label>
+                                    <label class="color-black"><input type="radio" name="round-trip" value="0"<?= $params['round-trip'] == 0 ? ' checked' : null ?>>Một chiều</label>
                                 </div>
                                 <div class="radio">
-                                    <label class="color-black">
-                                        <input type="radio" name="round-trip" value="1"<?= $params['round-trip'] == 1 ? ' checked' : null ?>>Khứ hồi
-                                    </label>
+                                    <label class="color-black"><input type="radio" name="round-trip" value="1"<?= $params['round-trip'] == 1 ? ' checked' : null ?>>Khứ hồi</label>
                                 </div>
                             </div>
                         </div>

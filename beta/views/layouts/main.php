@@ -1,17 +1,21 @@
 <?php
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\Spaceless;
 use app\assets\AppAsset;
 
 $bundle = AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
+<?php Spaceless::begin() ?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="title" content="<?= Html::encode(Yii::t('app', $this->title)) ?>">
+    <meta name="description" content="<?= Html::encode('Vé máy bay Hải Phi Yến cung cấp dịch vụ đặt mua vé máy bay trong nước và quốc tế rẻ nhất') ?>">
     <?= Html::csrfMetaTags() ?>
     <meta property="fb:app_id" content="1720543934884790">
     <title><?= Html::encode(Yii::t('app', $this->title)) ?></title>
@@ -190,4 +194,5 @@ $bundle = AppAsset::register($this);
     <?php $this->endBody() ?>
 </body>
 </html>
+<?php Spaceless::end(); ?>
 <?php $this->endPage() ?>

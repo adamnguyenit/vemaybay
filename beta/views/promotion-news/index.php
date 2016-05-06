@@ -24,14 +24,10 @@ $this->title = 'Vé máy bay Hải Phi Yến | Khuyến mãi';
                         <div class="row">
                             <div class="form-group col-sm-12" style="margin-top: 5px">
                                 <div class="radio">
-                                    <label class="color-black">
-                                        <input type="radio" name="round-trip" value="0" checked>Một chiều
-                                    </label>
+                                    <label class="color-black"><input type="radio" name="round-trip" value="0" checked>Một chiều</label>
                                 </div>
                                 <div class="radio">
-                                    <label class="color-black">
-                                        <input type="radio" name="round-trip" value="1">Khứ hồi
-                                    </label>
+                                    <label class="color-black"><input type="radio" name="round-trip" value="1">Khứ hồi</label>
                                 </div>
                             </div>
                         </div>

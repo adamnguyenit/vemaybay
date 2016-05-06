@@ -1,10 +1,12 @@
 <?php
 use app\assets\FlightIndexAsset;
 use yii\helpers\Url;
+use yii\helpers\Html;
 
 $bundle = FlightIndexAsset::register($this);
 $this->title = 'Vé máy bay Hải Phi Yến';
 ?>
+<h1 style="display: none"><?= Html::encode($this->title) ?></h1>
 <div class="container-fluid">
     <div id="content-page-container" class="row hidden-xs">
         <div id="promotions-slider" class="carousel slide" data-ride="carousel">
@@ -22,14 +24,10 @@ $this->title = 'Vé máy bay Hải Phi Yến';
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="radio">
-                            <label class="color-black">
-                                <input type="radio" name="round-trip" value="0" checked>Một chiều
-                            </label>
+                            <label class="color-black"><input type="radio" name="round-trip" value="0" checked>Một chiều</label>
                         </div>
                         <div class="radio">
-                            <label class="color-black">
-                                <input type="radio" name="round-trip" value="1">Khứ hồi
-                            </label>
+                            <label class="color-black"><input type="radio" name="round-trip" value="1">Khứ hồi</label>
                         </div>
                     </div>
                 </div>
