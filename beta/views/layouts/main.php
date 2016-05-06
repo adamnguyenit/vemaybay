@@ -19,13 +19,96 @@ $bundle = AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <meta property="fb:app_id" content="1720543934884790">
     <title><?= Html::encode(Yii::t('app', $this->title)) ?></title>
-    <?php $this->head() ?>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        #loading {
+            background-color: #3b89c9;
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            z-index: 999999;
+            margin-top: 0px;
+            top: 0px;
+        }
+        #loading-center {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        #loading-center-absolute {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            height: 150px;
+            width: 150px;
+            margin-top: -75px;
+            margin-left: -75px;
+        }
+        .object {
+            width: 50px;
+            height: 50px;
+            background-color: #FFF;
+            float: left;
+            margin-top: 65px;
+            -moz-border-radius: 50% 50% 50% 50%;
+            -webkit-border-radius: 50% 50% 50% 50%;
+            border-radius: 50% 50% 50% 50%;
+        }
+        #object_one {
+            -webkit-animation: object_one 1.5s infinite;
+            animation: object_one 1.5s infinite;
+        }
+        #object_two {
+            -webkit-animation: object_two 1.5s infinite;
+            animation: object_two 1.5s infinite;
+            -webkit-animation-delay: 0.25s;
+            animation-delay: 0.25s;
+        }
+        #object_three {
+            -webkit-animation: object_three 1.5s infinite;
+            animation: object_three 1.5s infinite;
+            -webkit-animation-delay: 0.5s;
+            animation-delay: 0.5s;
+        }
+        @-webkit-keyframes object_one {
+            75% {
+                -webkit-transform: scale(0);
+            }
+        }
+        @keyframes object_one {
+            75% {
+                transform: scale(0);
+                -webkit-transform: scale(0);
+            }
+        }
+        @-webkit-keyframes object_two {
+            75% {
+                -webkit-transform: scale(0);
+            }
+        }
+        @keyframes object_two {
+            75% {
+                transform: scale(0);
+                -webkit-transform: scale(0);
+            }
+        }
+        @-webkit-keyframes object_three {
+            75% {
+                -webkit-transform: scale(0);
+            }
+        }
+        @keyframes object_three {
+            75% {
+                transform: scale(0);
+                -webkit-transform: scale(0);
+            }
+        }
+    </style>
 </head>
 <body>
     <?php $this->beginBody() ?>
@@ -192,6 +275,21 @@ $bundle = AppAsset::register($this);
         </footer>
     </div>
     <?php $this->endBody() ?>
+    <noscript id="deferred-styles">
+        <?php $this->head() ?>
+    </noscript>
+    <script>
+        var loadDeferredStyles = function() {
+            var addStylesNode = document.getElementById("deferred-styles");
+            var replacement = document.createElement("div");
+            replacement.innerHTML = addStylesNode.textContent;
+            document.body.appendChild(replacement)
+            addStylesNode.parentElement.removeChild(addStylesNode);
+        };
+        var raf = requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame || msRequestAnimationFrame;
+        if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+        else window.addEventListener('load', loadDeferredStyles);
+    </script>
 </body>
 </html>
 <?php Spaceless::end(); ?>
