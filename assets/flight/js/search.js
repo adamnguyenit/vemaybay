@@ -1,17 +1,11 @@
-function addSlide(slide) {
-    $('#promotions-slider').prepend(slide);
-    $('#promotions-slider').carousel();
-}
-
 function addPanel(panel) {
     $('#panel-box').append(panel);
 }
 
 function isPageLoaded() {
-    return isSlidesLoaded && isPanelsLoaded;
+    return isPanelsLoaded;
 }
 
-var isSlidesLoaded = false;
 var isPanelsLoaded = false;
 
 $.extend($.fn.dataTableExt.oSort, {
@@ -340,13 +334,6 @@ $(document).ready(function() {
         if (data) {
             addPanel(data);
             isPanelsLoaded = true;
-        }
-    });
-
-    getList('slides?per-page=100', function(data) {
-        if (data) {
-            addSlide(data);
-            isSlidesLoaded = true;
         }
     });
 

@@ -109,18 +109,6 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                 </div>
             </div>
             <div class="row hidden-xs hidden-sm" style="margin-right: -10px">
-                <div id="promotions-slider" class="carousel slide" data-ride="carousel">
-                    <a class="left carousel-control" href="#promotions-slider" role="button" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                        <span class="sr-only">Trước</span>
-                    </a>
-                    <a class="right carousel-control" href="#promotions-slider" role="button" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                        <span class="sr-only">Sau</span>
-                    </a>
-                </div>
-            </div>
-            <div class="row hidden-xs hidden-sm" style="margin-right: -10px">
                 <div id="panel-box"></div>
             </div>
         </div>
