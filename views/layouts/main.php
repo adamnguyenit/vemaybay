@@ -25,104 +25,12 @@ $bundle = AppAsset::register($this);
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <style>
-        #loading {
-            background-color: #3b89c9;
-            height: 100%;
-            width: 100%;
-            position: fixed;
-            z-index: 999999;
-            margin-top: 0px;
-            top: 0px;
-        }
-        #loading-center {
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-        #loading-center-absolute {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            height: 150px;
-            width: 150px;
-            margin-top: -75px;
-            margin-left: -75px;
-        }
-        .object {
-            width: 50px;
-            height: 50px;
-            background-color: #FFF;
-            float: left;
-            margin-top: 65px;
-            -moz-border-radius: 50% 50% 50% 50%;
-            -webkit-border-radius: 50% 50% 50% 50%;
-            border-radius: 50% 50% 50% 50%;
-        }
-        #object_one {
-            -webkit-animation: object_one 1.5s infinite;
-            animation: object_one 1.5s infinite;
-        }
-        #object_two {
-            -webkit-animation: object_two 1.5s infinite;
-            animation: object_two 1.5s infinite;
-            -webkit-animation-delay: 0.25s;
-            animation-delay: 0.25s;
-        }
-        #object_three {
-            -webkit-animation: object_three 1.5s infinite;
-            animation: object_three 1.5s infinite;
-            -webkit-animation-delay: 0.5s;
-            animation-delay: 0.5s;
-        }
-        @-webkit-keyframes object_one {
-            75% {
-                -webkit-transform: scale(0);
-            }
-        }
-        @keyframes object_one {
-            75% {
-                transform: scale(0);
-                -webkit-transform: scale(0);
-            }
-        }
-        @-webkit-keyframes object_two {
-            75% {
-                -webkit-transform: scale(0);
-            }
-        }
-        @keyframes object_two {
-            75% {
-                transform: scale(0);
-                -webkit-transform: scale(0);
-            }
-        }
-        @-webkit-keyframes object_three {
-            75% {
-                -webkit-transform: scale(0);
-            }
-        }
-        @keyframes object_three {
-            75% {
-                transform: scale(0);
-                -webkit-transform: scale(0);
-            }
-        }
-    </style>
+    <style>body{padding:0;margin:0}#loading{background-color:#3b89c9;height:100%;width:100%;position:fixed;z-index:999999;margin-top:0;top:0}#loading-center{width:100%;height:100%;position:relative}#loading-center-absolute{position:absolute;left:50%;top:50%;height:150px;width:150px;margin-top:-75px;margin-left:-75px}.object{width:50px;height:50px;background-color:#FFFFFF;float:left;margin-top:65px;-moz-border-radius:50%;-webkit-border-radius:50%;border-radius:50%}#object_one{-webkit-animation:object_one 1.5s infinite;animation:object_one 1.5s infinite}#object_two{-webkit-animation:object_two 1.5s infinite;animation:object_two 1.5s infinite;-webkit-animation-delay:.25s;animation-delay:.25s}#object_three{-webkit-animation:object_three 1.5s infinite;animation:object_three 1.5s infinite;-webkit-animation-delay:.5s;animation-delay:.5s}@-webkit-keyframes object_one{75%{-webkit-transform:scale(0)}}@keyframes object_one{75%{transform:scale(0);-webkit-transform:scale(0)}}@-webkit-keyframes object_two{75%{-webkit-transform:scale(0)}}@keyframes object_two{75%{transform:scale(0);-webkit-transform:scale(0)}}@-webkit-keyframes object_three{75%{-webkit-transform:scale(0)}}@keyframes object_three{75%{transform:scale(0);-webkit-transform:scale(0)}}</style>
 </head>
 <body>
     <?php $this->beginBody() ?>
     <div id="fb-root"></div>
-    <script>
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6&appId=1720543934884790";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
+    <script>!function(e,t,n){var o,c=e.getElementsByTagName(t)[0];e.getElementById(n)||(o=e.createElement(t),o.id=n,o.src="//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6&appId=1720543934884790",c.parentNode.insertBefore(o,c))}(document,"script","facebook-jssdk");</script>
     <div id="loading">
         <div id="loading-center">
             <div id="loading-center-absolute">
@@ -203,6 +111,12 @@ $bundle = AppAsset::register($this);
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5>Hoặc nhập địa điểm</h5>
+                                    <input class="form-control places-suggestion" type="text" placeholder="Nhập địa điểm">
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
@@ -230,6 +144,12 @@ $bundle = AppAsset::register($this);
                                             <h5 class="color-red">Quốc tế</h5>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5>Hoặc nhập địa điểm</h5>
+                                    <input class="form-control places-suggestion" type="text" placeholder="Nhập địa điểm">
                                 </div>
                             </div>
                         </div>
@@ -278,18 +198,7 @@ $bundle = AppAsset::register($this);
     <noscript id="deferred-styles">
         <?php $this->head() ?>
     </noscript>
-    <script>
-        var loadDeferredStyles = function() {
-            var addStylesNode = document.getElementById("deferred-styles");
-            var replacement = document.createElement("div");
-            replacement.innerHTML = addStylesNode.textContent;
-            document.body.appendChild(replacement)
-            addStylesNode.parentElement.removeChild(addStylesNode);
-        };
-        var raf = requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame || msRequestAnimationFrame;
-        if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
-        else window.addEventListener('load', loadDeferredStyles);
-    </script>
+    <script>var loadDeferredStyles=function(){var e=document.getElementById("deferred-styles"),t=document.createElement("div");t.innerHTML=e.textContent,document.body.appendChild(t),e.parentElement.removeChild(e)},raf=requestAnimationFrame||mozRequestAnimationFrame||webkitRequestAnimationFrame||msRequestAnimationFrame;raf?raf(function(){window.setTimeout(loadDeferredStyles,0)}):window.addEventListener("load",loadDeferredStyles);</script>
 </body>
 </html>
 <?php Spaceless::end(); ?>

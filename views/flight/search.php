@@ -69,7 +69,7 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                                     <div class="row" style="margin-right: -10px">
                                         <label class="control-label color-black">Người lớn</label>
                                         <select class="select form-control" name="adult" data-value="21">
-                                            <?php foreach (range(1, 30) as $index) : ?>
+                                            <?php foreach (range(1, 9) as $index) : ?>
                                             <option value="<?= $index ?>"<?= $index == $params['adult'] ? ' selected' : null ?>><?= $index ?></option>
                                             <?php endforeach ?>
                                         </select>
@@ -80,7 +80,7 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                                     <div class="row" style="margin-right: -10px">
                                         <label class="control-label color-black">Trẻ em</label>
                                         <select class="select form-control" name="child">
-                                            <?php foreach (range(0, 30) as $index) : ?>
+                                            <?php foreach (range(0, 9) as $index) : ?>
                                             <option value="<?= $index ?>"<?= $index == $params['child'] ? ' selected' : null ?>><?= $index ?></option>
                                             <?php endforeach ?>
                                         </select>
@@ -91,7 +91,7 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                                     <div class="row">
                                         <label class="control-label color-black">Em bé</label>
                                         <select class="select form-control" name="infant">
-                                            <?php foreach (range(0, 30) as $index) : ?>
+                                            <?php foreach (range(0, 6) as $index) : ?>
                                             <option value="<?= $index ?>"<?= $index == $params['infant'] ? ' selected' : null ?>><?= $index ?></option>
                                             <?php endforeach ?>
                                         </select>

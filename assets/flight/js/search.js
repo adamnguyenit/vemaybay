@@ -249,7 +249,6 @@ function startSearch() {
                 resizeTable();
             }
             $('.hide-when-done').hide();
-            console.log(tickets);
         }
     }
     var onSuccess = function(data) {

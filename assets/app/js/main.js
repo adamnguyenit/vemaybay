@@ -85,6 +85,26 @@ Number.prototype.formatMoney = function(c, d, t) {
 
 var _interval;
 var _sources = ['JetStar', 'VietJetAir', 'VietnamAirlines'];
+var _suggestionOpt = {
+    serviceUrl: API_URL + 'places/suggestion',
+    dataType: 'json',
+    paramName: 'q',
+    transformResult: function(response) {
+        return {
+            suggestions: $.map(response.items, function(item) {
+                return {
+                    value: item.name + ' - ' + item.code,
+                    data: item
+                };
+            })
+        };
+    },
+    groupBy: 'group',
+    autoSelectFirst: true,
+    showNoSuggestionNotice: true,
+    noSuggestionNotice: 'Không tìm thấy sân bay',
+    orientation: 'auto'
+};
 
 $(document).ready(function() {
     // Material
@@ -128,26 +148,7 @@ $(document).ready(function() {
         }
     }, 200);
 
-    $('input.places-suggestion').autocomplete({
-        serviceUrl: API_URL + 'places/suggestion',
-        dataType: 'json',
-        paramName: 'q',
-        transformResult: function(response) {
-            return {
-                suggestions: $.map(response.items, function(item) {
-                    return {
-                        value: item.name + ' - ' + item.code,
-                        data: item
-                    };
-                })
-            };
-        },
-        groupBy: 'group',
-        autoSelectFirst: true,
-        showNoSuggestionNotice: true,
-        noSuggestionNotice: 'Không tìm thấy sân bay',
-        orientation: 'auto'
-    });
+    $('input.places-suggestion').autocomplete(_suggestionOpt);
 
     getList('places/agent', function(data) {
         $('#places-box-from .agent').append(data);
@@ -166,4 +167,19 @@ $(document).ready(function() {
         $('[name=place-to]').val($(this).text());
         $('#places-box-to').modal('hide');
     });
+    $('.places-box').on('shown.bs.modal', function() {
+        $(this).find('input.places-suggestion').focus();
+    });
+    $('#places-box-from input.places-suggestion').autocomplete().setOptions($.extend(_suggestionOpt, {
+        onSelect: function(suggestion) {
+            $('[name=place-from]').val(suggestion.value);
+            $('#places-box-from').modal('hide');
+        }
+    }));
+    $('#places-box-to input.places-suggestion').autocomplete().setOptions($.extend(_suggestionOpt, {
+        onSelect: function(suggestion) {
+            $('[name=place-to]').val(suggestion.value);
+            $('#places-box-to').modal('hide');
+        }
+    }));
 });

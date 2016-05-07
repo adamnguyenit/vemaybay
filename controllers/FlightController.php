@@ -21,7 +21,7 @@ class FlightController extends \yii\web\Controller
     {
         $defaults = [
             'fromPlace' => 'Đà Nẵng - DAD',
-            'toPlace' => 'Singapore - SIN',
+            'toPlace' => 'Hồ Chí Minh - SGN',
             'departDate' => date('d/m/Y', strtotime('+3 days')),
             'returnDate' => date('d/m/Y', strtotime('+5 days')),
         ];

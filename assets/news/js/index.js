@@ -26,4 +26,5 @@ $(document).ready(function() {
             isPanelsLoaded = true;
         }
     });
+    $(document).trigger('scroll');
 });

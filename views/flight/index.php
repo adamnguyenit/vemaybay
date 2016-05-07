@@ -89,7 +89,7 @@ $this->title = 'Vé máy bay Hải Phi Yến';
                             <div class="row" style="margin-right: 5px">
                                 <label class="control-label color-black">Người lớn</label>
                                 <select class="select form-control linked" name="adult">
-                                    <?php foreach (range(1, 30) as $index) : ?>
+                                    <?php foreach (range(1, 9) as $index) : ?>
                                     <option value="<?= $index ?>"><?= $index ?></option>
                                     <?php endforeach ?>
                                 </select>
@@ -100,7 +100,7 @@ $this->title = 'Vé máy bay Hải Phi Yến';
                             <div class="row" style="margin-right: 5px">
                                 <label class="control-label color-black">Trẻ em</label>
                                 <select class="select form-control linked" name="child">
-                                    <?php foreach (range(0, 30) as $index) : ?>
+                                    <?php foreach (range(0, 9) as $index) : ?>
                                     <option value="<?= $index ?>"><?= $index ?></option>
                                     <?php endforeach ?>
                                 </select>
@@ -111,7 +111,7 @@ $this->title = 'Vé máy bay Hải Phi Yến';
                             <div class="row">
                                 <label class="control-label color-black">Em bé</label>
                                 <select class="select form-control linked" name="infant">
-                                    <?php foreach (range(0, 30) as $index) : ?>
+                                    <?php foreach (range(0, 6) as $index) : ?>
                                     <option value="<?= $index ?>"><?= $index ?></option>
                                     <?php endforeach ?>
                                 </select>
@@ -198,7 +198,7 @@ $this->title = 'Vé máy bay Hải Phi Yến';
                             <div class="row" style="margin-right: 0">
                                 <label class="control-label color-black">Người lớn</label>
                                 <select class="select form-control linked" name="adult">
-                                    <?php foreach (range(1, 30) as $index) : ?>
+                                    <?php foreach (range(1, 9) as $index) : ?>
                                     <option value="<?= $index ?>"><?= $index ?></option>
                                     <?php endforeach ?>
                                 </select>
@@ -209,7 +209,7 @@ $this->title = 'Vé máy bay Hải Phi Yến';
                             <div class="row" style="margin-right: 0">
                                 <label class="control-label color-black">Trẻ em</label>
                                 <select class="select form-control linked" name="child">
-                                    <?php foreach (range(0, 30) as $index) : ?>
+                                    <?php foreach (range(0, 9) as $index) : ?>
                                     <option value="<?= $index ?>"><?= $index ?></option>
                                     <?php endforeach ?>
                                 </select>
@@ -220,7 +220,7 @@ $this->title = 'Vé máy bay Hải Phi Yến';
                             <div class="row">
                                 <label class="control-label color-black">Em bé</label>
                                 <select class="select form-control linked" name="infant">
-                                    <?php foreach (range(0, 30) as $index) : ?>
+                                    <?php foreach (range(0, 9) as $index) : ?>
                                     <option value="<?= $index ?>"><?= $index ?></option>
                                     <?php endforeach ?>
                                 </select>
