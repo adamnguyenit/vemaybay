@@ -31,7 +31,7 @@ function searchTickets(data, handle, error) {
         type: 'POST',
         url: API_URL + 'tickets/search',
         data: data,
-        timeout: 60000,
+        timeout: 180000,
         success: function(data, textStatus, jqXHR) {
             handle(data);
         },
@@ -168,7 +168,9 @@ $(document).ready(function() {
         $('#places-box-to').modal('hide');
     });
     $('.places-box').on('shown.bs.modal', function() {
-        $(this).find('input.places-suggestion').focus();
+        var input = $(this).find('input.places-suggestion');
+        input.val(null);
+        input.focus();
     });
     $('#places-box-from input.places-suggestion').autocomplete().setOptions($.extend(_suggestionOpt, {
         onSelect: function(suggestion) {
