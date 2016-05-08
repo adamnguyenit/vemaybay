@@ -106,15 +106,14 @@ var flightTableOption = {
     }, {
         data: 'seatAvailable',
         render: function(data, type, full, meta) {
-            if (data == 1) {
-                return '<span class="label label-danger">Còn 1 vé</span>';
-            } else if (data > 0 && data <= 4) {
-                return '<span class="label label-warning">Sắp hết</span>';
+            if (data > 0) {
+                return '<span class="label label-warning">Còn ' + data + ' chỗ</span>';
             }
             return null;
         }
     }],
     createdRow: function(row, data, index) {
+        $(row).addClass('ticket');
         $(row).attr('data-id', data.id);
         $(row).attr('data-airline', data.airlineCode);
     }
@@ -122,10 +121,35 @@ var flightTableOption = {
 var flightTables = {};
 var tickets = {};
 var _count = 0;
+var chooseTickets = {};
 
 function childOfTicket(type, id) {
     var types = ['adult', 'child', 'infant'];
     var ticket = tickets[type][id];
+    var copyText = 'Hành trình: ' + ticket.fromPlace + ' - ' + ticket.toPlace + "\n";
+    copyText += 'Bay lúc: ' + dateDecode(ticket.departTime, true) + ' - đến lúc: ' + dateDecode(ticket.landingTime, true) + "\n";
+    copyText += 'Thời gian bay: ' + ticket.flightDuration.match(/PT(.*)/)[1].replace('D', ' ngày').replace('H', ' giờ ').replace('M', ' phút') + "\n";
+    copyText += 'Mã chuyến bay: ' + ticket.airline + ' ' + ticket.flightNumber + "\n";
+    copyText += 'Giá vé bao gồm ' + getParameterByName('adult') + ' người lớn, ' + getParameterByName('child') + ' trẻ em và ' + getParameterByName('infant') + ' em bé' + "\n";
+    copyText += 'Giá vé theo hạng ghế (đã bao gồm thuế phí): ' + "\n";
+    for (var i = 0; i < ticket.ticketOptions.length; i++) {
+      copyText += '    - ' + ticket.ticketOptions[i].ticketType + ': ' + parseInt(ticket.ticketOptions[i].totalPrice).formatMoney(0, ',', '.') + " VND\n";
+    }
+    copyText += 'Vui lòng xem chi tiết tại: ' + window.location.protocol + '//' + window.location.host;
+    var placeFromCode = getParameterByName('place-from').split(' - ');
+    placeFromCode = placeFromCode[placeFromCode.length - 1];
+    var placeToCode = getParameterByName('place-to').split(' - ');
+    placeToCode = placeToCode[placeToCode.length - 1];
+    var smsText = 'HT: ';
+    if (type === 'depart') {
+        smsText += placeFromCode + ' - ' + placeToCode + ', ';
+    } else {
+        smsText += placeToCode + ' - ' + placeFromCode + ', ';
+    }
+    var flightStart = dateDecode(ticket.departTime, false);
+    smsText += flightStart.day + '/' + flightStart.month + ', LUC ' + flightStart.hour + ':' + flightStart.min + ', ';
+    smsText += 'CBAY ' + ticket.flightNumber + ', ';
+    smsText += 'GIA ' + parseInt(ticket.priceFrom).formatMoney(0, ',', '.') + ' VND';
     var html = '<table class="ticket-detail"><tbody>';
     // Ticket detail
     html += '<tr>';
@@ -143,6 +167,9 @@ function childOfTicket(type, id) {
     html += '</tr>';
     html += '<tr>';
     html += '<td colspan="3">Thời gian bay: ' + ticket.flightDuration.match(/PT(.*)/)[1].replace('D', ' ngày').replace('H', ' giờ ').replace('M', ' phút') + '</td>';
+    html += '</tr>';
+    html += '<tr>';
+    html += '<td colspan="3"><button class="btn btn-sm btn-info copy-to-clipboard" data-clipboard-text="' + copyText + '"><span class="fa fa-clipboard"></span></button> <button class="btn btn-sm btn-info copy-to-clipboard" data-clipboard-text="' + smsText + '">SMS</button></td>';
     html += '</tr>';
     html += '</tbody></table>';
     // Price detail
@@ -163,7 +190,13 @@ function childOfTicket(type, id) {
         }
         html += '</td>';
         html += '<td class="color-red" style="text-align: right">' + parseInt(currentOption.totalPrice).formatMoney(0, ',', '.') + '</td>';
-        html += '<td><div class="radio radio-primary"><label><input type="radio" name="choose"></label></div></td>';
+        html += '<td><div class="radio radio-primary" style="margin-top: 0"><label>';
+        if (chooseTickets.hasOwnProperty(type) && chooseTickets[type]['ticket']['id'] == ticket.id && chooseTickets[type]['fareBasis'] == currentOption.fareBasis) {
+            html += '<input data-ticket-id="' + ticket.id + '" type="radio" name="choose" value="' + currentOption.fareBasis + '" checked>';
+        } else {
+            html += '<input data-ticket-id="' + ticket.id + '" type="radio" name="choose" value="' + currentOption.fareBasis + '">';
+        }
+        html += '</label></div></td>';
         html += '</tr>';
         html += '<tr>';
         html += '<td class="mobile-no-padding-left" colspan="4" style="border-top: 0">';
@@ -196,6 +229,25 @@ function childOfTicket(type, id) {
     html += '</tbody>';
     html += '</table>';
     return html;
+}
+
+function nextStep() {
+    var roundTrip = parseInt(getParameterByName('round-trip'));
+    var isOk = false;
+    if (roundTrip == 0) {
+        if (chooseTickets.hasOwnProperty('depart')) {
+            isOk = true;
+        }
+    } else {
+        if (chooseTickets.hasOwnProperty('depart') && chooseTickets.hasOwnProperty('return')) {
+            isOk = true;
+        }
+    }
+    if (isOk) {
+        $('#next').show();
+    } else {
+        $('#next').hide();
+    }
 }
 
 function getSearchData(s) {
@@ -305,7 +357,7 @@ $(document).ready(function() {
     });
 
     // Show ticket information
-    $('#depart-table').on('click', 'td', function() {
+    $('#depart-table').on('click', 'tr.ticket td', function() {
         var tr = $(this).closest('tr');
         var row = flightTables['depart'].row(tr);
         if (row.child.isShown()) {
@@ -316,8 +368,12 @@ $(document).ready(function() {
             $.material.init();
             tr.addClass('shown');
         }
+        $('.copy-to-clipboard').tooltip({
+            title: 'Đã sao chép',
+            trigger: 'manual'
+        });
     });
-    $('#return-table').on('click', 'td', function() {
+    $('#return-table').on('click', 'tr.ticket td', function() {
         var tr = $(this).closest('tr');
         var row = flightTables['return'].row(tr);
         if (row.child.isShown()) {
@@ -328,6 +384,57 @@ $(document).ready(function() {
             $.material.init();
             tr.addClass('shown');
         }
+        $('.copy-to-clipboard').tooltip({
+            title: 'Đã sao chép',
+            trigger: 'manual'
+        });
+    });
+    $('.tickets-table').on('click', '.copy-to-clipboard', function() {
+        var tooltip = $(this);
+        tooltip.tooltip('show');
+        setTimeout(function() {
+            tooltip.tooltip('hide');
+        }, 1000);
+    });
+
+    // Select tickets
+    $('#depart-table').on('click', 'input[type=radio][name=choose]', function() {
+        var ticketId = $(this).data('ticket-id');
+        var fareBasis = $(this).val();
+        if (fareBasis === 'null') {
+            fareBasis = null;
+        }
+        chooseTickets['depart'] = {
+            ticket: tickets['depart'][ticketId],
+            fareBasis: fareBasis
+        };
+        $('#depart-table tr.ticket').removeClass('info');
+        $('#depart-table tr.ticket[data-id=' + ticketId.replace('@', '\\@') + ']').addClass('info');
+        if (flightTables['return'] != null) {
+            $.fn.dataTable.ext.search.pop();
+            $.fn.dataTable.ext.search.push(
+                function(settings, data, dataIndex) {
+                    if (settings.sTableId != 'return-table') return true;
+                    return $(flightTables['return'].row(dataIndex).node()).attr('data-airline') == chooseTickets['depart']['ticket']['airlineCode'];
+                }
+            );
+            flightTables['return'].draw();
+        }
+        nextStep();
+    });
+    $('#return-table').on('click', 'input[type=radio][name=choose]', function() {
+        var ticketId = $(this).data('ticket-id');
+        var fareBasis = $(this).val();
+        if (fareBasis === 'null') {
+            fareBasis = null;
+        }
+        chooseTickets['return'] = {
+            ticket: tickets['return'][ticketId],
+            fareBasis: fareBasis
+        };
+        $('#return-table tr.ticket').removeClass('info');
+        $('#return-table tr.ticket[data-id=' + ticketId.replace('@', '\\@') + ']').addClass('info');
+        nextStep();
     });
 
     getList('panels?per-page=100', function(data) {

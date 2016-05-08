@@ -8,25 +8,36 @@
     font-weight: normal;
     margin-bottom: 5px;
 }
-#tabs-progress {
-    margin-top: 0;
-}
 #depart-table, #return-table {
     width: 100%;
+}
+.table.dates {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.table.dates tr td {
+    border: 0;
+}
+.table.dates tr td p:last-child {
+    margin-bottom: 0;
 }
 .flight-date {
     padding-top: 10px;
     cursor: pointer;
-    margin-top: 5px;
-    margin-bottom: 5px;
     background-color: #ffffff;
+}
+.flight-date a {
+    color: inherit;
+}
+.flight-date a {
+    text-decoration: none;
 }
 .flight-date:hover {
     background-color: #dddddd;
 }
 .flight-date.active {
-    color: #ffffff;
-    background-color: #3b89c9;
+    color: #ffffff !important;
+    background-color: #3b89c9 !important;
 }
 table.dataTable {
     margin-top: 0 !important;
@@ -60,6 +71,21 @@ table.price-detail tbody tr td:last-child {
 .panel img {
     width: 100%;
 }
+#search-progress {
+    margin-top: 5px;
+    margin-right: 10px;
+}
+#choose-tickets {
+    margin-top: 5px;
+}
+.choose-ticket {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 5px;
+    background-color: #ffffff;
+    width: 100%;
+    display: inline-block;
+}
 @media (max-width: 767px) {
     #content-page {
         padding-top: 0;
@@ -67,5 +93,11 @@ table.price-detail tbody tr td:last-child {
     }
     .mobile-no-padding-left {
         padding-left: 0 !important;
+    }
+    #tabs-panel {
+        font-size: 11px;
+    }
+    #search-progress {
+        margin-right: 5px;
     }
 }

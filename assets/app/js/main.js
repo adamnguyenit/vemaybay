@@ -186,4 +186,5 @@ $(document).ready(function() {
             $('#places-box-to').modal('hide');
         }
     }));
+    clipboard = new Clipboard('.copy-to-clipboard');
 });
