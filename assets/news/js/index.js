@@ -15,16 +15,12 @@ var isPanelsLoaded = false;
 
 $(document).ready(function() {
     getList('news/popular', function(data) {
-        if (data) {
-            addPopular(data);
-            isNewsLoaded = true;
-        }
+        addPopular(data);
+        isNewsLoaded = true;
     });
     getList('panels', function(data) {
-        if (data) {
-            addPanel(data);
-            isPanelsLoaded = true;
-        }
+        addPanel(data);
+        isPanelsLoaded = true;
     });
     $(document).trigger('scroll');
 });

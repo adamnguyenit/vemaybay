@@ -26,9 +26,7 @@ $(document).ready(function() {
     });
 
     getList('slides?per-page=100', function(data) {
-        if (data) {
-            addSlide(data);
-            isSlidesLoaded = true;
-        }
+        addSlide(data);
+        isSlidesLoaded = true;
     });
 });

@@ -24,10 +24,8 @@ $(document).ready(function() {
     });
 
     getList('panels?per-page=100', function(data) {
-        if (data) {
-            addPanel(data);
-            isPanelsLoaded = true;
-        }
+        addPanel(data);
+        isPanelsLoaded = true;
     });
 
     $('[name=round-trip]').change(function() {

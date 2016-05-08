@@ -143,7 +143,9 @@ $(document).ready(function() {
 
     _interval = setInterval(function() {
         if (isPageLoaded()) {
-            $('#loading').fadeOut();
+            $('#loading').fadeOut(400, function() {
+                $('body').css('overflow-y', 'auto');
+            });
             clearInterval(_interval);
         }
     }, 200);

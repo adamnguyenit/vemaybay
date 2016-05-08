@@ -127,7 +127,8 @@ $this->title = 'Vé máy bay Hải Phi Yến | Tìm vé máy bay';
                                 <?php if (!empty($dates['depart'])) : ?>
                                 <?php foreach ($dates['depart'] as $date) : ?>
                                     <div class="col-xs-1 text-center">
-                                        <a class="color-black" href="<?= Url::current(['date-depart' => $date['date']]) ?>">
+                                        <?php $url = empty($date['depend']) ? Url::current(['date-depart' => $date['date']]) : Url::current(['date-depart' => $date['date'], 'date-return' => $date['depend']]) ?>
+                                        <a class="color-black" href="<?= $url ?>">
                                             <div class="row flight-date<?= empty($date['active']) ? null : ' active' ?>">
                                                 <p><?= $date['title'] ?></p>
                                                 <p><?= $date['date_short'] ?></p>

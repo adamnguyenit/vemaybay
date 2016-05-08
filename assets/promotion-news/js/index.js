@@ -31,24 +31,18 @@ $(document).ready(function() {
     fixFloatButton();
 
     getList('promotion-news?per-page=100', function(data) {
-        if (data) {
-            addPromotionNews(data);
-            isPromotionNewsLoaded = true;
-        }
+        addPromotionNews(data);
+        isPromotionNewsLoaded = true;
     });
 
     getList('panels?per-page=100', function(data) {
-        if (data) {
-            addPanel(data);
-            isPanelsLoaded = true;
-        }
+        addPanel(data);
+        isPanelsLoaded = true;
     });
 
     getList('slides?per-page=100', function(data) {
-        if (data) {
-            addSlide(data);
-            isSlidesLoaded = true;
-        }
+        addSlide(data);
+        isSlidesLoaded = true;
     });
 
     $('[name=round-trip]').change(function() {

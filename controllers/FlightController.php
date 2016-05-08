@@ -34,7 +34,7 @@ class FlightController extends \yii\web\Controller
         $params = \Yii::$app->request->get();
         $dates = [];
         if (!empty($params['date-depart'])) {
-            $dates['depart'] = $this->__calculateDates($this->_convertDate($params['date-depart']));
+            $dates['depart'] = $this->__calculateDates($this->_convertDate($params['date-depart']), null, strtotime($this->_convertDate($params['date-return'])));
             if (!empty($params['round-trip']) && !empty($params['date-return'])) {
                 $dates['return'] = $this->__calculateDates($this->_convertDate($params['date-return']), strtotime($this->_convertDate($params['date-depart'])));
             }
@@ -53,7 +53,7 @@ class FlightController extends \yii\web\Controller
         return;
     }
 
-    private function __calculateDates($date, $limit = null)
+    private function __calculateDates($date, $limit = null, $dependTime = null)
     {
         $unixTime = strtotime($date);
         if (empty($limit)) {
@@ -77,6 +77,9 @@ class FlightController extends \yii\web\Controller
             if ($i == 0) {
                 $date['active'] = true;
             }
+            if ($dependTime !== null && $unixSubTime > $dependTime) {
+                $date['depend'] = date('d/m/Y', strtotime('+3 days', $unixSubTime));
+            }
             $result[] = $date;
         }
         for ($j = 1; $j <= $this->addDays + $index; ++$j) {
@@ -86,6 +89,9 @@ class FlightController extends \yii\web\Controller
                 'date_short' => date('d/m', $unixSubTime),
                 'title' => $this->titles[date('D', $unixSubTime)],
             ];
+            if ($dependTime !== null && $unixSubTime > $dependTime) {
+                $date['depend'] = date('d/m/Y', strtotime('+3 days', $unixSubTime));
+            }
             $result[] = $date;
         }
 

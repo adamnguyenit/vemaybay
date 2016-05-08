@@ -28,15 +28,11 @@ $(document).ready(function() {
         isNewsLoaded = true;
     });
     getList('news/popular', function(data) {
-        if (data) {
-            addPopular(data);
-        }
+        addPopular(data);
         isPopularLoaded = true;
     });
     getList('panels', function(data) {
-        if (data) {
-            addPanel(data);
-        }
+        addPanel(data);
         isPanelsLoaded = true;
     });
 });
