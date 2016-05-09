@@ -210,24 +210,29 @@ if (!empty($params['place-from']) && !empty($params['place-to'])) {
                 </div>
             </div>
             <div id="choose-tickets" class="row" style="display: none">
-                <div id="depart-ticket" class="choose-ticket">
-                    <div class="col-xs-5 text-center">
-                        <div class="row"><h5><?= $params['place-from'] ?></h5></div>
-                    </div>
-                    <div class="col-xs-2 text-center"><span class="fa fa-3x fa-plane"></span></div>
-                    <div class="col-xs-5 text-center">
-                        <div class="row"><h5><?= $params['place-to'] ?></h5></div>
+                <div class="col-md-12"><h4>Vé đã chọn</h4></div>
+                <div id="choose-tickets-body"></div>
+                <div id="next-step">
+                    <div class="col-md-12">
+                        <button class="btn btn-raised btn-primary pull-right">Tiếp theo</button>
                     </div>
                 </div>
-                <div id="return-ticket" class="choose-ticket">
-                    <div class="col-xs-5 text-center">
-                        <div class="row"><h5><?= $params['place-to'] ?></h5></div>
-                    </div>
-                    <div class="col-xs-2 text-center"><span class="fa fa-3x fa-plane"></span></div>
-                    <div class="col-xs-5 text-center">
-                        <div class="row"><h5><?= $params['place-from'] ?></h5></div>
-                    </div>
-                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="message-box" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Thông báo</h4>
+            </div>
+            <div class="modal-body">
+                <p>Vui lòng chọn vé chiều đi trước</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
             </div>
         </div>
     </div>

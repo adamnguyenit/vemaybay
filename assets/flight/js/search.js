@@ -133,7 +133,7 @@ function childOfTicket(type, id) {
     copyText += 'Giá vé bao gồm ' + getParameterByName('adult') + ' người lớn, ' + getParameterByName('child') + ' trẻ em và ' + getParameterByName('infant') + ' em bé' + "\n";
     copyText += 'Giá vé theo hạng ghế (đã bao gồm thuế phí): ' + "\n";
     for (var i = 0; i < ticket.ticketOptions.length; i++) {
-      copyText += '    - ' + ticket.ticketOptions[i].ticketType + ': ' + parseInt(ticket.ticketOptions[i].totalPrice).formatMoney(0, ',', '.') + " VND\n";
+        copyText += '    - ' + ticket.ticketOptions[i].ticketType + ': ' + parseInt(ticket.ticketOptions[i].totalPrice).formatMoney(0, ',', '.') + " VND\n";
     }
     copyText += 'Vui lòng xem chi tiết tại: ' + window.location.protocol + '//' + window.location.host;
     var placeFromCode = getParameterByName('place-from').split(' - ');
@@ -191,7 +191,7 @@ function childOfTicket(type, id) {
         html += '</td>';
         html += '<td class="color-red" style="text-align: right">' + parseInt(currentOption.totalPrice).formatMoney(0, ',', '.') + '</td>';
         html += '<td><div class="radio radio-primary" style="margin-top: 0"><label>';
-        if (chooseTickets.hasOwnProperty(type) && chooseTickets[type]['ticket']['id'] == ticket.id && chooseTickets[type]['fareBasis'] == currentOption.fareBasis) {
+        if (chooseTickets.hasOwnProperty(type) && chooseTickets[type] != null && chooseTickets[type]['ticket']['id'] == ticket.id && chooseTickets[type]['fareBasis'] == currentOption.fareBasis) {
             html += '<input data-ticket-id="' + ticket.id + '" type="radio" name="choose" value="' + currentOption.fareBasis + '" checked>';
         } else {
             html += '<input data-ticket-id="' + ticket.id + '" type="radio" name="choose" value="' + currentOption.fareBasis + '">';
@@ -235,18 +235,52 @@ function nextStep() {
     var roundTrip = parseInt(getParameterByName('round-trip'));
     var isOk = false;
     if (roundTrip == 0) {
-        if (chooseTickets.hasOwnProperty('depart')) {
+        if (chooseTickets.hasOwnProperty('depart') && chooseTickets['depart'] != null) {
             isOk = true;
         }
     } else {
-        if (chooseTickets.hasOwnProperty('depart') && chooseTickets.hasOwnProperty('return')) {
+        if (chooseTickets.hasOwnProperty('depart') && chooseTickets.hasOwnProperty('return') && chooseTickets['return'] != null) {
             isOk = true;
         }
     }
+    $('#choose-tickets').hide();
+    $('#choose-tickets-body').html(null);
+    var flightTypes = ['depart', 'return'];
+    $.each(flightTypes, function() {
+        if (chooseTickets.hasOwnProperty(this) && chooseTickets[this] != null) {
+            $('#choose-tickets').show();
+            var ticket = chooseTickets[this].ticket;
+            var ticketOption = null;
+            for (var i = 0; i < ticket.ticketOptions.length; i++) {
+                if (ticket.ticketOptions[i].fareBasis == chooseTickets[this].fareBasis) {
+                    ticketOption = ticket.ticketOptions[i];
+                    break;
+                }
+            }
+            var html = '<div id="' + this + '-ticket" class="choose-ticket">';
+            html += '<div class="row">';
+            html += '<div class="col-xs-5 text-center"><h5>' + ticket.fromPlace + '</h5></div>';
+            html += '<div class="col-xs-2 text-center"><span class="fa fa-2x fa-plane"></span></div>';
+            html += '<div class="col-xs-5 text-center"><h5>' + ticket.toPlace + '</h5></div>';
+            html += '</div>';
+            html += '<div class="row">';
+            html += '<div class="col-xs-5 text-center">' + dateDecode(ticket.departTime, true) + '</div>';
+            html += '<div class="col-xs-2 text-center">' + ticket.flightNumber + '</div>';
+            html += '<div class="col-xs-5 text-center">' + dateDecode(ticket.landingTime, true) + '</div>';
+            html += '</div>';
+            html += '<div class="row">';
+            html += '<div class="col-xs-5 text-center">Hạng ghế: ' + ticketOption.ticketType + '</div>';
+            html += '<div class="col-xs-2 text-center"></div>';
+            html += '<div class="col-xs-5 text-center">Tổng giá: <span class="color-red">' + parseInt(ticketOption.totalPrice).formatMoney(0, ',', '.') + ' VND</span></div>';
+            html += '</div>';
+            html += '</div>';
+            $('#choose-tickets-body').append(html);
+        }
+    });
     if (isOk) {
-        $('#next').show();
+        $('#next-step').show();
     } else {
-        $('#next').hide();
+        $('#next-step').hide();
     }
 }
 
@@ -404,10 +438,14 @@ $(document).ready(function() {
         if (fareBasis === 'null') {
             fareBasis = null;
         }
+        var departTicket = tickets['depart'][ticketId];
         chooseTickets['depart'] = {
-            ticket: tickets['depart'][ticketId],
+            ticket: departTicket,
             fareBasis: fareBasis
         };
+        if (chooseTickets.hasOwnProperty('return') && chooseTickets['return'] != null && departTicket.airlineCode != chooseTickets['return']['ticket'].airlineCode) {
+            chooseTickets['return'] = null;
+        }
         $('#depart-table tr.ticket').removeClass('info');
         $('#depart-table tr.ticket[data-id=' + ticketId.replace('@', '\\@') + ']').addClass('info');
         if (flightTables['return'] != null) {
@@ -423,18 +461,24 @@ $(document).ready(function() {
         nextStep();
     });
     $('#return-table').on('click', 'input[type=radio][name=choose]', function() {
-        var ticketId = $(this).data('ticket-id');
-        var fareBasis = $(this).val();
-        if (fareBasis === 'null') {
-            fareBasis = null;
+        if (!chooseTickets.hasOwnProperty('depart') || chooseTickets['depart'] == null) {
+            $('#message-box').find('.modal-body').html('<p>Vui lòng chọn vé chiều đi trước</p>');
+            $('#message-box').modal('show');
+            $(this).prop('checked', false);
+        } else {
+            var ticketId = $(this).data('ticket-id');
+            var fareBasis = $(this).val();
+            if (fareBasis === 'null') {
+                fareBasis = null;
+            }
+            chooseTickets['return'] = {
+                ticket: tickets['return'][ticketId],
+                fareBasis: fareBasis
+            };
+            $('#return-table tr.ticket').removeClass('info');
+            $('#return-table tr.ticket[data-id=' + ticketId.replace('@', '\\@') + ']').addClass('info');
+            nextStep();
         }
-        chooseTickets['return'] = {
-            ticket: tickets['return'][ticketId],
-            fareBasis: fareBasis
-        };
-        $('#return-table tr.ticket').removeClass('info');
-        $('#return-table tr.ticket[data-id=' + ticketId.replace('@', '\\@') + ']').addClass('info');
-        nextStep();
     });
 
     getList('panels?per-page=100', function(data) {
