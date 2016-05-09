@@ -149,7 +149,7 @@ function childOfTicket(type, id) {
     var flightStart = dateDecode(ticket.departTime, false);
     smsText += flightStart.day + '/' + flightStart.month + ', LUC ' + flightStart.hour + ':' + flightStart.min + ', ';
     smsText += 'CBAY ' + ticket.flightNumber + ', ';
-    smsText += 'GIA ' + parseInt(ticket.priceFrom).formatMoney(0, ',', '.') + ' VND';
+    smsText += 'GIA ' + parseInt(ticket.ticketOptions[0].totalPrice).formatMoney(0, ',', '.') + ' VND';
     var html = '<table class="ticket-detail"><tbody>';
     // Ticket detail
     html += '<tr>';
