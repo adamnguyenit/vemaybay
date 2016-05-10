@@ -118,6 +118,17 @@ var flightTableOption = {
         $(row).attr('data-airline', data.airlineCode);
     }
 };
+
+function processScroll() {
+    if (isOk()) {
+        if ($('#next-step').visible()) {
+            $('#scroll-to-next').hide();
+        } else {
+            $('#scroll-to-next').show();
+        }
+    }
+}
+
 var flightTables = {};
 var tickets = {};
 var _count = 0;
@@ -231,18 +242,21 @@ function childOfTicket(type, id) {
     return html;
 }
 
-function nextStep() {
+function isOk() {
     var roundTrip = parseInt(getParameterByName('round-trip'));
-    var isOk = false;
     if (roundTrip == 0) {
         if (chooseTickets.hasOwnProperty('depart') && chooseTickets['depart'] != null) {
-            isOk = true;
+            return true;
         }
     } else {
         if (chooseTickets.hasOwnProperty('depart') && chooseTickets.hasOwnProperty('return') && chooseTickets['return'] != null) {
-            isOk = true;
+            return true;
         }
     }
+    return false;
+}
+
+function nextStep() {
     $('#choose-tickets').hide();
     $('#choose-tickets-body').html(null);
     var flightTypes = ['depart', 'return'];
@@ -277,10 +291,22 @@ function nextStep() {
             $('#choose-tickets-body').append(html);
         }
     });
-    if (isOk) {
+    if (isOk()) {
         $('#next-step').show();
+        if ($('#next-step').visible()) {
+            $('#scroll-to-next').hide();
+        } else {
+            $('#scroll-to-next').show();
+        }
+        sessionStorage.setItem('chooseTickets', JSON.stringify(chooseTickets));
+        sessionStorage.setItem('people', JSON.stringify({
+            adult: parseInt(getParameterByName('adult')),
+            child: parseInt(getParameterByName('child')),
+            infant: parseInt(getParameterByName('infant'))
+        }));
     } else {
         $('#next-step').hide();
+        $('#scroll-to-next').hide();
     }
 }
 
@@ -356,6 +382,7 @@ function startSearch() {
                 tickets['return'][this.id] = this;
             });
         }
+        processScroll();
         onComplete();
     };
     var onError = function() {
@@ -481,6 +508,12 @@ $(document).ready(function() {
         }
     });
 
+    $('#scroll-to-next').click(function() {
+        $('html, body').animate({
+            scrollTop: $('#next-step').offset().top
+        }, 500);
+    });
+
     getList('panels?per-page=100', function(data) {
         addPanel(data);
         isPanelsLoaded = true;
@@ -493,4 +526,8 @@ $(document).ready(function() {
 
 $(window).resize(function() {
     resizeTable();
+});
+
+$(window).scroll(function() {
+    processScroll();
 });

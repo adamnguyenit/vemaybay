@@ -1,0 +1,23 @@
+#content-page {
+    padding-top: 5px;
+    padding-bottom: 15px;
+}
+.choose-ticket {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #ffffff;
+    width: 100%;
+    display: inline-block;
+}
+.left-panel {
+    margin-right: -10px;
+}
+@media (max-width: 767px) {
+    #content-page {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .left-panel {
+        margin-right: -15px;
+    }
+}

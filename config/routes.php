@@ -1,10 +1,11 @@
 <?php
 
 return [
-    'GET /' => 'flight/index',
-    'GET ve-may-bay/tim-ve' => 'flight/search',
-    'GET khuyen-mai' => 'promotion-news/index',
-    'GET khuyen-mai/<alias>' => 'promotion-news/info',
-    'GET tin-tuc' => 'news/index',
-    'GET tin-tuc/<alias>' => 'news/info',
+    '/' => 'flight/index',
+    've-may-bay/tim-ve' => 'flight/search',
+    've-may-bay/dat-ve' => 'flight/book',
+    'khuyen-mai' => 'promotion-news/index',
+    'khuyen-mai/<alias>' => 'promotion-news/info',
+    'tin-tuc' => 'news/index',
+    'tin-tuc/<alias>' => 'news/info',
 ];

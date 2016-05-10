@@ -28,6 +28,7 @@ class AppAsset extends \yii\web\AssetBundle
         'js/jquery.jscroll.min.js',
         'js/jquery.autocomplete.min.js',
         'js/clipboard.min.js',
+        'js/jquery.visible.min.js',
         'js/main.js'
     ];
 }

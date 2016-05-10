@@ -43,6 +43,11 @@ class FlightController extends \yii\web\Controller
         return $this->render('search', ['params' => $params, 'dates' => $dates]);
     }
 
+    public function actionBook()
+    {
+        return $this->render('book');
+    }
+
     protected function _convertDate($date)
     {
         $dateArr = explode('/', $date);
