@@ -213,11 +213,9 @@ if (!empty($params['place-from']) && !empty($params['place-to'])) {
                 <div class="col-md-12"><h4>Vé đã chọn</h4></div>
                 <div id="choose-tickets-body"></div>
                 <div id="next-step">
-                    <form action="<?= Url::toRoute(['flight/book']) ?>">
-                        <div class="col-md-12">
-                            <button class="btn btn-raised btn-primary pull-right" type="submit">Tiếp theo</button>
-                        </div>
-                    </form>
+                    <div class="col-md-12">
+                        <a href="<?= Url::toRoute(['flight/book']) ?>" class="btn btn-raised btn-primary pull-right" role="button">Tiếp theo</a>
+                    </div>
                 </div>
             </div>
         </div>

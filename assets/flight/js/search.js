@@ -285,7 +285,7 @@ function nextStep() {
             html += '<div class="row">';
             html += '<div class="col-xs-5 text-center">Hạng ghế: ' + ticketOption.ticketType + '</div>';
             html += '<div class="col-xs-2 text-center"></div>';
-            html += '<div class="col-xs-5 text-center">Tổng giá: <span class="color-red">' + parseInt(ticketOption.totalPrice).formatMoney(0, ',', '.') + ' VND</span></div>';
+            html += '<div class="col-xs-5 text-center"><span class="color-red">' + parseInt(ticketOption.totalPrice).formatMoney(0, ',', '.') + ' VND</span></div>';
             html += '</div>';
             html += '</div>';
             $('#choose-tickets-body').append(html);

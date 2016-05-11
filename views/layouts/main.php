@@ -80,7 +80,7 @@ $bundle = AppAsset::register($this);
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <span id="navbar-phone" class="visible-xs-block"><span class="fa fa-phone"></span> <a class="color-white" href="tel:0913 642 748">0913.642.748</a></span>
+                            <span id="navbar-phone" class="visible-xs-block"><a class="color-white" href="tel:0913 642 748">0913.642.748</a></span>
                         </div>
                         <div id="navbar-main" class="collapse navbar-collapse">
                             <ul class="nav navbar-nav">
