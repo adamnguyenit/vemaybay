@@ -1,5 +1,5 @@
 function isPageLoaded() {
-    return isPrintPrice && isPrintTickets && isPrintPeople;
+    return isPrintPrice && isPrintTickets && isPrintPeople && isGetBaggages;
 }
 
 function printPrice() {
@@ -17,8 +17,9 @@ function printPrice() {
                     break;
                 }
             }
-            var html = '<div id="' + key + '" class="col-md-12">';
-            html += '<h4>' + ticket.fromPlace + ' - ' + ticket.toPlace + '</h4>';
+            var html = '<div class="row">';
+            html += '<div id="' + key + '" class="col-md-12">';
+            html += '<h4 style="margin-bottom: 0">' + ticket.fromPlace + ' - ' + ticket.toPlace + '</h4>';
             html += '<table class="table table-hover" style="width: 100%">';
             html += '<thead><tr><th></th><th></th><th></th><th></th></tr></thead>';
             html += '<tbody>';
@@ -45,10 +46,11 @@ function printPrice() {
             html += '</tbody>';
             html += '</table>';
             html += '</div>';
+            html += '</div>';
             $('#price-box').append(html);
         }
     }
-    $('#price-box').append('<div class="col-md-12 text-right"><h3>Tổng: <span id="total-price" class="color-red" data-base="' + total + '">' + total.formatMoney(0, ',', '.') + ' VND</span></h3></div>');
+    $('#price-box').append('<div class="row"><div class="col-md-12 text-right"><h3><small>Tổng:</small> <span id="total-price" class="color-red" data-base="' + total + '" data-value="' + total + '">' + total.formatMoney(0, ',', '.') + ' VND</span></h3></div></div>');
     isPrintPrice = true;
 }
 
@@ -112,7 +114,7 @@ function printPeople() {
                 html += '<div class="col-md-12">'
                 html += '<div class="form-group col-sm-2 col-xs-3">';
                 html += '<div class="row">';
-                html += '<select class="form-control" name="people[' + type + '][' + i + '][title]">' + valueOf(type) + '</select>';
+                html += '<select class="form-control" name="people_' + type + '_' + i + '_title">' + valueOf(type) + '</select>';
                 html += '</div>';
                 html += '</div>';
                 switch (chooseTickets.depart.ticket.airlineCode) {
@@ -120,13 +122,13 @@ function printPeople() {
                         html += '<div class="form-group label-floating col-sm-6 col-xs-9">';
                         html += '<div class="row">';
                         html += '<label class="control-label">Họ và tên</label>';
-                        html += '<input id="bind-to-contact" class="form-control" name="people[' + type + '][' + i + '][name]">';
+                        html += '<input id="bind-to-contact" class="form-control" name="people_' + type + '_' + i + '_name">';
                         html += '</div>';
                         html += '</div>';
                         html += '<div class="form-group label-floating col-sm-4 col-xs-12">';
                         html += '<div class="row">';
                         html += '<label class="control-label">Ngày sinh</label>';
-                        html += '<div class="input-group date" data-provide="datepicker"><input class="form-control datepicker" type="text" name="people[' + type + '][' + i + '][birth]" readonly><div class="input-group-addon"><span class="fa fa-calendar"></span></div></div>';
+                        html += '<div class="input-group date" data-provide="datepicker"><input class="form-control datepicker" type="text" name="people_' + type + '_' + i + '_birth" readonly><div class="input-group-addon"><span class="fa fa-calendar"></span></div></div>';
                         html += '</div>';
                         html += '</div>';
                         break;
@@ -135,44 +137,44 @@ function printPeople() {
                             html += '<div class="form-group label-floating col-sm-6 col-xs-9">';
                             html += '<div class="row">';
                             html += '<label class="control-label">Họ và tên</label>';
-                            html += '<input id="bind-to-contact" class="form-control" name="people[' + type + '][' + i + '][name]">';
+                            html += '<input id="bind-to-contact" class="form-control" name="people_' + type + '_' + i + '_name">';
                             html += '</div>';
                             html += '</div>';
                             html += '<div class="form-group label-floating col-sm-4 col-xs-12">';
                             html += '<div class="row">';
                             html += '<label class="control-label">Ngày sinh</label>';
-                            html += '<div class="input-group date" data-provide="datepicker"><input class="form-control datepicker" type="text" name="people[' + type + '][' + i + '][birth]" readonly><div class="input-group-addon"><span class="fa fa-calendar"></span></div></div>';
+                            html += '<div class="input-group date" data-provide="datepicker"><input class="form-control datepicker" type="text" name="people_' + type + '_' + i + '_birth" readonly><div class="input-group-addon"><span class="fa fa-calendar"></span></div></div>';
                             html += '</div>';
                             html += '</div>';
                             html += '<div class="form-group label-floating col-sm-6 col-xs-6">';
                             html += '<div class="row">';
                             html += '<label class="control-label">Hành lý chặng đi</label>';
-                            html += '<select class="form-control baggage-depart" name="people[' + type + '][' + i + '][baggage][depart]">' + baggage() + '</select>';
+                            html += '<select class="form-control baggage-depart" name="people_' + type + '_' + i + '_baggage_depart">' + baggage() + '</select>';
                             html += '</div>';
                             html += '</div>';
                             html += '<div class="form-group label-floating col-sm-6 col-xs-6">';
                             html += '<div class="row">';
                             html += '<label class="control-label">Hành lý chặng về</label>';
-                            html += '<select class="form-control baggage-return" name="people[' + type + '][' + i + '][baggage][return]">' + baggage() + '</select>';
+                            html += '<select class="form-control baggage-return" name="people_' + type + '_' + i + '_baggage_return">' + baggage() + '</select>';
                             html += '</div>';
                             html += '</div>';
                         } else {
                             html += '<div class="form-group label-floating col-sm-4 col-xs-9">';
                             html += '<div class="row">';
                             html += '<label class="control-label">Họ và tên</label>';
-                            html += '<input id="bind-to-contact" class="form-control" name="people[' + type + '][' + i + '][name]">';
+                            html += '<input id="bind-to-contact" class="form-control" name="people_' + type + '_' + i + '_name">';
                             html += '</div>';
                             html += '</div>';
                             html += '<div class="form-group label-floating col-sm-3 col-xs-6">';
                             html += '<div class="row">';
                             html += '<label class="control-label">Ngày sinh</label>';
-                            html += '<div class="input-group date" data-provide="datepicker"><input class="form-control datepicker" type="text" name="people[' + type + '][' + i + '][birth]" readonly><div class="input-group-addon"><span class="fa fa-calendar"></span></div></div>';
+                            html += '<div class="input-group date" data-provide="datepicker"><input class="form-control datepicker" type="text" name="people_' + type + '_' + i + '_birth" readonly><div class="input-group-addon"><span class="fa fa-calendar"></span></div></div>';
                             html += '</div>';
                             html += '</div>';
                             html += '<div class="form-group label-floating col-sm-3 col-xs-6">';
                             html += '<div class="row">';
                             html += '<label class="control-label">Hành lý</label>';
-                            html += '<select class="form-control baggage-depart" name="people[' + type + '][' + i + '][baggage]">' + baggage() + '</select>';
+                            html += '<select class="form-control baggage-depart" name="people_' + type + '_' + i + '_baggage_depart">' + baggage() + '</select>';
                             html += '</div>';
                             html += '</div>';
                         }
@@ -189,16 +191,10 @@ function printPeople() {
     isPrintPeople = true;
 }
 
+var baggagePrice = {};
+
 function printBaggage() {
     var baggage = {};
-    var baggagePrice = {
-        BG15: 150000,
-        BG20: 170000,
-        BG25: 230000,
-        BG30: 300000,
-        BG35: 350000,
-        BG40: 400000
-    };
     $('.baggage-depart').each(function() {
         var val = $(this).val();
         if (!baggage.hasOwnProperty('depart')) {
@@ -250,6 +246,7 @@ function printBaggage() {
         $('#total-' + key + '-value').html((parseInt($('#total-' + key + '-value').data('base')) + totalBaggagePrice[key]).formatMoney(0, ',', '.'));
     }
     $('#total-price').html(totalPayment.formatMoney(0, ',', '.') + ' VND');
+    $('#total-price').data('value', totalPayment);
 }
 
 var chooseTickets;
@@ -257,11 +254,19 @@ var people;
 var isPrintPrice = false;
 var isPrintTickets = false;
 var isPrintPeople = false;
+var isGetBaggages = false;
 
 $(document).ready(function() {
     $.fn.datepicker.defaults.startDate = null;
     chooseTickets = JSON.parse(sessionStorage.getItem('chooseTickets'));
     people = JSON.parse(sessionStorage.getItem('people'));
+    getList('baggages/' + chooseTickets['depart']['ticket']['airline'] + '?per-page=100', function(data) {
+        baggagePrice = {};
+        $.each(data.items, function() {
+            baggagePrice[this.code] = parseInt(this.price);
+        });
+        isGetBaggages = true;
+    });
     printPrice();
     printTickets();
     printPeople();
@@ -286,5 +291,66 @@ $(document).ready(function() {
     });
     $('.baggage-return').on('change', function() {
         printBaggage();
+    });
+    $('#confirm-btn').click(function() {
+        // checks
+        var isOK = true;
+        $('#people input').each(function() {
+            if (!$(this).val()) {
+                $(this).closest('.form-group').addClass('has-error');
+                isOK = false;
+            }
+        });
+        $('#contact input').each(function() {
+            if (!$(this).val()) {
+                $(this).closest('.form-group').addClass('has-error');
+                isOK = false;
+            }
+        });
+        if (isOK) {
+            var payment = {
+                method: $('[name=payment_method]').val()
+            };
+            if (payment.method == 'bank') {
+                payment['bank'] = $('[name=payment_bank]:checked').val();
+            }
+            var contact = {
+                name: $('[name=contact_name]').val(),
+                phone: $('[name=contact_phone]').val(),
+                email: $('[name=contact_email]').val()
+            };
+            var price = parseInt($('#total-price').data('value'));
+            var passengers = {};
+            for (type in people) {
+                if (people.hasOwnProperty(type) && people[type] > 0) {
+                    passengers[type] = [];
+                    for (var i = 1; i <= people[type]; i++) {
+                        var item = {
+                            title: $('[name=people_' + type + '_' + i + '_title]').val(),
+                            name: $('[name=people_' + type + '_' + i + '_name]').val(),
+                            birth: $('[name=people_' + type + '_' + i + '_birth]').val(),
+                        };
+                        if ($('[name=people_' + type + '_' + i + '_baggage_depart]').val()) {
+                            if (!item.hasOwnProperty('baggage')) {
+                                item['baggage'] = {};
+                            }
+                            item['baggage']['depart'] = $('[name=people_' + type + '_' + i + '_baggage_depart]').val();
+                        }
+                        if ($('[name=people_' + type + '_' + i + '_baggage_return]').val()) {
+                            if (!item.hasOwnProperty('baggage')) {
+                                item['baggage'] = {};
+                            }
+                            item['baggage']['return'] = $('[name=people_' + type + '_' + i + '_baggage_return]').val();
+                        }
+                        passengers[type].push(item);
+                    }
+                }
+            }
+            bookTickets(chooseTickets, passengers, payment, contact, price, people, function(data) {
+                window.location.href = '/ve-may-bay/dat-ve/' + data.identity + '.html';
+            });
+        } else {
+            $('#message-box').modal('show');
+        }
     });
 });

@@ -41,6 +41,31 @@ function searchTickets(data, handle, error) {
     });
 }
 
+function bookTickets(tickets, passengers, payment, contact, price, query, handle, error) {
+    var data = {
+        tickets: tickets,
+        passengers: passengers,
+        payment: payment,
+        contact: contact,
+        price: price,
+        adult: parseInt(query['adult']),
+        child: parseInt(query['child']),
+        infant: parseInt(query['infant'])
+    };
+    $.ajax({
+        type: 'POST',
+        url: API_URL + 'books',
+        data: data,
+        timeout: 180000,
+        success: function(data, textStatus, jqXHR) {
+            handle(data);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            error();
+        }
+    });
+}
+
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");

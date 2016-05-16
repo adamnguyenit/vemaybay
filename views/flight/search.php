@@ -229,7 +229,7 @@ if (!empty($params['place-from']) && !empty($params['place-to'])) {
                 <h4 class="modal-title">Thông báo</h4>
             </div>
             <div class="modal-body">
-                <p>Vui lòng chọn vé chiều đi trước</p>
+                <p>Vui lòng chọn vé chiều đi trước.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>

@@ -9,15 +9,32 @@
     width: 100%;
     display: inline-block;
 }
-.left-panel {
-    margin-right: -10px;
+.right-panel {
+    margin-left: -10px;
+}
+#price-box {
+    padding: 5px;
+}
+#price-box h3 {
+    margin-top: 0;
+    font-weight: bold;
+    font-size: 24px;
+}
+#price-box .table {
+    margin-bottom: 5px;
+}
+#confirm {
+    margin-top: 5px;
 }
 @media (max-width: 767px) {
     #content-page {
         padding-top: 0;
         padding-bottom: 0;
     }
-    .left-panel {
-        margin-right: -15px;
+    #price-box {
+        margin-top: 5px;
+    }
+    .right-panel {
+        margin-left: -15px;
     }
 }

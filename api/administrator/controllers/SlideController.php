@@ -59,7 +59,7 @@ class SlideController extends Controller
         return $model;
     }
 
-    public function actionDelete()
+    public function actionDelete($id)
     {
         $model = Slide::findOne($id);
         if ($model === null || !$model->delete()) {

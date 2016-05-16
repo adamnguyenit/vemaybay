@@ -59,7 +59,7 @@ class PanelController extends Controller
         return $model;
     }
 
-    public function actionDelete()
+    public function actionDelete($id)
     {
         $model = Panel::findOne($id);
         if ($model === null || !$model->delete()) {

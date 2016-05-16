@@ -48,6 +48,14 @@ class FlightController extends \yii\web\Controller
         return $this->render('book');
     }
 
+    public function actionResult($id)
+    {
+        $data = [
+            'id' => $id,
+        ];
+        return $this->render('result', ['data' => $data]);
+    }
+
     protected function _convertDate($date)
     {
         $dateArr = explode('/', $date);
