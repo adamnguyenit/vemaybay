@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Booking;
+use yii\web\BadRequestHttpException;
 
 class BookingController extends Controller
 {
@@ -29,9 +30,11 @@ class BookingController extends Controller
     public function actionInfo($identity)
     {
         $model = Booking::find()->where(['identity' => $identity])->limit(1)->one();
-
         if (\Yii::$app->response->format == 'html') {
-            \Yii::$app->response->format = 'json';
+            return $this->render('info', ['model' => $model]);
+        }
+        if (empty($model)) {
+            throw new BadRequestHttpException();
         }
         return $model;
     }

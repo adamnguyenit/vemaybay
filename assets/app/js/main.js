@@ -13,7 +13,7 @@ function getList(endpoint, handle) {
     });
 }
 
-function getItem(endpoint, handle) {
+function getItem(endpoint, handle, error) {
     $.ajax({
         type: 'GET',
         url: API_URL + endpoint,
@@ -22,6 +22,9 @@ function getItem(endpoint, handle) {
         },
         success: function(data, textStatus, jqXHR) {
             handle(data);
+        },
+        error: function() {
+            error();
         }
     });
 }

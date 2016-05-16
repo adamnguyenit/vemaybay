@@ -1,0 +1,26 @@
+#content-page {
+    padding-top: 5px;
+    padding-bottom: 15px;
+}
+#trip table tbody tr td {
+    padding-right: 5px;
+}
+#trip table tbody tr td:last {
+    padding-right: 0;
+}
+#passengers table {
+    margin-bottom: 0;
+}
+#content-page .box {
+    padding-bottom: 5px;
+    border-bottom: 1px dashed #aaa;
+}
+#content-page .box:last-child {
+    border-bottom: 0;
+}
+@media (max-width: 767px) {
+    #content-page {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}

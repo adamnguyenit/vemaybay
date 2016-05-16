@@ -9,6 +9,6 @@ return [
     'khuyen-mai/<alias>' => 'promotion-news/info',
     'tin-tuc' => 'news/index',
     'tin-tuc/<alias>' => 'news/info',
-    'giao-dich' => 'booking/index'
+    'giao-dich' => 'booking/index',
     'giao-dich/<id>' => 'booking/info',
 ];

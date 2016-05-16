@@ -87,6 +87,12 @@ $bundle = AppAsset::register($this);
                                 <li><a href="<?= Url::toRoute(['flight/index']) ?>"><span class="fa fa-plane"></span> Vé máy bay <span class="sr-only">(current)</span></a></li>
                                 <li><a href="<?= Url::toRoute(['promotion-news/index']) ?>"><span class="fa fa-gift"></span> Khuyến mãi</span></a></li>
                                 <li><a href="<?= Url::toRoute(['news/index']) ?>"><span class="fa fa-newspaper-o"></span> Tin tức</a></li>
+                                <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tra cứu <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="<?= Url::toRoute(['booking/index']) ?>">Giao dịch</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                     </div>

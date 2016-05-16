@@ -7,4 +7,9 @@ $this->title = 'Vé máy bay Hải Phi Yến | Giao dịch #' . $data['id'];
 ?>
 <div class="container">
     <input id="id" type="hidden" value="<?= $data['id'] ?>">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="booking-box" class="row bg-white"></div>
+        </div>
+    </div>
 </div>

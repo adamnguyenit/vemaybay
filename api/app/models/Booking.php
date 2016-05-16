@@ -59,6 +59,7 @@ class Booking extends \yii\db\ActiveRecord
             'ticketsDetail',
             'status',
             'createdAt',
+            'baggages',
         ];
     }
 
@@ -93,6 +94,45 @@ class Booking extends \yii\db\ActiveRecord
     public function getTicketsDetail()
     {
         return Json::decode($this->tickets);
+    }
+
+    public function getSelectedTicketOptions()
+    {
+        $result = [];
+        $tickets = $this->ticketsDetail;
+        $departOption = [];
+        if (!empty($tickets['depart'])) {
+            if (count($tickets['depart']['ticket']['ticketOptions']) == 1) {
+                $departOption = $tickets['depart']['ticket']['ticketOptions'][0];
+            } else {
+                foreach ($tickets['depart']['ticket']['ticketOptions'] as $option) {
+                    if ((empty($tickets['depart']['fareBasis']) && empty($options['fareBasis'])) || ($tickets['depart']['fareBasis'] == $option['fareBasis'])) {
+                        $departOption = $option;
+                        break;
+                    }
+                }
+            }
+        }
+        if (!empty($departOption)) {
+            $result['depart'] = $departOption;
+        }
+        $returnOption = [];
+        if (!empty($tickets['return'])) {
+            if (count($tickets['return']['ticket']['ticketOptions']) == 1) {
+                $returnOption = $tickets['return']['ticket']['ticketOptions'][0];
+            } else {
+                foreach ($tickets['return']['ticket']['ticketOptions'] as $option) {
+                    if ((empty($tickets['return']['fareBasis']) && empty($options['fareBasis'])) || ($tickets['return']['fareBasis'] == $option['fareBasis'])) {
+                        $returnOption = $option;
+                        break;
+                    }
+                }
+            }
+        }
+        if (!empty($returnOption)) {
+            $result['return'] = $returnOption;
+        }
+        return $result;
     }
 
     public function getPriceDetail()
@@ -171,6 +211,52 @@ class Booking extends \yii\db\ActiveRecord
         return $result;
     }
 
+    public function getBaggages()
+    {
+        $result = [];
+        $tickets = $this->ticketsDetail;
+        $passengersDetail = $this->passengersDetail;
+        foreach ($passengersDetail as $type => $passengers) {
+            foreach ($passengers as $passenger) {
+                if (!empty($passenger['baggage'])) {
+                    foreach ($passenger['baggage'] as $key => $value) {
+                        if (empty($value)) {
+                            continue;
+                        }
+                        $baggage = Baggage::find()->where(['airline' => $tickets['depart']['ticket']['airline'], 'code' => $value])->limit(1)->one();
+                        $price = $baggage !== null ? $baggage->price : 0;
+                        if (empty($result[$key][$value])) {
+                            $result[$key][$value] = [
+                                'description' => static::$description[$value],
+                                'price' => $price,
+                                'quantity' => 1,
+                                'total' => $price,
+                            ];
+                        } else {
+                            $result[$key][$value]['quantity']++;
+                            $result[$key][$value]['total']+= $price;
+                        }
+                    }
+                }
+            }
+        }
+        return $result;
+    }
+
+    public function getStatusString()
+    {
+        switch ($this->status) {
+            case 0:
+                return 'chưa xuất vé';
+            case 1:
+                return 'đã xuất vé';
+            case -1:
+                return 'đã hủy';
+            default:
+                return 'chưa xuất vé';
+        }
+    }
+
     public function getCreatedAt()
     {
         $titles = [
@@ -183,5 +269,32 @@ class Booking extends \yii\db\ActiveRecord
             'Sun' => 'CN',
         ];
         return empty($this->created_at) ? null : $titles[date('D', $this->created_at)] . ', ngày ' . date('d/m/Y', $this->created_at);
+    }
+
+    public static function decodeDateTime($dateTime)
+    {
+        $dateTimeArr = explode('T', $dateTime);
+        $dateArr = explode('-', $dateTimeArr[0]);
+        $timeArr = explode(':', $dateTimeArr[1]);
+        return "{$timeArr[0]}:{$timeArr[1]} {$dateArr[2]}/{$dateArr[1]}/{$dateArr[0]}";
+    }
+
+    public static function decodePassengerTitle($type, $title)
+    {
+        $arr = [
+            'adult' => [
+                'MR' => 'Ông',
+                'MRS' => 'Bà',
+            ],
+            'child' => [
+                'MR' => 'Anh',
+                'MISS' => 'Chị',
+            ],
+            'infant' => [
+                'MR' => 'Bé trai',
+                'MISS' => 'Bé gái',
+            ]
+        ];
+        return $arr[$type][$title];
     }
 }
