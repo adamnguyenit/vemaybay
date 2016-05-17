@@ -106,6 +106,10 @@ function baggage() {
 
 function printPeople() {
     $('#people').html(null);
+    var passengers = localStorage.getItem('passengers');
+    if (passengers) {
+        passengers = JSON.parse(passengers);
+    }
     var html = '<div class="col-md-12"><h4 class="color-blue">Thông tin hành khách</h4>';
     for (type in people) {
         if (people.hasOwnProperty(type)) {
@@ -114,7 +118,7 @@ function printPeople() {
                 html += '<div class="col-md-12">'
                 html += '<div class="form-group col-sm-2 col-xs-3">';
                 html += '<div class="row">';
-                html += '<select class="form-control" name="people_' + type + '_' + i + '_title">' + valueOf(type) + '</select>';
+                html += '<select class="form-control required" name="people_' + type + '_' + i + '_title">' + valueOf(type) + '</select>';
                 html += '</div>';
                 html += '</div>';
                 switch (chooseTickets.depart.ticket.airlineCode) {
@@ -122,13 +126,13 @@ function printPeople() {
                         html += '<div class="form-group label-floating col-sm-6 col-xs-9">';
                         html += '<div class="row">';
                         html += '<label class="control-label">Họ và tên</label>';
-                        html += '<input id="bind-to-contact" class="form-control" name="people_' + type + '_' + i + '_name">';
+                        html += '<input id="bind-to-contact" class="form-control required" name="people_' + type + '_' + i + '_name">';
                         html += '</div>';
                         html += '</div>';
                         html += '<div class="form-group label-floating col-sm-4 col-xs-12">';
                         html += '<div class="row">';
                         html += '<label class="control-label">Ngày sinh</label>';
-                        html += '<div class="input-group date" data-provide="datepicker"><input class="form-control datepicker" type="text" name="people_' + type + '_' + i + '_birth" readonly><div class="input-group-addon"><span class="fa fa-calendar"></span></div></div>';
+                        html += '<div class="input-group date" data-provide="datepicker"><input class="form-control datepicker" type="text" name="people_' + type + '_' + i + '_birth"><div class="input-group-addon"><span class="fa fa-calendar"></span></div></div>';
                         html += '</div>';
                         html += '</div>';
                         break;
@@ -137,13 +141,13 @@ function printPeople() {
                             html += '<div class="form-group label-floating col-sm-6 col-xs-9">';
                             html += '<div class="row">';
                             html += '<label class="control-label">Họ và tên</label>';
-                            html += '<input id="bind-to-contact" class="form-control" name="people_' + type + '_' + i + '_name">';
+                            html += '<input id="bind-to-contact" class="form-control required" name="people_' + type + '_' + i + '_name">';
                             html += '</div>';
                             html += '</div>';
                             html += '<div class="form-group label-floating col-sm-4 col-xs-12">';
                             html += '<div class="row">';
                             html += '<label class="control-label">Ngày sinh</label>';
-                            html += '<div class="input-group date" data-provide="datepicker"><input class="form-control datepicker" type="text" name="people_' + type + '_' + i + '_birth" readonly><div class="input-group-addon"><span class="fa fa-calendar"></span></div></div>';
+                            html += '<div class="input-group date" data-provide="datepicker"><input class="form-control datepicker" type="text" name="people_' + type + '_' + i + '_birth"><div class="input-group-addon"><span class="fa fa-calendar"></span></div></div>';
                             html += '</div>';
                             html += '</div>';
                             html += '<div class="form-group label-floating col-sm-6 col-xs-6">';
@@ -162,13 +166,13 @@ function printPeople() {
                             html += '<div class="form-group label-floating col-sm-4 col-xs-9">';
                             html += '<div class="row">';
                             html += '<label class="control-label">Họ và tên</label>';
-                            html += '<input id="bind-to-contact" class="form-control" name="people_' + type + '_' + i + '_name">';
+                            html += '<input id="bind-to-contact" class="form-control required" name="people_' + type + '_' + i + '_name">';
                             html += '</div>';
                             html += '</div>';
                             html += '<div class="form-group label-floating col-sm-3 col-xs-6">';
                             html += '<div class="row">';
                             html += '<label class="control-label">Ngày sinh</label>';
-                            html += '<div class="input-group date" data-provide="datepicker"><input class="form-control datepicker" type="text" name="people_' + type + '_' + i + '_birth" readonly><div class="input-group-addon"><span class="fa fa-calendar"></span></div></div>';
+                            html += '<div class="input-group date" data-provide="datepicker"><input class="form-control datepicker" type="text" name="people_' + type + '_' + i + '_birth"><div class="input-group-addon"><span class="fa fa-calendar"></span></div></div>';
                             html += '</div>';
                             html += '</div>';
                             html += '<div class="form-group label-floating col-sm-3 col-xs-6">';
@@ -186,6 +190,29 @@ function printPeople() {
     }
     html += '</div>';
     $('#people').append(html);
+    if (passengers) {
+        for (type in passengers) {
+            if (passengers.hasOwnProperty(type)) {
+                for (var i = 1; i <= passengers[type].length; i++) {
+                    if (passengers[type][i - 1]['title']) {
+                        if ($('#people [name=people_' + type + '_' + i + '_title]')) {
+                            $('#people [name=people_' + type + '_' + i + '_title]').val(passengers[type][i - 1]['title']);
+                        }
+                    }
+                    if (passengers[type][i - 1]['name']) {
+                        if ($('#people [name=people_' + type + '_' + i + '_name]')) {
+                            $('#people [name=people_' + type + '_' + i + '_name]').val(passengers[type][i - 1]['name']);
+                        }
+                    }
+                    if (passengers[type][i - 1]['birth']) {
+                        if ($('#people [name=people_' + type + '_' + i + '_birth]')) {
+                            $('#people [name=people_' + type + '_' + i + '_birth]').val(passengers[type][i - 1]['birth']);
+                        }
+                    }
+                }
+            }
+        }
+    }
     // Material
     $.material.init();
     isPrintPeople = true;
@@ -295,13 +322,7 @@ $(document).ready(function() {
     $('#confirm-btn').click(function() {
         // checks
         var isOK = true;
-        $('#people input').each(function() {
-            if (!$(this).val()) {
-                $(this).closest('.form-group').addClass('has-error');
-                isOK = false;
-            }
-        });
-        $('#contact input').each(function() {
+        $('.required').each(function() {
             if (!$(this).val()) {
                 $(this).closest('.form-group').addClass('has-error');
                 isOK = false;
@@ -347,10 +368,30 @@ $(document).ready(function() {
                 }
             }
             bookTickets(chooseTickets, passengers, payment, contact, price, people, function(data) {
+                localStorage.setItem('passengers', JSON.stringify(passengers));
+                localStorage.setItem('contact', JSON.stringify(contact));
                 window.location.href = '/ve-may-bay/dat-ve/' + data.identity + '.html';
             });
         } else {
             $('#message-box').modal('show');
         }
     });
+
+    var contact = localStorage.getItem('contact');
+    if (contact) {
+        contact = JSON.parse(contact);
+        console.log(contact);
+        if (contact['name']) {
+            $('[name=contact_name]').val(contact['name']);
+            $('[name=contact_name]').trigger('change');
+        }
+        if (contact['phone']) {
+            $('[name=contact_phone]').val(contact['phone']);
+            $('[name=contact_phone]').trigger('change');
+        }
+        if (contact['email']) {
+            $('[name=contact_email]').val(contact['email']);
+            $('[name=contact_email]').trigger('change');
+        }
+    }
 });

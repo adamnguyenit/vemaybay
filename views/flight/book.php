@@ -26,19 +26,19 @@ $this->title = 'Vé máy bay Hải Phi Yến - Hoàn tất đặt vé';
                         <div class="form-group label-floating col-sm-5">
                             <div class="row">
                                 <label class="control-label">Họ và tên</label>
-                                <input id="contact-name" class="form-control" name="contact_name">
+                                <input id="contact-name" class="form-control required" name="contact_name">
                             </div>
                         </div>
                         <div class="form-group label-floating col-sm-3">
                             <div class="row">
                                 <label class="control-label">Số ĐT</label>
-                                <input class="form-control" name="contact_phone" type="tel">
+                                <input class="form-control required" name="contact_phone" type="tel">
                             </div>
                         </div>
                         <div class="form-group label-floating col-sm-4">
                             <div class="row">
                                 <label class="control-label">Email</label>
-                                <input class="form-control" name="contact_email" type="email">
+                                <input class="form-control required" name="contact_email" type="email">
                             </div>
                         </div>
                     </div>
