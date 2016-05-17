@@ -20,11 +20,10 @@ function addSlide(slide) {
 }
 
 function isPageLoaded() {
-    return isPromotionNewsLoaded && isSlidesLoaded && isPanelsLoaded;
+    return isPromotionNewsLoaded && isPanelsLoaded;
 }
 
 var isPromotionNewsLoaded = false;
-var isSlidesLoaded = false;
 var isPanelsLoaded = false;
 
 $(document).ready(function() {
@@ -38,11 +37,6 @@ $(document).ready(function() {
     getList('panels?per-page=100', function(data) {
         addPanel(data);
         isPanelsLoaded = true;
-    });
-
-    getList('slides?per-page=100', function(data) {
-        addSlide(data);
-        isSlidesLoaded = true;
     });
 
     $('[name=round-trip]').change(function() {

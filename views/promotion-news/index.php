@@ -7,16 +7,6 @@ $this->title = 'Vé máy bay Hải Phi Yến | Khuyến mãi';
 ?>
 <div class="container">
     <div class="row">
-        <div id="promotions-slider" class="carousel slide hidden-xs" data-ride="carousel">
-            <a class="left carousel-control" href="#promotions-slider" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Trước</span>
-            </a>
-            <a class="right carousel-control" href="#promotions-slider" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Sau</span>
-            </a>
-        </div>
         <div id="left-side" class="col-md-3 hidden-sm hidden-xs">
             <div class="row bg-white" style="margin-right: -5px; margin-top: 5px">
                 <div id="book-form" class="col-md-12">

@@ -11,42 +11,42 @@ RewriteRule . index.php
 RewriteCond %{HTTP:Authorization} ^(.*)
 RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
 
-Header set Cache-Control "no-cache, no-store, must-revalidate"
-Header set Pragma "no-cache"
-Header set Expires 0
+<IfModule mod_deflate.c>
+    SetOutputFilter DEFLATE
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
+    BrowserMatch ^Mozilla/4 gzip-only-text/html
+    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+    SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+    Header append Vary User-Agent env=!dont-vary
+</IfModule>
 
-# <IfModule mod_deflate.c>
-    # SetOutputFilter DEFLATE
-    # AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
-    # BrowserMatch ^Mozilla/4 gzip-only-text/html
-    # BrowserMatch ^Mozilla/4\.0[678] no-gzip
-    # BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
-    # SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
-    # Header append Vary User-Agent env=!dont-vary
-# </IfModule>
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 year"
+    ExpiresByType text/html "access plus 1 day"
+    ExpiresByType text/css "access plus 1 day"
+    ExpiresByType text/xml "access plus 1 day"
+    ExpiresByType text/javascript "access plus 1 day"
+    ExpiresByType application/x-javascript "access plus 1 day"
+    ExpiresByType image/ico "access plus 1 day"
+    ExpiresByType image/jpg "access plus 1 day"
+    ExpiresByType image/jpeg "access plus 1 day"
+    ExpiresByType image/gif "access plus 1 day"
+    ExpiresByType image/png "access plus 1 day"
+    ExpiresByType image/svg+xml "access plus 1 day"
+    ExpiresByType video/ogg "access plus 1 day"
+    ExpiresByType audio/ogg "access plus 1 day"
+    ExpiresByType video/mp4 "access plus 1 day"
+    ExpiresByType video/webm "access plus 1 day"
+    ExpiresByType application/x-shockwave-flash "access plus 1 day"
+    ExpiresByType application/x-font-woff "access plus 1 day"
+    ExpiresByType application/vnd.ms-fontobject "access plus 1 day"
+    ExpiresByType application/json "access plus 1 minute"
+    ExpiresByType application/rss+xml "access plus 1 hour"
+    ExpiresByType application/atom+xml "access plus 1 hour"
+</IfModule>
 
-# <IfModule mod_expires.c>
-    # ExpiresActive On
-    # ExpiresDefault "access plus 1 year"
-    # ExpiresByType text/css "access plus 14 days"
-    # ExpiresByType text/xml "access plus 14 days"
-    # ExpiresByType text/javascript "access plus 14 days"
-    # ExpiresByType application/x-javascript "access plus 14 days"
-    # ExpiresByType image/ico "access plus 14 days"
-    # ExpiresByType image/jpg "access plus 14 days"
-    # ExpiresByType image/jpeg "access plus 14 days"
-    # ExpiresByType image/gif "access plus 14 days"
-    # ExpiresByType image/png "access plus 14 days"
-    # ExpiresByType image/svg+xml "access plus 1 month"
-    # ExpiresByType text/html "access plus 14 days"
-    # ExpiresByType video/ogg "access plus 1 month"
-    # ExpiresByType audio/ogg "access plus 1 month"
-    # ExpiresByType video/mp4 "access plus 1 month"
-    # ExpiresByType video/webm "access plus 1 month"
-    # ExpiresByType application/x-shockwave-flash "access plus 1 months"
-    # ExpiresByType application/x-font-woff "access plus 1 month"
-    # ExpiresByType application/vnd.ms-fontobject "access plus 1 month"
-    # ExpiresByType application/json "access plus 0 seconds"
-    # ExpiresByType application/rss+xml "access plus 1 hour"
-    # ExpiresByType application/atom+xml "access plus 1 hour"
-# </IfModule>
+RewriteCond %{HTTP_USER_AGENT} (facebookexternalhit/[0-9]|Twitterbot|Pinterest|Google.*snippet) [NC]
+RewriteCond %{QUERY_STRING} !^noredirect [NC]
+RewriteRule ^(.*)$ http://seo.vemaybay.com%{REQUEST_URI} [L,R=302]
