@@ -2,18 +2,23 @@
     padding-top: 5px;
     padding-bottom: 15px;
 }
-#trip table tbody tr td {
-    padding-right: 5px;
+#trip .flight-detail {
+    margin-bottom: 10px;
 }
-#trip table tbody tr td:last {
-    padding-right: 0;
+#trip .flight-detail table {
+    width: 100%;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #dddddd;
+}
+#trip .flight-detail table:last-child {
+    margin-bottom: 0;
 }
 #passengers table {
     margin-bottom: 0;
 }
 #content-page .box {
     padding-bottom: 5px;
-    border-bottom: 1px dashed #aaa;
+    border-bottom: 1px dashed #aaaaaa;
 }
 #content-page .box:last-child {
     border-bottom: 0;

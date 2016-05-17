@@ -16,27 +16,28 @@ use app\models\Booking;
             <?php foreach ($model->ticketsDetail as $key => $value) : ?>
                 <div class="col-md-6">
                     <div class="row">
-                        <table id="<?= $key ?>">
-                            <tbody>
-                                <tr>
-                                    <td><b><?= $value['ticket']['fromPlace'] ?></b></td>
-                                    <td><span class="fa fa-plane"></span></td>
-                                    <td><b><?= $value['ticket']['toPlace'] ?></b></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">Đi lúc: <?= Booking::decodeDateTime($value['ticket']['departTime']) ?></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">Đến lúc: <?= Booking::decodeDateTime($value['ticket']['landingTime']) ?></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">Mã chuyến bay: <?= $value['ticket']['airline'] ?> <?= $value['ticket']['flightNumber'] ?></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">Hạng ghế: <?= $model->selectedTicketOptions[$key]['ticketType'] ?></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div id="<?= $key ?>" class="flight-detail">
+                            <div><b><?= $value['ticket']['fromPlace'] ?></b> đến <b><?= $value['ticket']['toPlace'] ?></b></div>
+                            <div>Hạng ghế: <?= $model->selectedTicketOptions[$key]['ticketType'] ?></div>
+                            <div>
+                            <?php foreach ($value['ticket']['flightDetails'] as $flightDetail) : ?>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td><?= $flightDetail['from'] ?></td>
+                                            <td><span class="fa fa-fighter-jet"></span></td>
+                                            <td><?= $flightDetail['to'] ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><?= Booking::decodeDateTime($flightDetail['departTime']) ?></td>
+                                            <td></td>
+                                            <td><?= Booking::decodeDateTime($flightDetail['landingTime']) ?></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            <?php endforeach ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
             <?php endforeach ?>
