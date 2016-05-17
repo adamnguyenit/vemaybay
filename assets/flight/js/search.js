@@ -13,20 +13,20 @@ $.extend($.fn.dataTableExt.oSort, {
         var str = String(a);
         var x = 0;
         str = str.split(' ngày');
-        if (str.length > 0) {
+        if (str.length == 2 || (str.length == 1 && str[0].length > 0 && !isNaN(str[0]))) {
             x += parseInt(str[0]) * 24 * 60;
         }
-        if (str.length > 1) {
-            str = str[str.length - 1];
+        if (str.length > 0) {
+            str = str[str.length - 1].trim();
             str = str.split(' giờ');
-            if (str.length > 0) {
+            if (str.length == 2 || (str.length == 1 && str[0].length > 0 && !isNaN(str[0]))) {
                 x += parseInt(str[0]) * 60;
             }
         }
-        if (str.length > 1) {
-            str = str[str.length - 1];
+        if (str.length > 0) {
+            str = str[str.length - 1].trim();
             str = str.split(' phút');
-            if (str.length > 0) {
+            if (str.length == 2 || (str.length == 1 && str[0].length > 0 && !isNaN(str[0]))) {
                 x += parseInt(str[0]);
             }
         }
@@ -36,6 +36,19 @@ $.extend($.fn.dataTableExt.oSort, {
         return ((a < b) ? -1 : ((a > b) ? 1 : 0));
     },
     'flight-duration-desc': function(a, b) {
+        return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+    }
+});
+
+$.extend($.fn.dataTableExt.oSort, {
+    'flight-number-pre': function(a) {
+        var str = String(a);
+        return str.split(', ').length;
+    },
+    'flight-number-asc': function(a, b) {
+        return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+    },
+    'flight-number-desc': function(a, b) {
         return ((a < b) ? 1 : ((a > b) ? -1 : 0));
     }
 });
@@ -93,11 +106,14 @@ var flightTableOption = {
         data: 'flightDuration',
         type: 'flight-duration',
         render: function(data, type, full, meta) {
-            var val = data.match(/PT(.*)/)[1];
-            return val.replace('D', ' ngày').replace('H', ' giờ ').replace('M', ' phút');
+            return data.replace('P', '').replace('T', '').replace('D', ' ngày ').replace('H', ' giờ ').replace('M', ' phút').trim();
         }
     }, {
-        data: 'flightNumber'
+        data: 'flightNumbers',
+        type: 'flight-number',
+        render: function(data, type, full, meta) {
+            return data.join(', ');
+        }
     }, {
         data: 'priceFrom',
         type: 'num-fmt',
@@ -140,7 +156,7 @@ function childOfTicket(type, id) {
     var copyText = 'Hành trình: ' + ticket.fromPlace + ' - ' + ticket.toPlace + "\n";
     copyText += 'Bay lúc: ' + dateDecode(ticket.departTime, true) + ' - đến lúc: ' + dateDecode(ticket.landingTime, true) + "\n";
     copyText += 'Thời gian bay: ' + ticket.flightDuration.match(/PT(.*)/)[1].replace('D', ' ngày').replace('H', ' giờ ').replace('M', ' phút') + "\n";
-    copyText += 'Mã chuyến bay: ' + ticket.airline + ' ' + ticket.flightNumber + "\n";
+    copyText += 'Mã chuyến bay: ' + ticket.airline + ' ' + ticket.flightNumbers.join(', ') + "\n";
     copyText += 'Giá vé bao gồm ' + getParameterByName('adult') + ' người lớn, ' + getParameterByName('child') + ' trẻ em và ' + getParameterByName('infant') + ' em bé' + "\n";
     copyText += 'Giá vé theo hạng ghế (đã bao gồm thuế phí): ' + "\n";
     for (var i = 0; i < ticket.ticketOptions.length; i++) {
@@ -161,28 +177,30 @@ function childOfTicket(type, id) {
     smsText += flightStart.day + '/' + flightStart.month + ', LUC ' + flightStart.hour + ':' + flightStart.min + ', ';
     smsText += 'CBAY ' + ticket.flightNumber + ', ';
     smsText += 'GIA ' + parseInt(ticket.ticketOptions[0].totalPrice).formatMoney(0, ',', '.') + ' VND';
-    var html = '<table class="ticket-detail"><tbody>';
+    var html = '<div class="ticket-detailed">';
+    html += '<button class="btn btn-sm btn-info copy-to-clipboard" data-clipboard-text="' + copyText + '"><span class="fa fa-clipboard"></span></button> <button class="btn btn-sm btn-info copy-to-clipboard" data-clipboard-text="' + smsText + '">SMS</button>';
     // Ticket detail
-    html += '<tr>';
-    html += '<td>' + ticket.fromPlace + '</td>';
-    html += '<td><span class="fa fa-fighter-jet"></span></td>';
-    html += '<td>' + ticket.toPlace + '</td>';
-    html += '</tr>';
-    html += '<tr>';
-    html += '<td>' + dateDecode(ticket.departTime, true) + '</td>';
-    html += '<td></td>';
-    html += '<td>' + dateDecode(ticket.landingTime, true) + '</td>';
-    html += '</tr>';
-    html += '<tr>';
-    html += '<td colspan="3">Mã chuyến bay: ' + ticket.airline + ' ' + ticket.flightNumber + '</td>';
-    html += '</tr>';
-    html += '<tr>';
-    html += '<td colspan="3">Thời gian bay: ' + ticket.flightDuration.match(/PT(.*)/)[1].replace('D', ' ngày').replace('H', ' giờ ').replace('M', ' phút') + '</td>';
-    html += '</tr>';
-    html += '<tr>';
-    html += '<td colspan="3"><button class="btn btn-sm btn-info copy-to-clipboard" data-clipboard-text="' + copyText + '"><span class="fa fa-clipboard"></span></button> <button class="btn btn-sm btn-info copy-to-clipboard" data-clipboard-text="' + smsText + '">SMS</button></td>';
-    html += '</tr>';
-    html += '</tbody></table>';
+    $.each(ticket.flightDetails, function() {
+        html += '<table class="ticket-detail"><tbody>';
+        html += '<tr>';
+        html += '<td><b>' + this.from + '</b></td>';
+        html += '<td><span class="fa fa-fighter-jet"></span></td>';
+        html += '<td><b>' + this.to + '</b></td>';
+        html += '</tr>';
+        html += '<tr>';
+        html += '<td>' + dateDecode(this.departTime, true) + '</td>';
+        html += '<td></td>';
+        html += '<td>' + dateDecode(this.landingTime, true) + '</td>';
+        html += '</tr>';
+        html += '<tr>';
+        html += '<td colspan="3">Mã chuyến bay: ' + this.airline + ' ' + this.flightNumber + '</td>';
+        html += '</tr>';
+        html += '<tr>';
+        html += '<td colspan="3">Thời gian bay: ' + this.flightDuration + '</td>';
+        html += '</tr>';
+        html += '<tr>';
+        html += '</tbody></table>';
+    });
     // Price detail
     html += '<table class="table" style="margin-bottom: 0">';
     html += '<thead><tr><th class="mobile-no-padding-left">Loại</th><th style="text-align: right">Giá</th><th style="text-align: right">Tổng</th><th></th></tr></thead>';
@@ -239,6 +257,7 @@ function childOfTicket(type, id) {
 
     html += '</tbody>';
     html += '</table>';
+    html += '</div>';
     return html;
 }
 

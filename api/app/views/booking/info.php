@@ -71,6 +71,7 @@ use app\models\Booking;
     <div class="col-md-12 box">
         <div id="baggages">
             <h4>Hành lý</h4>
+            <?php $count = 0 ?>
             <?php foreach ($model->baggages as $type => $value) : ?>
             <h5>Chặng: <?= $model->ticketsDetail[$type]['ticket']['fromPlace'] ?> - <?= $model->ticketsDetail[$type]['ticket']['toPlace'] ?></h5>
             <table class="table">
@@ -82,6 +83,7 @@ use app\models\Booking;
                 </thead>
                 <tbody>
                     <?php foreach ($value as $baggage) : ?>
+                    <?php $count++ ?>
                     <tr>
                         <td><?= $baggage['description'] ?></td>
                         <td><?= $baggage['quantity'] ?></td>
@@ -90,6 +92,9 @@ use app\models\Booking;
                 </tbody>
             </table>
             <?php endforeach ?>
+            <?php if ($count == 0) : ?>
+            <h5 class="color-red">Hành lý xách tay</h5>
+            <?php endif ?>
         </div>
     </div>
     <div class="col-md-12 box">
