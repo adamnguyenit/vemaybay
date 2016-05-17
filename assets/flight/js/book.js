@@ -116,6 +116,7 @@ function printPeople() {
             for (var i = 1; i <= people[type]; i++) {
                 html += '<div class="row">';
                 html += '<div class="col-md-12">'
+                html += '<p class="color-red">Thông tin phải chính xác như trên giấy tờ tùy thân (như trên CMND, Hộ Chiếu, giấy phép lái xe…). Quý khách bị từ chối vận chuyển nếu thông tin không chính xác. Vui lòng nhập thông tin bằng Tiếng Việt không dấu.</p>';
                 html += '<div class="form-group col-sm-2 col-xs-3">';
                 html += '<div class="row">';
                 html += '<select class="form-control required" name="people_' + type + '_' + i + '_title">' + valueOf(type) + '</select>';
