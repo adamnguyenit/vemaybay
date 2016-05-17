@@ -183,7 +183,7 @@ $bundle = AppAsset::register($this);
                         <div class="row color-white">
                             <h4>Đại lý vé máy bay Hải Phi Yến</h4>
                             <ul>
-                                <li>Địa chỉ: 665 Nguyễn Hữu Thọ, Q. Cẩm Lệ, TP. Đà Nẵng</li>
+                                <li>Địa chỉ: B1-17 Lô 108 Khu đô thị sinh thái Hoà Xuân, Q. Cẩm Lệ, TP. Đà Nẵng</li>
                                 <li>Hotline: <a class="color-white" href="tel:0913 642 748">0913.642.748</a> - <a class="color-white" href="tel:0914 650 511">0914.650.511</a></li>
                                 <li>Zalo: 0913.642.748</li>
                                 <li>Email: <a class="color-white" href="mailto:vemaybayhaiphiyen@gmail.com">vemaybayhaiphiyen@gmail.com</a></li>

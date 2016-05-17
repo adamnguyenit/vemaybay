@@ -60,7 +60,7 @@ $this->title = 'Vé máy bay Hải Phi Yến - Hoàn tất đặt vé';
                                     <option value="bank">Chuyển khoản ngân hàng</option>
                                 </select>
                                 <div id="at_store">
-                                    <h5>Văn phòng Vé Máy Bay Hải Phi Yến, số 665 Nguyễn Hữu Thọ, Q. Cẩm Lệ, TP. Đà Nẵng<h5>
+                                    <h5>Văn phòng Vé Máy Bay Hải Phi Yến, số B1-17 Lô 108 Khu đô thị sinh thái Hoà Xuân, Q. Cẩm Lệ, TP. Đà Nẵng<h5>
                                 </div>
                                 <div id="bank" style="display: none">
                                     <div class="radio">
