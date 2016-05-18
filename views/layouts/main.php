@@ -10,14 +10,18 @@ $bundle = AppAsset::register($this);
 <?php Spaceless::begin() ?>
 <!DOCTYPE html>
 <html lang="vi">
-<head>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# vemaybayhaiphiyen: http://ogp.me/ns/fb/vemaybayhaiphiyen#">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="title" content="<?= Html::encode(Yii::t('app', $this->title)) ?>">
     <meta name="description" content="<?= Html::encode('Vé máy bay Hải Phi Yến cung cấp dịch vụ đặt mua vé máy bay trong nước và quốc tế rẻ nhất') ?>">
     <?= Html::csrfMetaTags() ?>
+    <link rel="opengraph" href="http://seo.vemaybayhaiphiyen.com<?= Url::current() ?>"/>
     <meta property="fb:app_id" content="1720543934884790">
+    <meta property="og:type" content="vemaybayhaiphiyen:website">
+    <meta property="og:url" content="<?= Url::current([], true) ?>">
+    <meta property="og:site_name" content="Vé máy bay Hải Phi Yến">
+    <meta property="og:locale" content="vi_VN"/>
     <title><?= Html::encode(Yii::t('app', $this->title)) ?></title>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

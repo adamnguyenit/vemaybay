@@ -1,3 +1,6 @@
+RewriteCond %{HTTP_USER_AGENT} (facebookexternalhit/[0-9]|Twitterbot|Pinterest|Google.*snippet)
+RewriteRule ^(.*)$ http://seo.vemaybayhaiphiyen.com%{REQUEST_URI} [L,R=301]
+
 Header set Access-Control-Allow-Origin "*"
 Header set Access-Control-Allow-Methods "GET,POST,PUT,DELETE,OPTIONS"
 Header set Access-Control-Allow-Headers "Accept, Content-Type, Access-Token, Role, Authorization"
@@ -46,7 +49,3 @@ RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
     ExpiresByType application/rss+xml "access plus 1 hour"
     ExpiresByType application/atom+xml "access plus 1 hour"
 </IfModule>
-
-RewriteCond %{HTTP_USER_AGENT} (facebookexternalhit/[0-9]|Twitterbot|Pinterest|Google.*snippet) [NC]
-RewriteCond %{QUERY_STRING} !^noredirect [NC]
-RewriteRule ^(.*)$ http://seo.vemaybay.com%{REQUEST_URI} [L,R=302]

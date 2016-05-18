@@ -1,23 +1,31 @@
 <?php
 
-function generateFacebookGraph($url, $type, $title, $description, $images)
+function generateFacebookGraph($url, $title, $description, $images)
 {
     echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
     echo '<html xmlns="http://www.w3.org/1999/xhtml" lang="vi" xml:lang="vi">';
     echo '<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# vemaybayhaiphiyen: http://ogp.me/ns/fb/vemaybayhaiphiyen#">';
-    echo '<title>' . $title . '</title>';
-    echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>';
-    echo '<meta property="fb:app_id" content="1720543934884790" />';
-    echo '<meta property="og:site_name" content="Vé máy bay Hải Phi Yến"/>';
-    echo '<meta property="og:url" content="http://seo.vemaybayhaiphiyen.com' . $url . '"/>';
-    echo '<meta property="og:type" content="' . $type . '"/>';
-    echo '<meta property="og:locale" content="vi_VN"/>';
-    echo '<meta property="og:title" content="' . $title . '"/>';
-    echo '<meta property="og:description" content="' . $description . '"/>';
+    echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">';
+    echo '<meta property="fb:app_id" content="1720543934884790">';
+    echo '<meta property="og:type" content="vemaybayhaiphiyen:website">';
+    echo '<meta property="og:url" content="http://seo.vemaybayhaiphiyen.com' . $url . '">';
+    echo '<meta property="og:site_name" content="Vé máy bay Hải Phi Yến">';
+    echo '<meta property="og:locale" content="vi_VN">';
+    echo '<meta property="og:title" content="' . $title . '">';
+    echo '<meta property="og:description" content="' . $description . '">';
     foreach ($images as $image) {
-        echo '<meta property="og:image" content="' . $image . '"/>';
+        echo '<meta property="og:image" content="' . $image . '">';
     }
+    echo '<link rel="origin" href="http://vemaybayhaiphiyen.com' . $url . '">';
+    echo '<title>' . $title . '</title>';
     echo '</head>';
+    echo '<body>';
+    echo '<h1>' . $title . '</h1>';
+    echo '<p>' . $description . '</p>';
+    foreach ($images as $image) {
+        echo '<img src="' . $image . '">';
+    }
+    echo '</body>';
     echo '</html>';
 }
 
@@ -56,7 +64,6 @@ function base64ToImage($base64Str)
 }
 
 $url = $_SERVER['REQUEST_URI'];
-$type = 'website';
 $title = 'Vé máy bay Hải Phi Yến';
 $description = 'Vé máy bay Hải Phi Yến cung cấp dịch vụ đặt mua vé máy bay trong nước và quốc tế giá rẻ nhất';
 $images = ['http://seo.vemaybayhaiphiyen.com/logo.jpg'];
@@ -101,4 +108,4 @@ if (!empty($url)) {
         break;
     }
 }
-generateFacebookGraph($url, $type, $title, $description, $images);
+generateFacebookGraph($url, $title, $description, $images);

@@ -1,9 +1,10 @@
 RewriteEngine on
+
+RewriteCond %{HTTP_USER_AGENT} !(facebookexternalhit/[0-9]|Twitterbot|Pinterest|Google.*snippet)
+RewriteRule ^(.*)$ http://vemaybayhaiphiyen.com%{REQUEST_URI} [L,R=302]
+
 # If a directory or a file exists, use it directly
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 # Otherwise forward it to index.php
 RewriteRule . index.php
-
-RewriteCond %{HTTP_USER_AGENT} !(facebookexternalhit/[0-9]|Twitterbot|Pinterest|Google.*snippet)
-RewriteRule ^(.*)$ http://vemaybay.com%{REQUEST_URI} [L,R=302]

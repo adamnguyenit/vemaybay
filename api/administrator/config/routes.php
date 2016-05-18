@@ -5,7 +5,7 @@ return [
     'POST users' => 'user/create',
     'PUT users/<id>' => 'user/update',
     'DELETE users/<id>' => 'user/delete',
-    'POST users/logouts' => 'user/logout',
+    'POST users/logout' => 'user/logout',
     'GET me' => 'user/info',
     'GET users' => 'user/list',
     'POST promotions-news' => 'promotion-news/create',
