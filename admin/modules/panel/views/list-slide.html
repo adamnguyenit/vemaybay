@@ -1,0 +1,149 @@
+<span ng-show="loading">Loading...</span>
+<div ng-show="!loading" class='list-group'>
+    <div ng-show="slides.length" class="row table-header-bar" ng-model="filter">
+        <div class="select-item-perpage pull-left col-md-4 col-sm-6 col-xs-6">
+            <label class="count-number-of">Số lượng trên trang: </label>
+            <select ng-model="viewby" ng-change="setItemsPerPage(viewby)">
+                <option>5</option>
+                <option>10</option>
+                <option>20</option>
+                <option>30</option>
+                <option>40</option>
+                <option>50</option>
+            </select>
+        </div>
+        <div class="input-group pull-right col-md-4 col-sm-6 col-xs-6">
+            <input class="form-control" type="text" placeholder="Search" ng-model="searchText">
+        </div>
+    </div>
+    <div class="table-wraper">
+        <table ng-show="slides.length" class="table table-bordered" style="background-color: #ffffff">
+            <thead>
+            <tr>
+                <th ng-click="orderMe('id')">
+                    No.
+                    <div class="sorting" ng-show="myOrder =='id'">
+                        <i class="fa fa-sort-amount-asc" ng-show="!myReverse"></i>
+                        <i class="fa fa-sort-amount-desc" ng-show="myReverse"></i>
+                    </div>
+                    <i class="fa fa-exchange sort-me" ng-hide="myOrder =='id'"></i>
+                </th>
+                <th ng-click="orderMe('image')">
+                    Ảnh
+                    <div class="sorting" ng-show="myOrder =='image'">
+                        <i class="fa fa-sort-amount-asc" ng-show="!myReverse"></i>
+                        <i class="fa fa-sort-amount-desc" ng-show="myReverse"></i>
+                    </div>
+                    <i class="fa fa-exchange sort-me" ng-hide="myOrder =='image'"></i>
+                </th>
+                <th ng-click="orderMe('link')">
+                    Link
+                    <div class="sorting" ng-show="myOrder =='link'">
+                        <i class="fa fa-sort-amount-asc" ng-show="!myReverse"></i>
+                        <i class="fa fa-sort-amount-desc" ng-show="myReverse"></i>
+                    </div>
+                    <i class="fa fa-exchange sort-me" ng-hide="myOrder =='link'"></i>
+                </th>
+                <th ng-click="orderMe('createdAt')">
+                    Đăng lúc
+                    <div class="sorting" ng-show="myOrder =='createdAt'">
+                        <i class="fa fa-sort-amount-asc" ng-show="!myReverse"></i>
+                        <i class="fa fa-sort-amount-desc" ng-show="myReverse"></i>
+                    </div>
+                    <i class="fa fa-exchange sort-me" ng-hide="myOrder =='createdAt'"></i>
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in items = slides.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | orderBy:myOrder:myReverse | filter:searchText">
+                <td>
+                    {{items.indexOf(item) + 1}}
+                </td>
+                <td>
+                    <img src="{{item.image}}" class="image-table" style="width: 220px; height: 150px;">
+                    <button class="btn btn-default show-image" data-toggle="modal" data-target="#viewImage">Show</button>
+                    <div class="modal fade" id="viewImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="{{item.image}}" style="width: 100%">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    {{item.link}}
+                </td>
+                <td>
+                    {{item.createdAt}}
+                </td>
+                <td>
+                    <span class="btn btn-info btn-xs" data-toggle="modal" data-target="#viewModal"
+                          ng-click="onView(item)">Xem</span>
+                    <span class="btn btn-warning btn-xs" data-toggle="modal" data-target="#editModal" ng-click="onEdit(item)">Sửa</span>
+                    <span class="btn btn-danger btn-xs" ng-click="deleteSlide(item.id)">Xóa</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div ng-hide="!slides.length" class="text-center">
+            <uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm"
+                            boundary-links="true" force-ellipses="true" items-per-page="itemsPerPage"
+                            previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                            last-text="&raquo;"></uib-pagination>
+        </div>
+    </div>
+
+    <div ng-show="!slides.length" class="list-group-item">
+        <h4 class="list-group-item-heading" translate>
+            Không có slide nào tại đây
+        </h4>
+
+        <p class="list-group-item-text" translate>Nhấn <a href="" ui-sref="^.add">vào đây</a> để thêm slide</p>
+    </div>
+</div>
+
+
+<!-- View Modal -->
+<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+            <a href="{{viewItem.link}}"><img src="{{viewItem.image}}" style="width: 100%"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label">Thứ tự</label>
+                    <input class="form-control" ng-model="editItem.index"/>
+                </div>
+                <div class="controls">
+                    <button class="btn btn-success" ng-click="editPanel(editItem)" data-dismiss="modal">Cập nhật</button>
+                    <button class="btn btn-default" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">Huỷ bỏ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

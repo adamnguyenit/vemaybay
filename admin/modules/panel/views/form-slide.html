@@ -1,0 +1,25 @@
+<div class="form-add-panel">
+    <h4>
+        <a href="" ui-sref="^.list" class="btn btn-xs btn-default"><i class="fa fa-arrow-left"></i></a>
+
+        <span>Thêm slide</span>
+    </h4>
+
+    <form>
+        <div class="form-group">
+            <label class="control-label">Link *</label>
+            <input type="text" name="link" required class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="control-label">Thứ tự *</label>
+            <input type="number" name="index" required class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="control-label">Ảnh *</label>
+            <input type="file" name="image" required>
+        </div>
+        <div class="controls">
+            <button type="submit" class="btn btn-success" ng-click="onSubmit()">Tạo slide</button>
+        </div>
+    </form>
+</div>

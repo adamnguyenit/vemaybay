@@ -1,0 +1,101 @@
+<span ng-show="loading">Loading...</span>
+<div ng-show="!loading" class='list-group'>
+    <div ng-show="promoNews.length" class="row table-header-bar" ng-model="filter">
+        <div class="select-item-perpage pull-left col-md-4 col-sm-6 col-xs-6">
+            <label class="count-number-of">Số lượng trên trang: </label>
+            <select ng-model="viewby" ng-change="setItemsPerPage(viewby)">
+                <option>5</option>
+                <option>10</option>
+                <option>20</option>
+                <option>30</option>
+                <option>40</option>
+                <option>50</option>
+            </select>
+        </div>
+        <div class="input-group pull-right col-md-4 col-sm-6 col-xs-6">
+            <input class="form-control" type="text" placeholder="Search" ng-model="searchText">
+        </div>
+    </div>
+    <div class="table-wraper">
+        <table ng-show="promoNews.length" class="table table-bordered" style="background-color: #ffffff">
+            <thead>
+            <tr>
+                <th ng-click="orderMe('id')">
+                    No.
+                    <div class="sorting" ng-show="myOrder =='id'">
+                        <i class="fa fa-sort-amount-asc" ng-show="!myReverse"></i>
+                        <i class="fa fa-sort-amount-desc" ng-show="myReverse"></i>
+                    </div>
+                    <i class="fa fa-exchange sort-me" ng-hide="myOrder =='id'"></i>
+                </th>
+                <th ng-click="orderMe('title')">
+                    Tiêu đề
+                    <div class="sorting" ng-show="myOrder =='title'">
+                        <i class="fa fa-sort-amount-asc" ng-show="!myReverse"></i>
+                        <i class="fa fa-sort-amount-desc" ng-show="myReverse"></i>
+                    </div>
+                    <i class="fa fa-exchange sort-me" ng-hide="myOrder =='title'"></i>
+                </th>
+                <th ng-click="orderMe('createdAt')">
+                    Đăng lúc
+                    <div class="sorting" ng-show="myOrder =='createdAt'">
+                        <i class="fa fa-sort-amount-asc" ng-show="!myReverse"></i>
+                        <i class="fa fa-sort-amount-desc" ng-show="myReverse"></i>
+                    </div>
+                    <i class="fa fa-exchange sort-me" ng-hide="myOrder =='createdAt'"></i>
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in items = promoNews.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | orderBy:myOrder:myReverse | filter:searchText">
+                <td>
+                    {{items.indexOf(item) + 1}}
+                </td>
+                <td>
+                    {{item.title}}
+                </td>
+                <td>
+                    {{item.createdAt}}
+                </td>
+                <td>
+                    <span class="btn btn-info btn-xs" data-toggle="modal" data-target="#viewModal"
+                          ng-click="onView(item)">Xem</span>
+                    <span class="btn btn-warning btn-xs" ui-sref="^.edit({id: item.id})">Sửa</span>
+                    <span class="btn btn-danger btn-xs" ng-click="deletePromo(item.id)">Xóa</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div ng-hide="!promoNews.length" class="text-center">
+            <uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm"
+                            boundary-links="true" force-ellipses="true" items-per-page="itemsPerPage"
+                            previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                            last-text="&raquo;"></uib-pagination>
+        </div>
+    </div>
+
+    <div ng-show="!promoNews.length" class="list-group-item">
+        <h4 class="list-group-item-heading" translate>
+            Không có tin khuyến mãi nào tại đây
+        </h4>
+
+        <p class="list-group-item-text" translate>Nhấn <a href="" ui-sref="^.add">vào đây</a> để thêm tin khuyến mãi</p>
+    </div>
+</div>
+
+<!-- View Modal -->
+<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                {{viewItem.title}}
+            </div>
+            <div class="modal-body" ng-bind-html="viewItem.content">
+
+            </div>
+        </div>
+    </div>
+</div>

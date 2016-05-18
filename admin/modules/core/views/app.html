@@ -1,0 +1,54 @@
+<header class="header">
+    <a class="logo" href="/">{{ getSetting('appName') }}</a>
+    <navbar></navbar>
+</header>
+<div style="height: 100%;">
+    <div class="wrapper row-offcanvas row-offcanvas-left">
+        <aside class="left-side sidebar-offcanvas">
+            <section class="sidebar">
+                <ul class="sidebar-menu">
+                    <li class="header">CHỨC NĂNG</li>
+                    <li class="treeview" ui-sref-active="active">
+                        <a ui-sref="app.home">
+                            <i class="fa fa-dashboard"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="treeview" ng-repeat="menu in menuoptions[0].menuList" ui-sref-active="active">
+                        <a href="">
+                            <i class="fa {{menu.icon}}"></i>
+                            <span>{{menu.name}}</span>
+                            <i ng-hide="!menu.subList" class="fa fa-angle-down pull-right"></i>
+                        </a>
+                        <ul ng-hide="!menu.subList" class="treeview-menu" style="display: none;">
+                            <li ng-repeat="submenu in menu.subList" ui-sref-active="active">
+                                <a ui-sref="{{submenu.sref}}">
+                                    <i class="fa fa-circle-o"></i>
+                                    {{submenu.name}}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="header">CÔNG NỢ</li>
+                    <li class="treeview" ng-repeat="menu in menuoptions[1].menuList">
+                        <a href="">
+                            <i class="fa {{menu.icon}}"></i> <span>{{menu.name}}</span> <i
+                                class="fa fa-angle-down pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu" style="display: none;">
+                            <li ng-repeat="submenu in menu.subList">
+                                <a ui-sref="{{submenu.sref}}">
+                                    <i class="fa fa-circle-o"></i>
+                                    {{submenu.name}}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+        <aside ui-view class="right-side at-view-fade-in at-view-fade-out">
+
+        </aside>
+    </div>
+</div>
