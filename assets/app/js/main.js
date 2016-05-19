@@ -1,5 +1,22 @@
 const API_URL = 'http://api.vemaybay.com/app/';
 
+function request(type, endpoint, data, handle, error) {
+    $.ajax({
+        type: type,
+        url: API_URL + endpoint,
+        headers: {
+            Accept: 'application/json'
+        },
+        data: data,
+        success: function(data, textStatus, jqXHR) {
+            handle(data);
+        },
+        error: function() {
+            error();
+        }
+    });
+}
+
 function getList(endpoint, handle) {
     $.ajax({
         type: 'GET',

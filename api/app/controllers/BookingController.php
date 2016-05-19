@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Booking;
 use yii\web\BadRequestHttpException;
+use yii\helpers\Json;
 
 class BookingController extends Controller
 {
@@ -34,6 +35,20 @@ class BookingController extends Controller
             return $this->render('info', ['model' => $model]);
         }
         if (empty($model)) {
+            throw new BadRequestHttpException();
+        }
+        return $model;
+    }
+
+    public function actionSetOptions($identity)
+    {
+        $options = \Yii::$app->request->post('options');
+        $model = Booking::find()->where(['identity' => $identity])->limit(1)->one();
+        if (empty($model)) {
+            throw new BadRequestHttpException();
+        }
+        $model->options = Json::encode($options);
+        if (!$model->save()) {
             throw new BadRequestHttpException();
         }
         return $model;

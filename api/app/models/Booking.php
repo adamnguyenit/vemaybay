@@ -60,6 +60,10 @@ class Booking extends \yii\db\ActiveRecord
             'status',
             'createdAt',
             'baggages',
+            'billable' => function() {
+                return $this->isBillabe();
+            },
+            'bill',
         ];
     }
 
@@ -243,6 +247,14 @@ class Booking extends \yii\db\ActiveRecord
         return $result;
     }
 
+    public function getOptionsDetail()
+    {
+        if (empty($this->options)) {
+            return [];
+        }
+        return Json::decode($this->options);
+    }
+
     public function getStatusString()
     {
         switch ($this->status) {
@@ -269,6 +281,24 @@ class Booking extends \yii\db\ActiveRecord
             'Sun' => 'CN',
         ];
         return empty($this->created_at) ? null : $titles[date('D', $this->created_at)] . ', ngày ' . date('d/m/Y', $this->created_at);
+    }
+
+    public function isBillabe()
+    {
+        $options = $this->optionsDetail;
+        if (empty($options) || empty($options['bill'])) {
+            return false;
+        }
+        return true;
+    }
+
+    public function getBill()
+    {
+        $options = $this->optionsDetail;
+        if (empty($options) || empty($options['bill'])) {
+            return [];
+        }
+        return $options['bill'];
     }
 
     public static function decodeDateTime($dateTime)

@@ -23,6 +23,23 @@
 #content-page .box:last-child {
     border-bottom: 0;
 }
+#bill-detailed {
+    margin-bottom: 15px;
+}
+#bill-detailed .bill-title {
+    font-size: 12px;
+    font-weight: bold;
+}
+#bill-detailed .bill-content {
+    margin-bottom: 5px;
+}
+#contact .contact-title {
+    font-size: 12px;
+    font-weight: bold;
+}
+#contact .contact-content {
+    margin-bottom: 5px;
+}
 @media (max-width: 767px) {
     #content-page {
         padding-top: 0;

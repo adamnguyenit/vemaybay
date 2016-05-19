@@ -381,7 +381,6 @@ $(document).ready(function() {
     var contact = localStorage.getItem('contact');
     if (contact) {
         contact = JSON.parse(contact);
-        console.log(contact);
         if (contact['name']) {
             $('[name=contact_name]').val(contact['name']);
             $('[name=contact_name]').trigger('change');

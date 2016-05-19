@@ -14,5 +14,6 @@ return [
     'POST tickets/search' => 'ticket/search',
     'POST books' => 'booking/create',
     'GET books/<identity>' => 'booking/info',
+    'PUT books/<identity>/options' => 'booking/set-options',
     'GET baggages/<airline>' => 'baggage/list'
 ];
