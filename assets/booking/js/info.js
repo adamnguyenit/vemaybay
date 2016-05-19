@@ -43,7 +43,7 @@ $(document).ready(function() {
             $('#bill-ok').addClass('disabled');
             $('#bill-ok').html('Vui lòng đợi...');
             var onComplete = function() {
-                // location.reload();
+                location.reload();
             }
             request('PUT', 'books/' + id + '/options', {
                 options: {

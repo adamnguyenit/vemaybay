@@ -23,7 +23,8 @@ use app\models\Booking;
             <div class="bill-content"><?= $model->bill['phone'] ?></div>
         </div>
         <?php else : ?>
-        <buton id="bill" class="btn btn-xs btn-raised">Tôi muốn xuất hóa đơn</button>
+        <button id="bill" class="btn btn-xs btn-raised">Tôi muốn xuất hóa đơn</button>
+        <p class="color-red">Yêu cầu xuất hoá đơn trong vòng 4 ngày kể từ ngày xuất vé, quá thời gian này chúng tôi không chịu trách nhiệm.</p>
         <?php endif ?>
     </div>
 </div>

@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Booking;
+use app\models\Bill;
 use yii\web\BadRequestHttpException;
 use yii\filters\VerbFilter;
 
@@ -42,6 +43,7 @@ class BookingController extends Controller
         if ($model === null || !$model->delete()) {
             throw new BadRequestHttpException();
         }
+        Bill::remove($identity);
         return [];
     }
 
@@ -73,5 +75,23 @@ class BookingController extends Controller
     {
         $total = Booking::find()->where(['status' => 0])->count();
         return ['total' => intval($total)];
+    }
+
+    public function actionCountNewBill()
+    {
+        $total = Bill::find()->count();
+        return ['total' => intval($total)];
+    }
+
+    public function actionListNewBill()
+    {
+        $bills = Bill::find()->all();
+        return $bills;
+    }
+
+    public function actionDeleteBill($identity)
+    {
+        Bill::remove($identity);
+        return [];
     }
 }

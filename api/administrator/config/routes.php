@@ -35,6 +35,9 @@ return [
     'GET bookings/completed' => 'booking/list-completed',
     'GET bookings/uncompleted' => 'booking/list-uncompleted',
     'GET bookings/count-uncompleted' => 'booking/count-uncompleted',
+    'GET bookings/count-new-bill' => 'booking/count-new-bill',
+    'GET bookings/new-bill' => 'booking/list-new-bill',
     'GET bookings/<identity>' => 'booking/info',
-    'DELETE bookings/<identity>' => 'booking/delete' ,
+    'DELETE bookings/<identity>' => 'booking/delete',
+    'DELETE bookings/<identity>/bill' => 'booking/delete-bill',
 ];

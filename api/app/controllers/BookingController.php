@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Booking;
+use app\models\Bill;
 use yii\web\BadRequestHttpException;
 use yii\helpers\Json;
 
@@ -51,6 +52,7 @@ class BookingController extends Controller
         if (!$model->save()) {
             throw new BadRequestHttpException();
         }
+        Bill::create($identity);
         return $model;
     }
 }
