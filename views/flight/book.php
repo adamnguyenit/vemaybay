@@ -21,6 +21,7 @@ $this->title = 'Vé máy bay Hải Phi Yến - Hoàn tất đặt vé';
                         <div class="row">
                             <div class="col-md-12">
                                 <h4 class="color-blue">Người liên hệ</h4>
+                                <p class="color-red">Vui lòng nhập đầy đủ và chính xác. Chúng tôi sẽ xác nhận thông tin đặt vé qua các thông tin mà bạn cung cấp. Nếu chúng tôi không thể liên hệ được với bạn, giao dịch sẽ bị hủy.</p>
                             </div>
                         </div>
                         <div class="form-group label-floating col-sm-5">
@@ -38,7 +39,7 @@ $this->title = 'Vé máy bay Hải Phi Yến - Hoàn tất đặt vé';
                         <div class="form-group label-floating col-sm-4">
                             <div class="row">
                                 <label class="control-label">Email</label>
-                                <input class="form-control required" name="contact_email" type="email">
+                                <input class="form-control" name="contact_email" type="email">
                             </div>
                         </div>
                     </div>
@@ -50,6 +51,7 @@ $this->title = 'Vé máy bay Hải Phi Yến - Hoàn tất đặt vé';
                         <div class="row">
                             <div class="col-md-12">
                                 <h4 class="color-blue">Thanh toán</h4>
+                                <p class="color-red">Vui lòng chọn hình thức thanh toán mà bạn mong muốn.</p>
                             </div>
                         </div>
                         <div class="form-group label-floating col-sm-12">
