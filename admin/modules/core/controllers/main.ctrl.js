@@ -19,17 +19,16 @@ angular.module('com.module.core')
                 function (response) {
                     $rootScope.currentUser = response.data;
                     $rootScope.apiChecked = true;
+                    ApiService.find('bookings/count-uncompleted', localStorage.accessToken, function(result){
+                        $rootScope.uncompletedExchange = result.data.total;
+                    })
                 });
         }
         if (!localStorage.accessToken) {
             $state.go('login')
         }
 
-        $rootScope.hideScrollBar = function(){
-            $('html').css({
-                'overflow': 'hidden'
-            })
-        }
+
 
         $scope.menuoptions = [{
             "menuList": [

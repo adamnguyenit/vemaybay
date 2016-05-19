@@ -14,6 +14,40 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
+                    <li class="treeview" ui-sref-active="active">
+                        <a ui-sref="">
+                            <i class="fa fa-exchange"></i>
+                            <span>Giao dịch</span>
+                            <span ng-show="uncompletedExchange > 0" style="margin-right: 6px" class="label label-primary pull-right">{{uncompletedExchange}}</span>
+                            <i ng-hide="uncompletedExchange > 0" class="fa fa-angle-down pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu" style="display: none;">
+                            <li ui-sref-active="active">
+                                <a ui-sref="app.bookings.list">
+                                    <i class="fa fa-circle-o"></i>
+                                    Danh sách
+                                </a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a ui-sref="app.bookings.uncompleted">
+                                    <i class="fa fa-circle-o"></i>
+                                    Chưa thanh toán
+                                </a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a ui-sref="app.bookings.completed">
+                                    <i class="fa fa-circle-o"></i>
+                                    Đã thanh toán
+                                </a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a ui-sref="app.bookings.canceled">
+                                    <i class="fa fa-circle-o"></i>
+                                    Đã huỷ
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="treeview" ng-repeat="menu in menuoptions[0].menuList" ui-sref-active="active">
                         <a href="">
                             <i class="fa {{menu.icon}}"></i>

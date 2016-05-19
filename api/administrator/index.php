@@ -14,4 +14,8 @@ require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 
 $config = require __DIR__ . '/config/api.php';
 
-(new yii\web\Application($config))->run();
+try {
+    (new yii\web\Application($config))->run();
+} catch (\Exception $e) {
+    \yii\helpers\VarDumper::dump($e, 10, true);
+}

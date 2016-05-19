@@ -36,7 +36,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="item in items = listSlide = news.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | orderBy:myOrder:myReverse | filter:searchText">
+            <tr ng-repeat="item in items = news.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | orderBy:myOrder:myReverse | filter:searchText">
                 <td>
                     {{items.indexOf(item) + 1}}
                 </td>

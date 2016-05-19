@@ -30,4 +30,11 @@ return [
     'DELETE panels/<id>' => 'panel/delete',
     'POST panels' => 'panel/create',
     'GET panels/<id>' => 'panel/info',
+    'GET bookings' => 'booking/list',
+    'GET bookings/canceled' => 'booking/list-canceled',
+    'GET bookings/completed' => 'booking/list-completed',
+    'GET bookings/uncompleted' => 'booking/list-uncompleted',
+    'GET bookings/count-uncompleted' => 'booking/count-uncompleted',
+    'GET bookings/<identity>' => 'booking/info',
+    'DELETE bookings/<identity>' => 'booking/delete' ,
 ];

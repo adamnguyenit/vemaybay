@@ -38,6 +38,7 @@
             'com.module.core',
             'com.module.settings',
             'com.module.users',
+            'com.module.bookings',
             'com.module.priceOptions',
             'com.module.promo',
             'com.module.news',
