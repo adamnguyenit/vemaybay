@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Booking;
 use app\models\Bill;
+use app\models\Notification;
 use yii\web\BadRequestHttpException;
 use yii\helpers\Json;
 
@@ -26,6 +27,7 @@ class BookingController extends Controller
         if (\Yii::$app->response->format == 'html') {
             \Yii::$app->response->format = 'json';
         }
+        Notification::setNewUncompletedBooking(true);
         return $model;
     }
 
@@ -59,6 +61,7 @@ class BookingController extends Controller
             throw new BadRequestHttpException();
         }
         Bill::create($identity);
+        Notification::setHasNewBill(true);
         return $model;
     }
 }
