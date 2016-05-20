@@ -6,10 +6,16 @@ use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\HttpBearerAuth;
 use yii\filters\auth\QueryParamAuth;
+use yii\web\Response;
 use app\models\User;
 
 class Controller extends \yii\rest\Controller
 {
+
+    public $serializer = [
+        'class' => 'yii\rest\Serializer',
+        'collectionEnvelope' => 'items',
+    ];
 
     public function behaviors()
     {
@@ -26,6 +32,7 @@ class Controller extends \yii\rest\Controller
             ],
         ];
         $behaviors['rateLimiter']['enableRateLimitHeaders'] = true;
+        $behaviors['contentNegotiator']['formats']['text/html'] = Response::FORMAT_HTML;
         return $behaviors;
     }
 

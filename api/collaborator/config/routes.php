@@ -2,8 +2,8 @@
 
 return [
     'POST users/login' => 'user/login',
-    'POST users/logouts' => 'user/logout',
-    'GET me' => 'user/info',
-    'GET places' => 'place/list',
-    'POST tickets' => 'ticket/search',
+    'POST users/logout' => 'user/logout',
+    'GET places/suggestion' => 'place/suggestion',
+    'GET places/agent' => 'place/agent',
+    'GET places/international' => 'place/international',
 ];

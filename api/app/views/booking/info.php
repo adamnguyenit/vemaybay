@@ -63,7 +63,7 @@ use app\models\Booking;
                                     </tr>
                                     <tr>
                                         <td><?= Booking::decodeDateTime($flightDetail['departTime']) ?></td>
-                                        <td></td>
+                                        <td><?= $flightDetail['flightNumber'] ?></td>
                                         <td><?= Booking::decodeDateTime($flightDetail['landingTime']) ?></td>
                                     </tr>
                                 </tbody>

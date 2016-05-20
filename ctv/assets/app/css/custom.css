@@ -1,0 +1,109 @@
+.navbar {
+    margin-bottom: 0;
+}
+@media (min-width: 768px) {
+    .navbar-collapse {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+.carousel-control {
+    width: 10%;
+}
+.form-group label.control-label {
+    color: #000000;
+}
+.datepicker table tr td.disabled, .datepicker table tr td.disabled {
+    color: #aaaaaa;
+}
+.datepicker table tr td.disabled, .datepicker table tr td.disabled:hover {
+    color: #aaaaaa;
+}
+.form-group .help-block {
+    display: inline-block;
+}
+.nav-tabs {
+    border: 0;
+    padding-bottom: 1px;
+}
+.nav-tabs > li.active {
+    background-color: #f03e44 !important;
+}
+.autocomplete-suggestions {
+    z-index: 99999 !important;
+    overflow-y: auto;
+    background-color: #ffffff;
+    min-width: 200px;
+    -moz-box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.25);
+}
+.autocomplete-suggestions strong {
+    font-weight: normal;
+}
+.autocomplete-suggestions .autocomplete-suggestion {
+    padding: 7px;
+    cursor: pointer;
+    color: #000000;
+}
+.autocomplete-suggestions .autocomplete-suggestion.autocomplete-selected, .autocomplete-suggestions .autocomplete-suggestion:hover {
+    background-color: #3b89c9;
+    color: #ffffff;
+}
+.autocomplete-suggestions .autocomplete-group {
+    color: #f03e44;
+    padding: 7px 7px 0 7px;
+    border-bottom: 1px solid #dddddd;
+}
+.places-box {
+    z-index: 99999;
+}
+.places-box .list-group {
+    max-height: 300px;
+    overflow-y: auto;
+}
+.places-box .list-group .list-group-item {
+    padding: 5px 2px;
+    border-bottom: 1px solid #dddddd;
+    cursor: pointer;
+}
+.places-box .list-group .list-group-item:last-child {
+    border-bottom: 0;
+}
+.places-box .list-group .list-group-item:hover {
+    color: #ffffff;
+    background-color: #3b89c9;
+}
+::-webkit-scrollbar {
+    background: transparent;
+    overflow: visible;
+    width: 15px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: solid #ffffff;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+::-webkit-scrollbar-thumb:horizontal {
+    border-width: 4px 6px;
+    min-width: 40px;
+}
+::-webkit-scrollbar-thumb:vertical {
+    border-width: 6px 4px;
+    min-height: 40px;
+}
+::-webkit-scrollbar-track-piece {
+    background-color: #ffffff;
+}
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #ADADAD;
+    -webkit-box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.10), inset 0 -1px 0 rgba(0, 0, 0, 0.07);
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #999999;
+}
