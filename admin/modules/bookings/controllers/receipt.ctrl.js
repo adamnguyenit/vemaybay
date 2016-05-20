@@ -1,9 +1,9 @@
 angular.module('com.module.bookings')
-	.controller('BookingsCtrl', function($scope, ApiService, CoreService){
+	.controller('ReceiptCtrl', function($scope, ApiService, CoreService){
 		$scope.loading = true;
         $scope.searchText = '';
-        ApiService.find('bookings', localStorage.accessToken, function (response) {
-            $scope.bookings = response.data;
+        ApiService.find('bookings/new-bill', localStorage.accessToken, function (response) {
+            $scope.receipts = response.data;
             $scope.myOrder = '';
             $scope.myReverse = true;
             $scope.loading = false;
@@ -16,19 +16,19 @@ angular.module('com.module.bookings')
             $scope.currentPage = 1;
             $scope.itemsPerPage = $scope.viewby;
             $scope.maxSize = 5;
-            $scope.totalItems = $scope.bookings.length;
+            $scope.totalItems = $scope.receipts.length;
             $scope.totalPage = Math.ceil($scope.totalItems / $scope.itemsPerPage);
             $scope.setItemsPerPage = function (num) {
                 $scope.itemsPerPage = num;
                 $scope.currentPage = 1; //reset to first paghe
                 $scope.totalPage = Math.ceil($scope.totalItems / $scope.itemsPerPage);
             };
-            $scope.deleteBooking = function (id) {
+            $scope.deleteReceipt = function (identity) {
                 CoreService.confirm('Xác nhận', 'Bạn có thực sự muốn xóa', function () {
-                    ApiService.deleteById('bookings', localStorage.accessToken, id, function () {
-                        ApiService.find('bookings', localStorage.accessToken, function (response) {
+                    ApiService.deleteReceiptRequest(localStorage.accessToken, identity, function () {
+                        ApiService.find('bookings/new-bill', localStorage.accessToken, function (response) {
                             CoreService.toastSuccess('Success!');
-                            $scope.bookings = response.data;
+                            $scope.receipts = response.data;
                         })
                     })
                 }, function () {

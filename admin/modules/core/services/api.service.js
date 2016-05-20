@@ -6,6 +6,7 @@ app.service('ApiService', function ($http, $window, $location, CoreService, $sta
 
 
     function error(response) {
+        console.log(response)
         if (response.status == 401) {
             var config = {
                 title: 'Thông báo',
@@ -186,6 +187,23 @@ app.service('ApiService', function ($http, $window, $location, CoreService, $sta
             method: 'PUT',
             url: apiURL + 'price-options/' + id,
             data: data,
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+            .then(function successCallback(response) {
+                successCb(response);
+                return;
+            }, function errorCallback(response) {
+                error(response);
+                return;
+            });
+    }
+
+    this.deleteReceiptRequest = function (token, identity, successCb, errorCb) {
+        $http({
+            method: 'DELETE',
+            url: apiURL + 'booking/' + identity + '/bill',
             headers: {
                 'Authorization': 'Bearer ' + token
             }

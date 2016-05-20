@@ -13,9 +13,10 @@
                             <i class="fa fa-dashboard"></i>
                             <span>Dashboard</span>
                         </a>
+                        <ul class="treeview-menu"></ul>
                     </li>
                     <li class="treeview" ui-sref-active="active">
-                        <a ui-sref="">
+                        <a href="">
                             <i class="fa fa-exchange"></i>
                             <span>Giao dịch</span>
                             <span ng-show="uncompletedExchange > 0" style="margin-right: 6px" class="label label-primary pull-right">{{uncompletedExchange}}</span>
@@ -31,19 +32,25 @@
                             <li ui-sref-active="active">
                                 <a ui-sref="app.bookings.uncompleted">
                                     <i class="fa fa-circle-o"></i>
-                                    Chưa thanh toán
+                                    Chưa xuất vé
                                 </a>
                             </li>
                             <li ui-sref-active="active">
                                 <a ui-sref="app.bookings.completed">
                                     <i class="fa fa-circle-o"></i>
-                                    Đã thanh toán
+                                    Đã xuất vé
                                 </a>
                             </li>
                             <li ui-sref-active="active">
                                 <a ui-sref="app.bookings.canceled">
                                     <i class="fa fa-circle-o"></i>
                                     Đã huỷ
+                                </a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a ui-sref="app.bookings.receipt">
+                                    <i class="fa fa-circle-o"></i>
+                                    Yêu cầu xuất hóa đơn
                                 </a>
                             </li>
                         </ul>

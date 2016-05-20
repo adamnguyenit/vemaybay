@@ -61,7 +61,7 @@ class BookingController extends Controller
             throw new BadRequestHttpException();
         }
         Bill::create($identity);
-        Notification::setHasNewBill(true);
+        Notification::setNewBill(true);
         return $model;
     }
 }

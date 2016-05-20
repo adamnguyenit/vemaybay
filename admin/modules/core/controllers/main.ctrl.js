@@ -22,13 +22,17 @@ angular.module('com.module.core')
                     ApiService.find('bookings/count-uncompleted', localStorage.accessToken, function(result){
                         $rootScope.uncompletedExchange = result.data.total;
                     })
+                    ApiService.find('bookings/count-new-bill', localStorage.accessToken, function(result){
+                        $rootScope.receiptRequest = result.data.total;
+                    })
                 });
         }
         if (!localStorage.accessToken) {
             $state.go('login')
         }
 
-
+        $rootScope.stateStarter = $state.current;
+        console.log($rootScope.stateStarter)
 
         $scope.menuoptions = [{
             "menuList": [

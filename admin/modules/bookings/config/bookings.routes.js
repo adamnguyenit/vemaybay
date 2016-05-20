@@ -12,12 +12,12 @@ angular.module('com.module.bookings')
 				controller: 'BookingsCtrl'
 			})
 			.state('app.bookings.uncompleted', {
-				url: '/chua-thanh-toan',
+				url: '/chua-xuat-ve',
 				templateUrl: 'modules/bookings/views/uncompleted.html',
 				controller: 'UncompletedCtrl'
 			})
 			.state('app.bookings.completed', {
-				url: '/da-thanh-toan',
+				url: '/da-xuat-ve',
 				templateUrl: 'modules/bookings/views/completed.html',
 				controller: 'CompletedCtrl'
 			})
@@ -26,4 +26,9 @@ angular.module('com.module.bookings')
 				templateUrl: 'modules/bookings/views/canceled.html',
 				controller: 'CanceledCtrl'
 			})
+			.state('app.bookings.receipt', {
+				url: '/yeu-cau-xuat-hoa-don',
+				templateUrl: 'modules/bookings/views/receipt.html',
+				controller: 'ReceiptCtrl'
+			});
 	})

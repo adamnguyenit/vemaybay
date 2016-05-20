@@ -1,6 +1,6 @@
 <span ng-show="loading">Loading...</span>
 <div ng-show="!loading" class='list-group'>
-    <div ng-show="bookings.length" class="row table-header-bar" ng-model="filter">
+    <div ng-show="receipts.length" class="row table-header-bar" ng-model="filter">
         <div class="select-item-perpage pull-left col-md-4 col-sm-6 col-xs-6">
             <label class="count-number-of">Số lượng trên trang: </label>
             <select ng-model="viewby" ng-change="setItemsPerPage(viewby)">
@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="table-wraper">
-        <table ng-show="bookings.length" class="table table-bordered" style="background-color: #ffffff">
+        <table ng-show="receipts.length" class="table table-bordered" style="background-color: #ffffff">
             <thead>
             <tr>
                 <th ng-click="orderMe('identity')">
@@ -52,11 +52,19 @@
                     </div>
                     <i class="fa fa-exchange sort-me" ng-hide="myOrder =='createdAt'"></i>
                 </th>
+                <th ng-click="orderMe('statusString')">
+                    Trạng thái
+                    <div class="sorting" ng-show="myOrder =='statusString'">
+                        <i class="fa fa-sort-amount-asc" ng-show="!myReverse"></i>
+                        <i class="fa fa-sort-amount-desc" ng-show="myReverse"></i>
+                    </div>
+                    <i class="fa fa-exchange sort-me" ng-hide="myOrder =='statusString'"></i>
+                </th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="item in items = bookings.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | orderBy:myOrder:myReverse | filter:searchText">
+            <tr ng-repeat="item in items = receipts.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | orderBy:myOrder:myReverse | filter:searchText">
                 <td>
                     {{item.identity}}
                 </td>
@@ -70,12 +78,15 @@
                     {{item.createdAt}}
                 </td>
                 <td>
-                    <span class="btn btn-danger btn-xs" ng-click="deleteBooking(item.identity)">Xóa</span>
+                    {{item.statusString}}
+                </td>
+                <td>
+                    <span class="btn btn-danger btn-xs" ng-click="deleteBooking(item.identity)">Đã xuất</span>
                 </td>
             </tr>
             </tbody>
         </table>
-        <div ng-hide="!bookings.length" class="text-center">
+        <div ng-hide="!receipts.length" class="text-center">
             <uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm"
                             boundary-links="true" force-ellipses="true" items-per-page="itemsPerPage"
                             previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
@@ -83,9 +94,9 @@
         </div>
     </div>
 
-    <div ng-show="!bookings.length" class="list-group-item">
+    <div ng-show="!receipts.length" class="list-group-item">
         <h4 class="list-group-item-heading" translate>
-            Không có giao dịch đã thanh toán nào tại đây
+            Không có yêu cầu xuất hóa đơn nào tại đây
         </h4>
 
         <!-- <p class="list-group-item-text" translate>Nhấn <a href="" ui-sref="^.add">vào đây</a> để thêm cộng tác viên</p> -->

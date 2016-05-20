@@ -12,7 +12,10 @@
             <tabset class="nav-tabs-custom">
                 <tab heading="{{ 'Dashboard' }}">
                     <div class="row">
-
+                        <small-box name="Giao dịch mới" color="bg-blue" icon="ion-arrow-swap"
+                       quantity="{{ uncompletedExchange }}" href="app.bookings.uncompleted"></small-box>
+                       <small-box name="Yêu cầu xuất hóa đơn" color="bg-blue" icon="ion-document-text"
+                       quantity="{{ receiptRequest }}" href="app.bookings.receipt"></small-box>
                     </div>
                 </tab>
             </tabset>

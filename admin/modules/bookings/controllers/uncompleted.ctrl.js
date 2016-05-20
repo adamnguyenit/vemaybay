@@ -1,9 +1,8 @@
 angular.module('com.module.bookings')
-	.controller('UncompletedCtrl', function($scope, ApiService){
+	.controller('UncompletedCtrl', function($scope, ApiService, CoreService){
 		$scope.loading = true;
         $scope.searchText = '';
         ApiService.find('bookings/uncompleted', localStorage.accessToken, function (response) {
-            console.log(response.data)
             $scope.bookings = response.data;
             $scope.myOrder = '';
             $scope.myReverse = true;
@@ -24,7 +23,7 @@ angular.module('com.module.bookings')
                 $scope.currentPage = 1; //reset to first paghe
                 $scope.totalPage = Math.ceil($scope.totalItems / $scope.itemsPerPage);
             };
-            /*$scope.deleteBooking = function (id) {
+            $scope.deleteBooking = function (id) {
                 CoreService.confirm('Xác nhận', 'Bạn có thực sự muốn xóa', function () {
                     ApiService.deleteById('bookings', localStorage.accessToken, id, function () {
                         ApiService.find('bookings/uncompleted', localStorage.accessToken, function (response) {
@@ -35,7 +34,7 @@ angular.module('com.module.bookings')
                 }, function () {
 
                 })
-            }*/
+            }
             $scope.onView = function (item) {
                 $scope.viewItem = item;
             }
