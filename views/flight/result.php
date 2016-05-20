@@ -8,6 +8,6 @@ $this->title = 'Vé máy bay Hải Phi Yến - Đặt vé thành công';
 ?>
 <div class="container bg-white">
     <h2>Bạn đã đặt vé thành công!</h2>
-    <p>Mã giao dịch của bạn là <a href="/giao-dich/<?= $data['id'] ?>.html"><?= $data['id'] ?></a></p>
+    <p>Mã giao dịch của bạn là <a href="/giao-dich/<?= $data['id'] ?>.html"><?= explode('-', $data['id'])[0] ?></a></p>
     <p>Chúng tôi sẽ liên hệ với bạn sớm nhất để xác nhận và xuất vé.</p>
 </div>

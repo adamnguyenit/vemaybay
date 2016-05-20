@@ -80,26 +80,34 @@ use app\models\Booking;
     <div id="passengers">
         <h4>Hành khách</h4>
         <p>Người lớn: <span class="color-red"><?= $model->adult ?></span>, trẻ em: <span class="color-red"><?= $model->child ?></span>, em bé: <span class="color-red"><?= $model->infant ?></span></p>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Họ và tên</th>
-                    <th>Năm sinh</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($model->passengersDetail as $type => $passengers) : ?>
-                    <?php foreach($passengers as $passenger) : ?>
-                <tr>
-                    <td><?= Booking::decodePassengerTitle($type, $passenger['title']) ?></td>
-                    <td><?= $passenger['name'] ?></td>
-                    <td><?= $passenger['birth'] ?></td>
-                </tr>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Họ và tên</th>
+                        <th>Năm sinh</th>
+                        <th>Địa chỉ</th>
+                        <th>Tỉnh/Thành phố</th>
+                        <th>Quốc gia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($model->passengersDetail as $type => $passengers) : ?>
+                        <?php foreach($passengers as $passenger) : ?>
+                    <tr>
+                        <td><?= Booking::decodePassengerTitle($type, $passenger['title']) ?></td>
+                        <td><?= $passenger['name'] ?></td>
+                        <td><?= $passenger['birth'] ?></td>
+                        <td><?= $passenger['address'] ?></td>
+                        <td><?= $passenger['city'] ?></td>
+                        <td><?= $passenger['country'] ?></td>
+                    </tr>
+                        <?php endforeach ?>
                     <?php endforeach ?>
-                <?php endforeach ?>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 <div class="col-md-12 box">

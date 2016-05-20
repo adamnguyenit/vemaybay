@@ -1,6 +1,8 @@
 function isPageLoaded() {
-    return isPrintPrice && isPrintTickets && isPrintPeople && isGetBaggages;
+    return isPrintPrice && isPrintTickets && isPrintPeople && isGetBaggages && isCountryLoaded;
 }
+
+var isCountryLoaded = false;
 
 function printPrice() {
     $('#price-box').html(null);
@@ -114,7 +116,7 @@ function printPeople() {
     for (type in people) {
         if (people.hasOwnProperty(type)) {
             for (var i = 1; i <= people[type]; i++) {
-                html += '<div class="row">';
+                html += '<div class="row person">';
                 html += '<div class="col-md-12">'
                 html += '<p class="color-red">Thông tin phải chính xác như trên giấy tờ tùy thân (như trên CMND, Hộ Chiếu, giấy phép lái xe…). Quý khách bị từ chối vận chuyển nếu thông tin không chính xác. Vui lòng nhập thông tin bằng Tiếng Việt không dấu.</p>';
                 html += '<div class="form-group col-sm-2 col-xs-3">';
@@ -134,6 +136,24 @@ function printPeople() {
                         html += '<div class="row">';
                         html += '<label class="control-label">Ngày sinh</label>';
                         html += '<div class="input-group date" data-provide="datepicker"><input class="form-control datepicker" type="text" name="people_' + type + '_' + i + '_birth"><div class="input-group-addon"><span class="fa fa-calendar"></span></div></div>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '<div class="form-group label-floating col-sm-6 col-xs-12">';
+                        html += '<div class="row">';
+                        html += '<label class="control-label">Địa chỉ</label>';
+                        html += '<input class="form-control address required" name="people_' + type + '_' + i + '_address">';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '<div class="form-group label-floating col-sm-3 col-xs-6">';
+                        html += '<div class="row">';
+                        html += '<label class="control-label">Quốc gia</label>';
+                        html += '<select class="form-control country required" name="people_' + type + '_' + i + '_country"><option value="null" selected>Chọn quốc gia</option></select>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '<div class="form-group label-floating col-sm-3 col-xs-6">';
+                        html += '<div class="row">';
+                        html += '<label class="control-label">Tỉnh/Thành phố</label>';
+                        html += '<select class="form-control city required" name="people_' + type + '_' + i + '_city"><option value="null" selected>Chọn thành phố</option></select>';
                         html += '</div>';
                         html += '</div>';
                         break;
@@ -163,6 +183,24 @@ function printPeople() {
                             html += '<select class="form-control baggage-return" name="people_' + type + '_' + i + '_baggage_return">' + baggage() + '</select>';
                             html += '</div>';
                             html += '</div>';
+                            html += '<div class="form-group label-floating col-sm-6 col-xs-12">';
+                            html += '<div class="row">';
+                            html += '<label class="control-label">Địa chỉ</label>';
+                            html += '<input class="form-control address required" name="people_' + type + '_' + i + '_address">';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '<div class="form-group label-floating col-sm-3 col-xs-6">';
+                            html += '<div class="row">';
+                            html += '<label class="control-label">Quốc gia</label>';
+                            html += '<select class="form-control country required" name="people_' + type + '_' + i + '_country"><option value="null" selected>Chọn quốc gia</option></select>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '<div class="form-group label-floating col-sm-3 col-xs-6">';
+                            html += '<div class="row">';
+                            html += '<label class="control-label">Tỉnh/Thành phố</label>';
+                            html += '<select class="form-control city required" name="people_' + type + '_' + i + '_city"><option value="null" selected>Chọn thành phố</option></select>';
+                            html += '</div>';
+                            html += '</div>';
                         } else {
                             html += '<div class="form-group label-floating col-sm-4 col-xs-9">';
                             html += '<div class="row">';
@@ -180,6 +218,24 @@ function printPeople() {
                             html += '<div class="row">';
                             html += '<label class="control-label">Hành lý</label>';
                             html += '<select class="form-control baggage-depart" name="people_' + type + '_' + i + '_baggage_depart">' + baggage() + '</select>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '<div class="form-group label-floating col-sm-6 col-xs-12">';
+                            html += '<div class="row">';
+                            html += '<label class="control-label">Địa chỉ</label>';
+                            html += '<input class="form-control address required" name="people_' + type + '_' + i + '_address">';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '<div class="form-group label-floating col-sm-3 col-xs-6">';
+                            html += '<div class="row">';
+                            html += '<label class="control-label">Quốc gia</label>';
+                            html += '<select class="form-control country required" name="people_' + type + '_' + i + '_country"><option value="null" selected>Chọn quốc gia</option></select>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '<div class="form-group label-floating col-sm-3 col-xs-6">';
+                            html += '<div class="row">';
+                            html += '<label class="control-label">Tỉnh/Thành phố</label>';
+                            html += '<select class="form-control city required" name="people_' + type + '_' + i + '_city"><option value="null" selected>Chọn thành phố</option></select>';
                             html += '</div>';
                             html += '</div>';
                         }
@@ -210,12 +266,29 @@ function printPeople() {
                             $('#people [name=people_' + type + '_' + i + '_birth]').val(passengers[type][i - 1]['birth']);
                         }
                     }
+                    if (passengers[type][i - 1]['address']) {
+                        if ($('#people [name=people_' + type + '_' + i + '_address]')) {
+                            $('#people [name=people_' + type + '_' + i + '_address]').val(passengers[type][i - 1]['address']);
+                        }
+                    }
+                    if (passengers[type][i - 1]['country']) {
+                        if ($('#people [name=people_' + type + '_' + i + '_country]')) {
+                            $('#people [name=people_' + type + '_' + i + '_country]').val(passengers[type][i - 1]['country']);
+                        }
+                    }
+                    if (passengers[type][i - 1]['city']) {
+                        if ($('#people [name=people_' + type + '_' + i + '_city]')) {
+                            $('#people [name=people_' + type + '_' + i + '_city]').val(passengers[type][i - 1]['city']);
+                        }
+                    }
                 }
             }
         }
     }
     // Material
     $.material.init();
+    $('.country').trigger('change');
+    $('.city').trigger('change');
     isPrintPeople = true;
 }
 
@@ -324,7 +397,7 @@ $(document).ready(function() {
         // checks
         var isOK = true;
         $('.required').each(function() {
-            if (!$(this).val()) {
+            if (!$(this).val() || $(this).val() == 'null') {
                 $(this).closest('.form-group').addClass('has-error');
                 isOK = false;
             }
@@ -351,6 +424,9 @@ $(document).ready(function() {
                             title: $('[name=people_' + type + '_' + i + '_title]').val(),
                             name: $('[name=people_' + type + '_' + i + '_name]').val(),
                             birth: $('[name=people_' + type + '_' + i + '_birth]').val(),
+                            address: $('[name=people_' + type + '_' + i + '_address]').val(),
+                            country: $('[name=people_' + type + '_' + i + '_country]').val(),
+                            city: $('[name=people_' + type + '_' + i + '_city]').val(),
                         };
                         if ($('[name=people_' + type + '_' + i + '_baggage_depart]').val()) {
                             if (!item.hasOwnProperty('baggage')) {
@@ -368,10 +444,14 @@ $(document).ready(function() {
                     }
                 }
             }
+            $('#confirm-btn').html('Vui lòng đợi...');
             bookTickets(chooseTickets, passengers, payment, contact, price, people, function(data) {
                 localStorage.setItem('passengers', JSON.stringify(passengers));
                 localStorage.setItem('contact', JSON.stringify(contact));
-                window.location.href = '/ve-may-bay/dat-ve/' + data.identity + '.html';
+                $('#confirm-btn').html('Hoàn tất');
+                window.location.href = '/ve-may-bay/dat-ve/' + data.identity + '-' + data.contact.phone + '.html';
+            }, function() {
+                $('#confirm-btn').html('Hoàn tất');
             });
         } else {
             $('#message-box').modal('show');
@@ -394,4 +474,53 @@ $(document).ready(function() {
             $('[name=contact_email]').trigger('change');
         }
     }
+
+    getList('countries?per-page=1000&fields=country_name', function(data) {
+        $.each(data.items, function() {
+            $('.country').append('<option value="' + this.country_name + '">' + this.country_name + '</option>');
+            isCountryLoaded = true;
+        });
+    });
+    $('.country').on('change', function() {
+        var instance = $(this).closest('.person').find('.city');
+        instance.html('<option value="null" selected>Chọn thành phố</option>');
+        getList('countries/' + $(this).val() + '?per-page=1000&fields=city_name', function(data) {
+            $.each(data.items, function() {
+                instance.append('<option value="' + this.city_name.replace("\n", '') + '">' + this.city_name.replace("\n", '') + '</option>');
+            });
+        });
+    });
+    $('.country').first().on('change', function() {
+        var value = $(this).val();
+        if (value != 'null') {
+            $('.country').each(function() {
+                if (!$(this).val() || $(this).val() == 'null') {
+                    $(this).val(value);
+                    $(this).trigger('change');
+                }
+            });
+        }
+    });
+    $('.city').first().on('change', function() {
+        var value = $(this).val();
+        if (value != 'null') {
+            $('.city').each(function() {
+                if (!$(this).val() || $(this).val() == 'null') {
+                    $(this).val(value);
+                    $(this).trigger('change');
+                }
+            });
+        }
+    });
+    $('.address').first().on('change', function() {
+        var value = $(this).val();
+        if (value != 'null') {
+            $('.address').each(function() {
+                if (!$(this).val() || $(this).val() == 'null') {
+                    $(this).val(value);
+                    $(this).trigger('change');
+                }
+            });
+        }
+    });
 });

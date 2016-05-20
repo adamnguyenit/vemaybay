@@ -47,6 +47,7 @@ class BookingController extends Controller
     public function actionSetOptions($encoded)
     {
         $options = \Yii::$app->request->post('options');
+        $encoded = explode('-', $encoded);
         $identity = $encoded[0];
         $phone = $encoded[1];
         $model = Booking::find()->where(['identity' => $identity, 'contact_phone' => $phone])->limit(1)->one();

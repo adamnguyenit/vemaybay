@@ -15,5 +15,7 @@ return [
     'POST books' => 'booking/create',
     'GET books/<encoded>' => 'booking/info',
     'PUT books/<encoded>/options' => 'booking/set-options',
-    'GET baggages/<airline>' => 'baggage/list'
+    'GET baggages/<airline>' => 'baggage/list',
+    'GET countries' => 'country/index',
+    'GET countries/<name>' => 'country/city',
 ];
