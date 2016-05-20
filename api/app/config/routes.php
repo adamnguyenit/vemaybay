@@ -13,7 +13,7 @@ return [
     'GET places/international' => 'place/international',
     'POST tickets/search' => 'ticket/search',
     'POST books' => 'booking/create',
-    'GET books/<identity>' => 'booking/info',
-    'PUT books/<identity>/options' => 'booking/set-options',
+    'GET books/<encoded>' => 'booking/info',
+    'PUT books/<encoded>/options' => 'booking/set-options',
     'GET baggages/<airline>' => 'baggage/list'
 ];

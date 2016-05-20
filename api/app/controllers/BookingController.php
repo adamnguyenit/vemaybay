@@ -29,9 +29,12 @@ class BookingController extends Controller
         return $model;
     }
 
-    public function actionInfo($identity)
+    public function actionInfo($encoded)
     {
-        $model = Booking::find()->where(['identity' => $identity])->limit(1)->one();
+        $encoded = explode('-', $encoded);
+        $identity = $encoded[0];
+        $phone = $encoded[1];
+        $model = Booking::find()->where(['identity' => $identity, 'contact_phone' => $phone])->limit(1)->one();
         if (\Yii::$app->response->format == 'html') {
             return $this->render('info', ['model' => $model]);
         }
@@ -41,10 +44,12 @@ class BookingController extends Controller
         return $model;
     }
 
-    public function actionSetOptions($identity)
+    public function actionSetOptions($encoded)
     {
         $options = \Yii::$app->request->post('options');
-        $model = Booking::find()->where(['identity' => $identity])->limit(1)->one();
+        $identity = $encoded[0];
+        $phone = $encoded[1];
+        $model = Booking::find()->where(['identity' => $identity, 'contact_phone' => $phone])->limit(1)->one();
         if (empty($model)) {
             throw new BadRequestHttpException();
         }
