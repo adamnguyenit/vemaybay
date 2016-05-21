@@ -8,14 +8,11 @@ use app\models\Place;
 
 class TicketController extends Controller
 {
+
     public function actionSearch()
     {
         $params = \Yii::$app->request->post();
-        if ($params['roundTrip'] === 'true') {
-            $params['roundTrip'] = true;
-        } elseif ($params['roundTrip'] === 'false') {
-            $params['roundTrip'] = false;
-        }
+        $params['roundTrip'] = boolval($params['roundTrip']);
         $fromPlace = $params['fromPlace'];
         $toPlace = $params['toPlace'];
         $fromPlaceModel = Place::find()->where(['code' => $fromPlace])->limit(1)->one();
@@ -23,6 +20,9 @@ class TicketController extends Controller
             throw new BadRequestHttpException();
         }
         $ticketQuery = new TicketQuery($params);
+        if (\Yii::$app->response->format === 'html') {
+            \Yii::$app->response->format = 'json';
+        }
         $tickets = \Yii::$app->atservice->getTickets($ticketQuery);
         $result = [];
         foreach ($tickets as $ticket) {

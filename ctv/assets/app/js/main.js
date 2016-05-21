@@ -113,6 +113,11 @@ function login(username, password) {
     });
 }
 
+function loginAgain() {
+    resetUser();
+    redirect('dang-nhap.html');
+}
+
 function logout() {
     $.ajax({
         type: 'POST',
@@ -121,8 +126,10 @@ function logout() {
             Authorization: 'Bearer ' + getAccessToken()
         },
         success: function(data, textStatus, jqXHR) {
-            resetUser();
-            redirect('dang-nhap.html');
+            loginAgain();
+        },
+        error: function() {
+            loginAgain();
         }
     });
 }
@@ -147,6 +154,7 @@ function searchTickets(data, handle, error) {
         type: 'POST',
         url: API_URL + 'tickets/search',
         headers: {
+            Accept: 'application/json',
             Authorization: 'Bearer ' + getAccessToken()
         },
         data: data,
@@ -155,7 +163,11 @@ function searchTickets(data, handle, error) {
             handle(data);
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            error();
+            if (jqXHR.status == 401) {
+                loginAgain()
+            } else {
+                error();
+            }
         }
     });
 }

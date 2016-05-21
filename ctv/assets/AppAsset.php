@@ -15,6 +15,7 @@ class AppAsset extends \yii\web\AssetBundle
         'css/bootstrap-material-design.min.css',
         'css/ripples.min.css',
         'css/bootstrap-datepicker3.min.css',
+        'css/datatables.min.css',
         'css/custom.css',
         'css/main.css',
     ];

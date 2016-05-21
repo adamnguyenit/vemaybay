@@ -6,4 +6,5 @@ return [
     'GET places/suggestion' => 'place/suggestion',
     'GET places/agent' => 'place/agent',
     'GET places/international' => 'place/international',
+    'POST tickets/search' => 'ticket/search',
 ];

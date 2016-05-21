@@ -1,0 +1,99 @@
+#page-content {
+    margin-top: 5px;
+}
+#depart-table, #return-table {
+    width: 100%;
+}
+.table.dates {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.table.dates tr td {
+    border: 0;
+}
+.table.dates tr td p:last-child {
+    margin-bottom: 0;
+}
+.flight-date {
+    padding-top: 10px;
+    cursor: pointer;
+    background-color: #ffffff;
+}
+.flight-date a {
+    color: inherit;
+}
+.flight-date a {
+    text-decoration: none;
+}
+.flight-date:hover {
+    background-color: #dddddd;
+}
+.flight-date.active {
+    color: #ffffff !important;
+    background-color: #3b89c9 !important;
+}
+table.dataTable {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+table.table-hover tbody tr {
+    cursor: pointer;
+}
+table.ticket-detail tbody tr td {
+    padding-right: 5px;
+}
+table.ticket-detail tbody tr td:last-child {
+    padding-right: 0;
+}
+table.price-detail tbody tr td {
+    padding-right: 10px;
+}
+table.price-detail tbody tr td:last-child {
+    padding-right: 0;
+}
+#left-side {}
+#right-side {
+    padding-left: 20px;
+}
+#search-progress {
+    margin-top: 5px;
+    margin-right: 10px;
+}
+#choose-tickets {
+    margin-top: 5px;
+}
+.choose-ticket {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 5px;
+    background-color: #ffffff;
+    width: 100%;
+    display: inline-block;
+}
+#scroll-to-next {
+    display: none;
+    cursor: pointer;
+    position: fixed;
+    right: 15px;
+    bottom: 30px;
+    padding: 15px;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+}
+.ticket-detailed table.ticket-detail {
+    margin-bottom: 15px;
+}
+.ticket-detailed table.ticket-detail:last-child {
+    margin-bottom: 0;
+}
+@media (max-width: 767px) {
+    #right-side {
+        padding-left: 15px;
+    }
+    #tabs-panel {
+        font-size: 11px;
+    }
+    #search-progress {
+        margin-right: 5px;
+    }
+}
