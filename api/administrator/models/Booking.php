@@ -17,34 +17,6 @@ class Booking extends \yii\db\ActiveRecord
         'BG40' => 'Hành lý 40kg',
     ];
 
-    public static function create($roundTrip, $tickets, $passengers, $payment, $contact, $price, $adult, $child = 0, $infant = 0, $options = [])
-    {
-        $model = new static();
-        $model->round_trip = intval($roundTrip);
-        $model->tickets = Json::encode($tickets);
-        $model->passengers = Json::encode($passengers);
-        $model->payment = Json::encode($payment);
-        $model->price = intval($price);
-        $model->contact_name = $contact['name'];
-        $model->contact_phone = $contact['phone'];
-        $model->contact_email = $contact['email'];
-        $model->adult = $adult;
-        $model->child = $child;
-        $model->infant = $infant;
-        if (!empty($options)) {
-            $model->options = Json::encode($options);
-        }
-        $model->created_at = time();
-        if (!$model->save()) {
-            return null;
-        }
-        $model->identity = str_pad($model->id, 8, '0', STR_PAD_LEFT);
-        if (!$model->save()) {
-            return null;
-        }
-        return $model;
-    }
-
     public function fields()
     {
         return [
@@ -58,9 +30,13 @@ class Booking extends \yii\db\ActiveRecord
             'passengersDetail',
             'ticketsDetail',
             'status',
-            'baggages',
             'statusString',
             'createdAt',
+            'baggages',
+            'billable' => function() {
+                return $this->isBillabe();
+            },
+            'bill',
         ];
     }
 
@@ -244,6 +220,14 @@ class Booking extends \yii\db\ActiveRecord
         return $result;
     }
 
+    public function getOptionsDetail()
+    {
+        if (empty($this->options)) {
+            return [];
+        }
+        return Json::decode($this->options);
+    }
+
     public function getStatusString()
     {
         switch ($this->status) {
@@ -270,6 +254,24 @@ class Booking extends \yii\db\ActiveRecord
             'Sun' => 'CN',
         ];
         return empty($this->created_at) ? null : $titles[date('D', $this->created_at)] . ', ngày ' . date('d/m/Y', $this->created_at);
+    }
+
+    public function isBillabe()
+    {
+        $options = $this->optionsDetail;
+        if (empty($options) || empty($options['bill'])) {
+            return false;
+        }
+        return true;
+    }
+
+    public function getBill()
+    {
+        $options = $this->optionsDetail;
+        if (empty($options) || empty($options['bill'])) {
+            return [];
+        }
+        return $options['bill'];
     }
 
     public static function decodeDateTime($dateTime)

@@ -108,4 +108,9 @@ class FlightController extends Controller
 
         return $result;
     }
+
+    public function actionBook()
+    {
+        return $this->render('book');
+    }
 }

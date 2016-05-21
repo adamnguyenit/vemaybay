@@ -93,9 +93,9 @@ $paramsName = ['round-trip', 'place-from', 'place-to', 'date-depart', 'date-retu
                         <div class="form-group label-static col-xs-4">
                             <div class="row">
                                 <label class="control-label color-black">Người lớn</label>
-                                <select class="select form-control" name="adult" data-value="21">
+                                <select class="select form-control" name="adult">
                                     <?php foreach (range(1, 30) as $index) : ?>
-                                    <option value="<?= $index ?>"><?= $index ?></option>
+                                    <option value="<?= $index ?>"<?= $index == $defaults['adult'] ? ' selected' : null ?>><?= $index ?></option>
                                     <?php endforeach ?>
                                 </select>
                                 <code style="font-size: 10px">> 12 tuổi</code>
@@ -106,7 +106,7 @@ $paramsName = ['round-trip', 'place-from', 'place-to', 'date-depart', 'date-retu
                                 <label class="control-label color-black">Trẻ em</label>
                                 <select class="select form-control" name="child">
                                     <?php foreach (range(0, 30) as $index) : ?>
-                                    <option value="<?= $index ?>"><?= $index ?></option>
+                                    <option value="<?= $index ?>"<?= $index == $defaults['child'] ? ' selected' : null ?>><?= $index ?></option>
                                     <?php endforeach ?>
                                 </select>
                                 <code style="font-size: 10px">< 2 tuổi</code>
@@ -117,7 +117,7 @@ $paramsName = ['round-trip', 'place-from', 'place-to', 'date-depart', 'date-retu
                                 <label class="control-label color-black">Em bé</label>
                                 <select class="select form-control" name="infant">
                                     <?php foreach (range(0, 30) as $index) : ?>
-                                    <option value="<?= $index ?>"><?= $index ?></option>
+                                    <option value="<?= $index ?>"<?= $index == $defaults['infant'] ? ' selected' : null ?>><?= $index ?></option>
                                     <?php endforeach ?>
                                 </select>
                                 <code style="font-size: 10px">< 2 tuổi</code>
@@ -222,7 +222,7 @@ $paramsName = ['round-trip', 'place-from', 'place-to', 'date-depart', 'date-retu
                 <div id="choose-tickets-body"></div>
                 <div id="next-step">
                     <div class="col-md-12">
-                        <a href="#" class="btn btn-raised btn-primary pull-right" role="button">Tiếp theo</a>
+                        <a href="/ve-may-bay/dat-ve.html" class="btn btn-raised btn-primary pull-right" role="button">Tiếp theo</a>
                     </div>
                 </div>
             </div>

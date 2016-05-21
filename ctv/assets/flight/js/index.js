@@ -323,7 +323,7 @@ function childOfTicket(type, id) {
     for (var i = 0; i < ticket.ticketOptions.length; i++) {
         copyText += '    - ' + ticket.ticketOptions[i].ticketType + ': ' + parseInt(ticket.ticketOptions[i].totalPrice).formatMoney(0, ',', '.') + " VND\n";
     }
-    copyText += 'Vui lòng xem chi tiết tại: ' + window.location.protocol + '//' + window.location.host;
+    copyText += 'Vui lòng xem chi tiết tại: http://vemaybayhaiphiyen.com';
     var placeFromCode = $('#params input[name=params_place-from]').val().split(' - ');
     placeFromCode = placeFromCode[placeFromCode.length - 1];
     var placeToCode = $('#params input[name=params_place-to]').val().split(' - ');
@@ -341,6 +341,9 @@ function childOfTicket(type, id) {
     var html = '<div class="ticket-detailed">';
     html += '<button class="btn btn-sm btn-info copy-to-clipboard" data-clipboard-text="' + copyText + '"><span class="fa fa-clipboard"></span></button> <button class="btn btn-sm btn-info copy-to-clipboard" data-clipboard-text="' + smsText + '">SMS</button>';
     // Ticket detail
+    if (!ticket.flightDetails || ticket.flightDetails.length < 1) {
+        console.log(ticket);
+    }
     $.each(ticket.flightDetails, function() {
         html += '<table class="ticket-detail"><tbody>';
         html += '<tr>';
@@ -525,8 +528,7 @@ $(document).ready(function() {
     });
     $('#return-table').on('click', 'input[type=radio][name=choose]', function() {
         if (!chooseTickets.hasOwnProperty('depart') || chooseTickets['depart'] == null) {
-            $('#message-box').find('.modal-body').html('<p>Vui lòng chọn vé chiều đi trước</p>');
-            $('#message-box').modal('show');
+            showNotice('Vui lòng chọn vé chiều đi trước.');
             $(this).prop('checked', false);
         } else {
             var ticketId = $(this).data('ticket-id');

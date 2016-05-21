@@ -11,7 +11,7 @@ function isUseClipboard() {
 }
 
 function isUseWeather() {
-    return true;
+    return false;
 }
 
 function isPageLoaded() {

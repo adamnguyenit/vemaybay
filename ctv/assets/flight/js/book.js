@@ -1,94 +1,21 @@
+function isUsePlaces() {
+    return false;
+}
+
+function isUseDatepicker() {
+    return true;
+}
+
+function isUseClipboard() {
+    return false;
+}
+
+function isUseWeather() {
+    return false;
+}
+
 function isPageLoaded() {
-    return isPrintPrice && isPrintTickets && isPrintPeople && isGetBaggages && isCountryLoaded;
-}
-
-var isCountryLoaded = false;
-
-function printPrice() {
-    $('#price-box').html(null);
-    var total = 0;
-    for (key in chooseTickets) {
-        if (chooseTickets.hasOwnProperty(key)) {
-            var ticket = chooseTickets[key].ticket;
-            var ticketOption = null;
-            var priceSummary = null;
-            for (var i = 0; i < ticket.ticketOptions.length; i++) {
-                if (ticket.ticketOptions[i].fareBasis == chooseTickets[key].fareBasis) {
-                    ticketOption = ticket.ticketOptions[i];
-                    priceSummary = ticket.ticketOptions[i].priceSummary;
-                    break;
-                }
-            }
-            var html = '<div class="row">';
-            html += '<div id="' + key + '" class="col-md-12">';
-            html += '<h4 style="margin-bottom: 0">' + ticket.fromPlace + ' - ' + ticket.toPlace + '</h4>';
-            html += '<table class="table table-hover" style="width: 100%">';
-            html += '<thead><tr><th></th><th></th><th></th><th></th></tr></thead>';
-            html += '<tbody>';
-            for (type in priceSummary) {
-                for (k in priceSummary[type]) {
-                    if (priceSummary[type].hasOwnProperty(k)) {
-                        html += '<tr>';
-                        html += '<td>' + priceSummary[type][k].description + '</td>';
-                        html += '<td class="text-right">' + parseInt(priceSummary[type][k].price).formatMoney(0, ',', '.') + '</td>';
-                        html += '<td>x' + priceSummary[type][k].quantity + '</td>';
-                        html += '<td class="color-red text-right">' + parseInt(priceSummary[type][k].total).formatMoney(0, ',', '.') + '</td>';
-                        html += '</tr>';
-                    }
-                }
-            }
-            html += '<tr id="baggage-' + key + '-BG15" class="baggage-' + key + '-box hidden"><td class="baggage-title">Hành lý 15kg</td><td class="text-right baggage-value">0</td><td class="baggage-quantity">x1</td><td class="color-red text-right baggage-price">0</td></tr>';
-            html += '<tr id="baggage-' + key + '-BG20" class="baggage-' + key + '-box hidden"><td class="baggage-title">Hành lý 20kg</td><td class="text-right baggage-value">0</td><td class="baggage-quantity">x1</td><td class="color-red text-right baggage-price">0</td></tr>';
-            html += '<tr id="baggage-' + key + '-BG25" class="baggage-' + key + '-box hidden"><td class="baggage-title">Hành lý 25kg</td><td class="text-right baggage-value">0</td><td class="baggage-quantity">x1</td><td class="color-red text-right baggage-price">0</td></tr>';
-            html += '<tr id="baggage-' + key + '-BG30" class="baggage-' + key + '-box hidden"><td class="baggage-title">Hành lý 30kg</td><td class="text-right baggage-value">0</td><td class="baggage-quantity">x1</td><td class="color-red text-right baggage-price">0</td></tr>';
-            html += '<tr id="baggage-' + key + '-BG35" class="baggage-' + key + '-box hidden"><td class="baggage-title">Hành lý 35kg</td><td class="text-right baggage-value">0</td><td class="baggage-quantity">x1</td><td class="color-red text-right baggage-price">0</td></tr>';
-            html += '<tr id="baggage-' + key + '-BG40" class="baggage-' + key + '-box hidden"><td class="baggage-title">Hành lý 40kg</td><td class="text-right baggage-value">0</td><td class="baggage-quantity">x1</td><td class="color-red text-right baggage-price">0</td></tr>';
-            total += parseInt(ticketOption.totalPrice);
-            html += '<tr><td colspan="3"><b>Thành tiền</b></td><td id="total-' + key + '-value" class="color-red text-right" data-base="' + ticketOption.totalPrice + '">' + parseInt(ticketOption.totalPrice).formatMoney(0, ',', '.') + '</td></tr>'
-            html += '</tbody>';
-            html += '</table>';
-            html += '</div>';
-            html += '</div>';
-            $('#price-box').append(html);
-        }
-    }
-    $('#price-box').append('<div class="row"><div class="col-md-12 text-right"><h3><small>Tổng:</small> <span id="total-price" class="color-red" data-base="' + total + '" data-value="' + total + '">' + total.formatMoney(0, ',', '.') + ' VND</span></h3></div></div>');
-    isPrintPrice = true;
-}
-
-function printTickets() {
-    $('#choose-tickets').html(null);
-    for (key in chooseTickets) {
-        if (chooseTickets.hasOwnProperty(key)) {
-            var ticket = chooseTickets[key].ticket;
-            var ticketOption = null;
-            for (var i = 0; i < ticket.ticketOptions.length; i++) {
-                if (ticket.ticketOptions[i].fareBasis == chooseTickets[key].fareBasis) {
-                    ticketOption = ticket.ticketOptions[i];
-                    break;
-                }
-            }
-            var html = '<div id="' + key + '-ticket" class="choose-ticket">';
-            html += '<div class="row">';
-            html += '<div class="col-xs-5 text-center"><h5>' + ticket.fromPlace + '</h5></div>';
-            html += '<div class="col-xs-2 text-center"><span class="fa fa-2x fa-plane"></span></div>';
-            html += '<div class="col-xs-5 text-center"><h5>' + ticket.toPlace + '</h5></div>';
-            html += '</div>';
-            html += '<div class="row">';
-            html += '<div class="col-xs-5 text-center">' + dateDecode(ticket.departTime, true) + '</div>';
-            html += '<div class="col-xs-2 text-center">' + ticket.flightNumber + '</div>';
-            html += '<div class="col-xs-5 text-center">' + dateDecode(ticket.landingTime, true) + '</div>';
-            html += '</div>';
-            html += '<div class="row">';
-            html += '<div class="col-xs-5 text-center">Hạng ghế: ' + ticketOption.ticketType + '</div>';
-            html += '<div class="col-xs-2 text-center"></div>';
-            html += '<div class="col-xs-5 text-center"><span class="color-red">' + parseInt(ticketOption.totalPrice).formatMoney(0, ',', '.') + ' VND</span></div>';
-            html += '</div>';
-            html += '</div>';
-            $('#choose-tickets').append(html);
-        }
-    }
-    isPrintTickets = true;
+    return isPrintTickets && isPrintPrice && isGetBaggages;
 }
 
 function valueOf(type) {
@@ -106,6 +33,14 @@ function baggage() {
     return '<option value="0">Xách tay</option><option value="BG15">15kg</option><option value="BG20">20kg</option><option value="BG25">25kg</option><option value="BG30">30kg</option><option value="BG35">35kg</option><option value="BG40">40kg</option>';
 }
 
+var isPrintTickets = false;
+var isPrintPrice = false;
+var isPrintPeople = false;
+var isGetBaggages = false;
+var chooseTickets;
+var people;
+var baggagePrice = {};
+
 function printPeople() {
     $('#people').html(null);
     var passengers = localStorage.getItem('passengers');
@@ -113,7 +48,6 @@ function printPeople() {
         passengers = JSON.parse(passengers);
     }
     var html = '<div class="col-md-12"><h4 class="color-blue">Thông tin hành khách</h4>';
-    html += '<p class="color-red">Thông tin phải chính xác như trên giấy tờ tùy thân (như trên CMND, Hộ Chiếu, giấy phép lái xe…). Quý khách bị từ chối vận chuyển nếu thông tin không chính xác. Vui lòng nhập thông tin bằng Tiếng Việt không dấu.</p>';
     for (type in people) {
         if (people.hasOwnProperty(type)) {
             for (var i = 1; i <= people[type]; i++) {
@@ -292,7 +226,92 @@ function printPeople() {
     isPrintPeople = true;
 }
 
-var baggagePrice = {};
+function printTickets() {
+    $('#choose-tickets').html(null);
+    for (key in chooseTickets) {
+        if (chooseTickets.hasOwnProperty(key)) {
+            var ticket = chooseTickets[key].ticket;
+            var ticketOption = null;
+            for (var i = 0; i < ticket.ticketOptions.length; i++) {
+                if (ticket.ticketOptions[i].fareBasis == chooseTickets[key].fareBasis) {
+                    ticketOption = ticket.ticketOptions[i];
+                    break;
+                }
+            }
+            var html = '<div id="' + key + '-ticket" class="choose-ticket bg-white">';
+            html += '<div class="row">';
+            html += '<div class="col-xs-5 text-center"><h5>' + ticket.fromPlace + '</h5></div>';
+            html += '<div class="col-xs-2 text-center"><span class="fa fa-2x fa-plane"></span></div>';
+            html += '<div class="col-xs-5 text-center"><h5>' + ticket.toPlace + '</h5></div>';
+            html += '</div>';
+            html += '<div class="row">';
+            html += '<div class="col-xs-5 text-center">' + dateDecode(ticket.departTime, true) + '</div>';
+            html += '<div class="col-xs-2 text-center">' + ticket.flightNumber + '</div>';
+            html += '<div class="col-xs-5 text-center">' + dateDecode(ticket.landingTime, true) + '</div>';
+            html += '</div>';
+            html += '<div class="row">';
+            html += '<div class="col-xs-5 text-center">Hạng ghế: ' + ticketOption.ticketType + '</div>';
+            html += '<div class="col-xs-2 text-center"></div>';
+            html += '<div class="col-xs-5 text-center"><span class="color-red">' + parseInt(ticketOption.totalPrice).formatMoney(0, ',', '.') + ' VND</span></div>';
+            html += '</div>';
+            html += '</div>';
+            $('#choose-tickets').append(html);
+        }
+    }
+    isPrintTickets = true;
+}
+
+function printPrice() {
+    $('#price-box').html(null);
+    var total = 0;
+    for (key in chooseTickets) {
+        if (chooseTickets.hasOwnProperty(key)) {
+            var ticket = chooseTickets[key].ticket;
+            var ticketOption = null;
+            var priceSummary = null;
+            for (var i = 0; i < ticket.ticketOptions.length; i++) {
+                if (ticket.ticketOptions[i].fareBasis == chooseTickets[key].fareBasis) {
+                    ticketOption = ticket.ticketOptions[i];
+                    priceSummary = ticket.ticketOptions[i].priceSummary;
+                    break;
+                }
+            }
+            var html = '<div class="row">';
+            html += '<div id="' + key + '" class="col-md-12">';
+            html += '<h4 style="margin-bottom: 0">' + ticket.fromPlace + ' - ' + ticket.toPlace + '</h4>';
+            html += '<table class="table table-hover" style="width: 100%">';
+            html += '<thead><tr><th></th><th></th><th></th><th></th></tr></thead>';
+            html += '<tbody>';
+            for (type in priceSummary) {
+                for (k in priceSummary[type]) {
+                    if (priceSummary[type].hasOwnProperty(k)) {
+                        html += '<tr>';
+                        html += '<td>' + priceSummary[type][k].description + '</td>';
+                        html += '<td class="text-right">' + parseInt(priceSummary[type][k].price).formatMoney(0, ',', '.') + '</td>';
+                        html += '<td>x' + priceSummary[type][k].quantity + '</td>';
+                        html += '<td class="color-red text-right">' + parseInt(priceSummary[type][k].total).formatMoney(0, ',', '.') + '</td>';
+                        html += '</tr>';
+                    }
+                }
+            }
+            html += '<tr id="baggage-' + key + '-BG15" class="baggage-' + key + '-box hidden"><td class="baggage-title">Hành lý 15kg</td><td class="text-right baggage-value">0</td><td class="baggage-quantity">x1</td><td class="color-red text-right baggage-price">0</td></tr>';
+            html += '<tr id="baggage-' + key + '-BG20" class="baggage-' + key + '-box hidden"><td class="baggage-title">Hành lý 20kg</td><td class="text-right baggage-value">0</td><td class="baggage-quantity">x1</td><td class="color-red text-right baggage-price">0</td></tr>';
+            html += '<tr id="baggage-' + key + '-BG25" class="baggage-' + key + '-box hidden"><td class="baggage-title">Hành lý 25kg</td><td class="text-right baggage-value">0</td><td class="baggage-quantity">x1</td><td class="color-red text-right baggage-price">0</td></tr>';
+            html += '<tr id="baggage-' + key + '-BG30" class="baggage-' + key + '-box hidden"><td class="baggage-title">Hành lý 30kg</td><td class="text-right baggage-value">0</td><td class="baggage-quantity">x1</td><td class="color-red text-right baggage-price">0</td></tr>';
+            html += '<tr id="baggage-' + key + '-BG35" class="baggage-' + key + '-box hidden"><td class="baggage-title">Hành lý 35kg</td><td class="text-right baggage-value">0</td><td class="baggage-quantity">x1</td><td class="color-red text-right baggage-price">0</td></tr>';
+            html += '<tr id="baggage-' + key + '-BG40" class="baggage-' + key + '-box hidden"><td class="baggage-title">Hành lý 40kg</td><td class="text-right baggage-value">0</td><td class="baggage-quantity">x1</td><td class="color-red text-right baggage-price">0</td></tr>';
+            total += parseInt(ticketOption.totalPrice);
+            html += '<tr><td colspan="3"><b>Thành tiền</b></td><td id="total-' + key + '-value" class="color-red text-right" data-base="' + ticketOption.totalPrice + '">' + parseInt(ticketOption.totalPrice).formatMoney(0, ',', '.') + '</td></tr>'
+            html += '</tbody>';
+            html += '</table>';
+            html += '</div>';
+            html += '</div>';
+            $('#price-box').append(html);
+        }
+    }
+    $('#price-box').append('<div class="row"><div class="col-md-12 text-right"><h3><small>Tổng:</small> <span id="total-price" class="color-red" data-base="' + total + '" data-value="' + total + '">' + total.formatMoney(0, ',', '.') + ' VND</span></h3></div></div>');
+    isPrintPrice = true;
+}
 
 function printBaggage() {
     var baggage = {};
@@ -350,13 +369,6 @@ function printBaggage() {
     $('#total-price').data('value', totalPayment);
 }
 
-var chooseTickets;
-var people;
-var isPrintPrice = false;
-var isPrintTickets = false;
-var isPrintPeople = false;
-var isGetBaggages = false;
-
 $(document).ready(function() {
     $.fn.datepicker.defaults.startDate = null;
     chooseTickets = JSON.parse(sessionStorage.getItem('chooseTickets'));
@@ -368,8 +380,8 @@ $(document).ready(function() {
         });
         isGetBaggages = true;
     });
-    printPrice();
     printTickets();
+    printPrice();
     printPeople();
     $('#bind-to-contact').change(function() {
         if ($('#contact-name').val() == '') {
@@ -393,87 +405,6 @@ $(document).ready(function() {
     $('.baggage-return').on('change', function() {
         printBaggage();
     });
-    $('#confirm-btn').click(function() {
-        // checks
-        var isOK = true;
-        $('.required').each(function() {
-            if (!$(this).val() || $(this).val() == 'null') {
-                $(this).closest('.form-group').addClass('has-error');
-                isOK = false;
-            }
-        });
-        if (isOK) {
-            var payment = {
-                method: $('[name=payment_method]').val()
-            };
-            if (payment.method == 'bank') {
-                payment['bank'] = $('[name=payment_bank]:checked').val();
-            }
-            var contact = {
-                name: $('[name=contact_name]').val(),
-                phone: $('[name=contact_phone]').val(),
-                email: $('[name=contact_email]').val()
-            };
-            var price = parseInt($('#total-price').data('value'));
-            var passengers = {};
-            for (type in people) {
-                if (people.hasOwnProperty(type) && people[type] > 0) {
-                    passengers[type] = [];
-                    for (var i = 1; i <= people[type]; i++) {
-                        var item = {
-                            title: $('[name=people_' + type + '_' + i + '_title]').val(),
-                            name: $('[name=people_' + type + '_' + i + '_name]').val(),
-                            birth: $('[name=people_' + type + '_' + i + '_birth]').val(),
-                            address: $('[name=people_' + type + '_' + i + '_address]').val(),
-                            country: $('[name=people_' + type + '_' + i + '_country]').val(),
-                            city: $('[name=people_' + type + '_' + i + '_city]').val(),
-                        };
-                        if ($('[name=people_' + type + '_' + i + '_baggage_depart]').val()) {
-                            if (!item.hasOwnProperty('baggage')) {
-                                item['baggage'] = {};
-                            }
-                            item['baggage']['depart'] = $('[name=people_' + type + '_' + i + '_baggage_depart]').val();
-                        }
-                        if ($('[name=people_' + type + '_' + i + '_baggage_return]').val()) {
-                            if (!item.hasOwnProperty('baggage')) {
-                                item['baggage'] = {};
-                            }
-                            item['baggage']['return'] = $('[name=people_' + type + '_' + i + '_baggage_return]').val();
-                        }
-                        passengers[type].push(item);
-                    }
-                }
-            }
-            $('#confirm-btn').html('Vui lòng đợi...');
-            bookTickets(chooseTickets, passengers, payment, contact, price, people, function(data) {
-                localStorage.setItem('passengers', JSON.stringify(passengers));
-                localStorage.setItem('contact', JSON.stringify(contact));
-                $('#confirm-btn').html('Hoàn tất');
-                window.location.href = '/ve-may-bay/dat-ve/' + data.identity + '-' + data.contact.phone + '.html';
-            }, function() {
-                $('#confirm-btn').html('Hoàn tất');
-            });
-        } else {
-            $('#message-box').modal('show');
-        }
-    });
-
-    var contact = localStorage.getItem('contact');
-    if (contact) {
-        contact = JSON.parse(contact);
-        if (contact['name']) {
-            $('[name=contact_name]').val(contact['name']);
-            $('[name=contact_name]').trigger('change');
-        }
-        if (contact['phone']) {
-            $('[name=contact_phone]').val(contact['phone']);
-            $('[name=contact_phone]').trigger('change');
-        }
-        if (contact['email']) {
-            $('[name=contact_email]').val(contact['email']);
-            $('[name=contact_email]').trigger('change');
-        }
-    }
 
     getList('countries?per-page=1000&fields=country_name', function(data) {
         $.each(data.items, function() {
