@@ -454,4 +454,67 @@ $(document).ready(function() {
             });
         }
     });
+
+    $('#confirm-btn').click(function() {
+        // checks
+        var isOK = true;
+        $('.required').each(function() {
+            if (!$(this).val() || $(this).val() == 'null') {
+                $(this).closest('.form-group').addClass('has-error');
+                isOK = false;
+            }
+        });
+        if (isOK) {
+            var payment = {
+                method: $('[name=payment_method]').val()
+            };
+            if (payment.method == 'bank') {
+                payment['bank'] = $('[name=payment_bank]:checked').val();
+            }
+            var contact = {
+                name: $('[name=contact_name]').val(),
+                phone: $('[name=contact_phone]').val(),
+                email: $('[name=contact_email]').val()
+            };
+            var price = parseInt($('#total-price').data('value'));
+            var passengers = {};
+            for (type in people) {
+                if (people.hasOwnProperty(type) && people[type] > 0) {
+                    passengers[type] = [];
+                    for (var i = 1; i <= people[type]; i++) {
+                        var item = {
+                            title: $('[name=people_' + type + '_' + i + '_title]').val(),
+                            name: $('[name=people_' + type + '_' + i + '_name]').val(),
+                            birth: $('[name=people_' + type + '_' + i + '_birth]').val(),
+                            address: $('[name=people_' + type + '_' + i + '_address]').val(),
+                            country: $('[name=people_' + type + '_' + i + '_country]').val(),
+                            city: $('[name=people_' + type + '_' + i + '_city]').val(),
+                        };
+                        if ($('[name=people_' + type + '_' + i + '_baggage_depart]').val()) {
+                            if (!item.hasOwnProperty('baggage')) {
+                                item['baggage'] = {};
+                            }
+                            item['baggage']['depart'] = $('[name=people_' + type + '_' + i + '_baggage_depart]').val();
+                        }
+                        if ($('[name=people_' + type + '_' + i + '_baggage_return]').val()) {
+                            if (!item.hasOwnProperty('baggage')) {
+                                item['baggage'] = {};
+                            }
+                            item['baggage']['return'] = $('[name=people_' + type + '_' + i + '_baggage_return]').val();
+                        }
+                        passengers[type].push(item);
+                    }
+                }
+            }
+            $('#confirm-btn').html('Vui lòng đợi...');
+            bookTickets(chooseTickets, passengers, payment, contact, price, people, function(data) {
+                $('#confirm-btn').html('Hoàn tất');
+                showNotice('Đặt vé thành công. Mã giao dịch <span class="color-red">' + data.identity + '</span>');
+            }, function() {
+                $('#confirm-btn').html('Hoàn tất');
+            });
+        } else {
+            showNotice('Vui lòng điền đầy đủ thông tin.');
+        }
+    });
 });

@@ -115,7 +115,7 @@ function login(username, password) {
 
 function loginAgain() {
     resetUser();
-    redirect('dang-nhap.html');
+    redirect('/dang-nhap.html');
 }
 
 function logout() {
@@ -186,13 +186,21 @@ function bookTickets(tickets, passengers, payment, contact, price, query, handle
     $.ajax({
         type: 'POST',
         url: API_URL + 'books',
+        headers: {
+            Accept: 'application/json',
+            Authorization: 'Bearer ' + getAccessToken()
+        },
         data: data,
         timeout: 180000,
         success: function(data, textStatus, jqXHR) {
             handle(data);
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            error();
+            if (jqXHR.status == 401) {
+                loginAgain()
+            } else {
+                error();
+            }
         }
     });
 }

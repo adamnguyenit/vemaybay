@@ -10,4 +10,5 @@ return [
     'GET countries' => 'country/index',
     'GET countries/<name>' => 'country/city',
     'POST tickets/search' => 'ticket/search',
+    'POST books' => 'booking/create',
 ];

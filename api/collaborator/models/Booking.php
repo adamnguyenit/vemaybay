@@ -4,7 +4,6 @@ namespace app\models;
 
 use yii\helpers\Json;
 use app\models\Baggage;
-use app\models\User;
 
 class Booking extends \yii\db\ActiveRecord
 {
@@ -17,6 +16,44 @@ class Booking extends \yii\db\ActiveRecord
         'BG35' => 'Hành lý 35kg',
         'BG40' => 'Hành lý 40kg',
     ];
+
+    public static function create($roundTrip, $tickets, $passengers, $payment, $contact, $price, $adult, $child = 0, $infant = 0, $options = [])
+    {
+        $model = new static();
+        $model->round_trip = intval($roundTrip);
+        $model->tickets = Json::encode($tickets);
+        foreach ($passengers as $type => $pass) {
+            foreach ($pass as $index => $passenger) {
+                $passengers[$type][$index]['name'] = static::removeUnicode($passenger['name']);
+                $passengers[$type][$index]['address'] = static::removeUnicode($passenger['address']);
+            }
+        }
+        $model->passengers = Json::encode($passengers);
+        $model->payment = Json::encode($payment);
+        $model->price = intval($price);
+        $model->contact_name = $contact['name'];
+        $model->contact_phone = $contact['phone'];
+        $model->contact_email = $contact['email'];
+        $model->adult = $adult;
+        $model->child = $child;
+        $model->infant = $infant;
+        if (!empty($options)) {
+            $model->options = Json::encode($options);
+        }
+        $model->created_at = time();
+        $currentUser = \Yii::$app->user->identity;
+        if (!empty($currentUser)) {
+            $model->created_by = $currentUser->id;
+        }
+        if (!$model->save()) {
+            return null;
+        }
+        $model->identity = str_pad($model->id, 8, '0', STR_PAD_LEFT);
+        if (!$model->save()) {
+            return null;
+        }
+        return $model;
+    }
 
     public function fields()
     {
@@ -31,14 +68,12 @@ class Booking extends \yii\db\ActiveRecord
             'passengersDetail',
             'ticketsDetail',
             'status',
-            'statusString',
             'createdAt',
             'baggages',
             'billable' => function() {
                 return $this->isBillabe();
             },
             'bill',
-            'createdBy',
         ];
     }
 
@@ -276,14 +311,6 @@ class Booking extends \yii\db\ActiveRecord
         return $options['bill'];
     }
 
-    public function getCreatedBy()
-    {
-        if (empty($this->created_by)) {
-            return null;
-        }
-        return User::findOne($this->created_by);
-    }
-
     public static function decodeDateTime($dateTime)
     {
         $dateTimeArr = explode('T', $dateTime);
@@ -309,5 +336,30 @@ class Booking extends \yii\db\ActiveRecord
             ]
         ];
         return $arr[$type][$title];
+    }
+
+    public static function removeUnicode($str)
+    {
+        $unicodes = [
+            'a' => 'á|à|ả|ã|ạ|ă|ắ|ặ|ằ|ẳ|ẵ|â|ấ|ầ|ẩ|ẫ|ậ',
+            'd' => 'đ',
+            'e' => 'é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ',
+            'i' => 'í|ì|ỉ|ĩ|ị',
+            'o' => 'ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ',
+            'u' => 'ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự',
+            'y' => 'ý|ỳ|ỷ|ỹ|ỵ',
+			'A' => 'Á|À|Ả|Ã|Ạ|Ă|Ắ|Ặ|Ằ|Ẳ|Ẵ|Â|Ấ|Ầ|Ẩ|Ẫ|Ậ',
+            'D' => 'Đ',
+            'E' => 'É|È|Ẻ|Ẽ|Ẹ|Ê|Ế|Ề|Ể|Ễ|Ệ',
+            'I' => 'Í|Ì|Ỉ|Ĩ|Ị',
+            'O' => 'Ó|Ò|Ỏ|Õ|Ọ|Ô|Ố|Ồ|Ổ|Ỗ|Ộ|Ơ|Ớ|Ờ|Ở|Ỡ|Ợ',
+            'U' => 'Ú|Ù|Ủ|Ũ|Ụ|Ư|Ứ|Ừ|Ử|Ữ|Ự',
+            'Y' => 'Ý|Ỳ|Ỷ|Ỹ|Ỵ',
+        ];
+        $result = $str;
+        foreach($unicodes as $nonUnicode => $unicode){
+            $result = preg_replace("/($unicode)/i", $nonUnicode, $result);
+        }
+        return strtoupper($result);
     }
 }
