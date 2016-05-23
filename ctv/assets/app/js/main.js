@@ -134,7 +134,7 @@ function logout() {
     });
 }
 
-function getList(endpoint, handle) {
+function getList(endpoint, handle, error) {
     $.ajax({
         type: 'GET',
         url: API_URL + endpoint,
@@ -144,6 +144,13 @@ function getList(endpoint, handle) {
         },
         success: function(data, textStatus, jqXHR) {
             handle(data);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            if (jqXHR.status == 401) {
+                loginAgain()
+            } else {
+                error();
+            }
         }
     });
 }
