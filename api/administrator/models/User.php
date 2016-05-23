@@ -77,6 +77,11 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface, \
         return $model;
     }
 
+    public function getTotalBookings()
+    {
+        return intval(Booking::find()->where(['created_by' -> $this->id])->count());
+    }
+
     public function fields()
     {
         return [
@@ -104,7 +109,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface, \
                     return null;
                 }
                 return date('H:i:s d-m-Y', $this->last_used);
-            }
+            },
+            'totalBookings',
         ];
     }
 }
