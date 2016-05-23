@@ -79,7 +79,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface, \
 
     public function getTotalBookings()
     {
-        return intval(Booking::find()->where(['created_by' -> $this->id])->count());
+        return intval(Booking::find()->where(['created_by' => $this->id])->count());
     }
 
     public function fields()
