@@ -11,4 +11,9 @@ return [
     'GET countries/<name>' => 'country/city',
     'POST tickets/search' => 'ticket/search',
     'POST books' => 'booking/create',
+    'GET bookings' => 'booking/list',
+    'GET bookings/canceled' => 'booking/list-canceled',
+    'GET bookings/completed' => 'booking/list-completed',
+    'GET bookings/uncompleted' => 'booking/list-uncompleted',
+    'GET bookings/count-uncompleted' => 'booking/count-uncompleted',
 ];

@@ -55,7 +55,7 @@ $bundle = AppAsset::register($this);
                             <li class="dropdown">
                                 <a href="/giao-dich.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-exchange"></i> Giao dịch <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/giao-dich/danh-sach.html">Danh sách</a></li>
+                                    <li><a href="/giao-dich.html">Danh sách</a></li>
                                     <li><a href="/giao-dich/chua-xuat-ve.html">Chưa xuất vé</a></li>
                                     <li><a href="/giao-dich/da-xuat-ve.html">Đã xuất vé</a></li>
                                     <li role="separator" class="divider"></li>

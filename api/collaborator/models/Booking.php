@@ -68,12 +68,14 @@ class Booking extends \yii\db\ActiveRecord
             'passengersDetail',
             'ticketsDetail',
             'status',
+            'statusString',
             'createdAt',
             'baggages',
             'billable' => function() {
                 return $this->isBillabe();
             },
             'bill',
+            'selectedTicketOptions',
         ];
     }
 

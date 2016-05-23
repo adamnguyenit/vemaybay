@@ -6,6 +6,7 @@ use app\models\Booking;
 use app\models\Notification;
 use yii\web\BadRequestHttpException;
 use yii\helpers\Json;
+use yii\data\ActiveDataProvider;
 
 class BookingController extends Controller
 {
@@ -32,26 +33,86 @@ class BookingController extends Controller
 
     public function actionList()
     {
-        $bookings = Booking::find()->where(['created_by' => $this->getCurrentuserId()])->orderBy(['created_at' => SORT_DESC])->all();
-        return $bookings;
+        $query = Booking::find()->where(['created_by' => $this->getCurrentuserId()]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'created_at' => SORT_DESC,
+                ],
+            ],
+            'pagination' => [
+                'pageSize' => 0,
+            ],
+        ]);
+        if (\Yii::$app->response->format == 'html') {
+            \Yii::$app->response->format = 'json';
+        }
+
+        return $dataProvider;
     }
 
     public function actionListCompleted()
     {
-        $bookings = Booking::find()->where(['created_by' => $this->getCurrentuserId(), 'status' => 1])->orderBy(['created_at' => SORT_DESC])->all();
-        return $bookings;
+        $query = Booking::find()->where(['created_by' => $this->getCurrentuserId(), 'status' => 1]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'created_at' => SORT_DESC,
+                ],
+            ],
+            'pagination' => [
+                'pageSize' => 0,
+            ],
+        ]);
+        if (\Yii::$app->response->format == 'html') {
+            \Yii::$app->response->format = 'json';
+        }
+
+        return $dataProvider;
     }
 
     public function actionListUncompleted()
     {
-        $bookings = Booking::find()->where(['created_by' => $this->getCurrentuserId(), 'status' => 0])->orderBy(['created_at' => SORT_DESC])->all();
-        return $bookings;
+        $query = Booking::find()->where(['created_by' => $this->getCurrentuserId(), 'status' => 0]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'created_at' => SORT_DESC,
+                ],
+            ],
+            'pagination' => [
+                'pageSize' => 0,
+            ],
+        ]);
+        if (\Yii::$app->response->format == 'html') {
+            \Yii::$app->response->format = 'json';
+        }
+
+        return $dataProvider;
     }
 
     public function actionListCanceled()
     {
-        $bookings = Booking::find()->where(['created_by' => $this->getCurrentuserId(), 'status' => -1])->orderBy(['created_at' => SORT_DESC])->all();
-        return $bookings;
+        $query = Booking::find()->where(['created_by' => $this->getCurrentuserId(), 'status' => -1]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'created_at' => SORT_DESC,
+                ],
+            ],
+            'pagination' => [
+                'pageSize' => 0,
+            ],
+        ]);
+        if (\Yii::$app->response->format == 'html') {
+            \Yii::$app->response->format = 'json';
+        }
+
+        return $dataProvider;
     }
 
     public function actionCountUncompleted()
