@@ -37,6 +37,16 @@ angular.module('com.module.bookings')
             }
             $scope.onView = function (item) {
                 $scope.viewItem = item;
+                for(type in item.priceDetail){
+                    var typePrices = item.priceDetail[type];
+                    typePrices.total = 0;
+                    for(typePaxs in typePrices){
+                        var typePax = typePrices[typePaxs]
+                        for(money in typePax){
+                            typePrices.total += typePax[money].total;
+                        }
+                    }
+                }
             }
         })
 	})

@@ -52,6 +52,14 @@
                     </div>
                     <i class="fa fa-exchange sort-me" ng-hide="myOrder =='createdAt'"></i>
                 </th>
+                <th ng-click="orderMe('createdBy.name')">
+                    Tạo bởi
+                    <div class="sorting" ng-show="myOrder =='createdBy.name'">
+                        <i class="fa fa-sort-amount-asc" ng-show="!myReverse"></i>
+                        <i class="fa fa-sort-amount-desc" ng-show="myReverse"></i>
+                    </div>
+                    <i class="fa fa-exchange sort-me" ng-hide="myOrder =='createdBy.name'"></i>
+                </th>
                 <th></th>
             </tr>
             </thead>
@@ -70,6 +78,10 @@
                     {{item.createdAt}}
                 </td>
                 <td>
+                    {{item.createdBy.name}}
+                </td>
+                <td>
+                    <span class="btn btn-primary btn-xs" data-toggle="modal" data-target="#bookingModal" ng-click="onView(item)">Xem</span>
                     <span class="btn btn-danger btn-xs" ng-click="deleteBooking(item.identity)">Xóa</span>
                 </td>
             </tr>
@@ -92,4 +104,354 @@
     </div>
 </div>
 
-  
+<!--view booking detail-->
+<div class="modal fade" id="bookingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="basic-info">
+                    <h4 class="modal-title" id="myModalLabel">Giao dịch #{{viewItem.identity}}</h4>
+                    <p>{{viewItem.createdAt}}</p>
+                    <p><span class="text-blue">Tình trạng:</span> {{viewItem.statusString}}</p>
+                    <p><span class="text-blue">Tổng giá trị giao dịch:</span> <span class="text-red">{{viewItem.price|currency:'':0}} VND</span></p>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="receipt-info" ng-show="viewItem.billable">
+                    <h4 class="modal-title">Xuất hoá đơn</h4>
+                    <div class="info-group">
+                        <h5><strong>Tên công ty</strong></h5>
+                        <p>{{viewItem.bill.name}}</p>
+                    </div>
+                    <div class="info-group">
+                        <h5><strong>Địa chỉ công ty</strong></h5>
+                        <p>{{viewItem.bill.address}}</p>
+                    </div>
+                    <div class="info-group">
+                        <h5><strong>Mã số thuế</strong></h5>
+                        <p>{{viewItem.bill.code}}</p>
+                    </div>
+                    <div class="info-group">
+                        <h5><strong>Địa chỉ người nhận</strong></h5>
+                        <p>{{viewItem.bill.contact}}</p>
+                    </div>
+                    <div class="info-group">
+                        <h5><strong>Số điện thoại người nhận</strong></h5>
+                        <p>{{viewItem.bill.phone}}</p>
+                    </div>
+                </div>
+                <div class="price-detail">
+                    <h4 class="modal-title">Bảng giá chi tiết</h4>
+                    <div class="depart">
+                        <div class="table-wraper">
+                            <table class="table text-black" style="background-color: #ffffff" ng-repeat="flightDetail in viewItem.ticketsDetail.depart.ticket.flightDetails">
+                                <thead>
+                                <tr>
+                                    <td>{{flightDetail.from}} - {{flightDetail.to}}</td>
+                                </tr>
+                                </thead>
+                                <tbody ng-repeat="ticketOption in viewItem.ticketsDetail.depart.ticket.ticketOptions" ng-show="viewItem.ticketsDetail.depart.fareBasis == ticketOption.fareBasis">
+                                <tr ng-repeat="net in ticketOption.priceSummary.net">
+                                    <td>
+                                        {{net.description}}
+                                    </td>
+                                    <td>
+                                        {{net.price|currency:'':0}}
+                                    </td>
+                                    <td>
+                                        x{{net.quantity}}
+                                    </td>
+                                    <td class="text-red">
+                                        {{net.total|currency:'':0}}
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="tax in ticketOption.priceSummary.tax">
+                                    <td>
+                                        {{tax.description}}
+                                    </td>
+                                    <td>
+                                        {{tax.price|currency:'':0}}
+                                    </td>
+                                    <td>
+                                        x{{tax.quantity}}
+                                    </td>
+                                    <td class="text-red">
+                                        {{tax.total|currency:'':0}}
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="bg in viewItem.baggages.depart">
+                                    <td>{{bg.description}}</td>
+                                    <td>{{bg.price|currency:'':0}}</td>
+                                    <td>x{{bg.quantity}}</td>
+                                    <td class="text-red">{{bg.total|currency:'':0}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Thành tiền:</strong></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-red">
+                                        {{viewItem.priceDetail.depart.total|currency:'':0}}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="return" ng-show="viewItem.ticketsDetail.return">
+                        <div class="table-wraper">
+                            <table class="table text-black" style="background-color: #ffffff" ng-repeat="flightDetail in viewItem.ticketsDetail.return.ticket.flightDetails">
+                                <thead>
+                                <tr>
+                                    <td>{{flightDetail.from}} - {{flightDetail.to}}</td>
+                                </tr>
+                                </thead>
+                                <tbody ng-repeat="ticketOption in viewItem.ticketsDetail.return.ticket.ticketOptions" ng-show="viewItem.ticketsDetail.return.fareBasis == ticketOption.fareBasis">
+                                <tr ng-repeat="net in ticketOption.priceSummary.net">
+                                    <td>
+                                        {{net.description}}
+                                    </td>
+                                    <td>
+                                        {{net.price|currency:'':0}}
+                                    </td>
+                                    <td>
+                                        x{{net.quantity}}
+                                    </td>
+                                    <td class="text-red">
+                                        {{net.total|currency:'':0}}
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="tax in ticketOption.priceSummary.tax">
+                                    <td>
+                                        {{tax.description}}
+                                    </td>
+                                    <td>
+                                        {{tax.price|currency:'':0}}
+                                    </td>
+                                    <td>
+                                        x{{tax.quantity}}
+                                    </td>
+                                    <td class="text-red">
+                                        {{tax.total|currency:'':0}}
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="bg in viewItem.baggages.depart">
+                                    <td>{{bg.description}}</td>
+                                    <td>{{bg.price|currency:'':0}}</td>
+                                    <td>x{{bg.quantity}}</td>
+                                    <td class="text-red">{{bg.total|currency:'':0}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Thành tiền:</strong></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-red">
+                                        {{viewItem.priceDetail.return.total|currency:'':0}}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="total-price">
+                        <p class="total-price-text">Tổng cộng: <span class="text-red">{{viewItem.price|currency:'':0}} VND</span></p>
+                    </div>
+                </div>
+                <div class="payment-method">
+                    <h4 class="modal-title">Phương thức thanh toán</h4>
+                    <p ng-show="viewItem.paymentDetail.method == 'at_store'">Tại văn phòng <span class="text-red">Vé Máy Bay Hải Phi Yến</span></p>
+                    <p ng-show="viewItem.paymentDetail.method == 'bank'">
+                        Chuyển khoản ngân hàng
+                        <span class="text-red" ng-show="viewItem.paymentDetail.bank == 'hdbank'"> HDBank</span>
+                        <span class="text-red" ng-show="viewItem.paymentDetail.bank == 'vietcombank'"> Vietcombank</span>
+                        <span class="text-red" ng-show="viewItem.paymentDetail.bank == 'mbbank'"> MBBank</span>
+                        <span class="text-red" ng-show="viewItem.paymentDetail.bank == 'techcombank'"> Techcombank</span>
+                        <span class="text-red" ng-show="viewItem.paymentDetail.bank == 'agribank'"> Agribank</span>
+                        <span class="text-red" ng-show="viewItem.paymentDetail.bank == 'bidv'"> BIDV</span>
+                    </p>
+                </div>
+                <div class="contact-info">
+                    <h4 class="modal-title">Liên hệ</h4>
+                    <div class="info-group">
+                        <h5><strong>Họ và tên</strong></h5>
+                        <p>{{viewItem.contact.name}}</p>
+                    </div>
+                    <div class="info-group">
+                        <h5><strong>Số điện thoại</strong></h5>
+                        <p>{{viewItem.contact.phone}}</p>
+                    </div>
+                    <div class="info-group">
+                        <h5><strong>Email</strong></h5>
+                        <p>{{viewItem.contact.email}}</p>
+                    </div>
+                </div>
+                <div class="ticket-info">
+                    <h4 class="modal-title">Hành trình</h4>
+                    <div class="depart">
+                        <p><strong>{{viewItem.ticketsDetail.depart.ticket.fromPlace}}</strong> đến <strong>{{viewItem.ticketsDetail.depart.ticket.toPlace}}</strong></p>
+                        <p ng-repeat="ticketOption in viewItem.ticketsDetail.depart.ticket.ticketOptions">
+                            <span ng-show="viewItem.ticketsDetail.depart.fareBasis == ticketOption.fareBasis">
+                                Hạng ghế: {{ticketOption.ticketType}}
+                            </span>
+                        </p>
+                        <div class="table-wraper">
+                            <table class="table text-black" style="background-color: #ffffff" ng-repeat="flightDetail in viewItem.ticketsDetail.depart.ticket.flightDetails">
+                                <thead>
+                                <tr>
+                                    <td>{{flightDetail.from}}</td>
+                                    <td><i class="fa fa-plane"></i></td>
+                                    <td>{{flightDetail.to}}</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        {{flightDetail.departTime}}
+                                    </td>
+                                    <td>
+                                        {{flightDetail.flightNumber}}
+                                    </td>
+                                    <td>
+                                        {{flightDetail.landingTime}}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="return" ng-show="viewItem.ticketsDetail.return">
+                        <p><strong>{{viewItem.ticketsDetail.return.ticket.fromPlace}}</strong> đến <strong>{{viewItem.ticketsDetail.return.ticket.toPlace}}</strong></p>
+                        <p ng-repeat="ticketOption in viewItem.ticketsDetail.return.ticket.ticketOptions">
+                            <span ng-show="viewItem.ticketsDetail.return.fareBasis == ticketOption.fareBasis">
+                                Hạng ghế: {{ticketOption.ticketType}}
+                            </span>
+                        </p>
+                        <div class="table-wraper">
+                            <table class="table text-black" style="background-color: #ffffff" ng-repeat="flightDetail in viewItem.ticketsDetail.return.ticket.flightDetails">
+                                <thead>
+                                <tr>
+                                    <td>{{flightDetail.from}}</td>
+                                    <td><i class="fa fa-plane"></i></td>
+                                    <td>{{flightDetail.to}}</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        {{flightDetail.departTime}}
+                                    </td>
+                                    <td>
+                                        {{flightDetail.flightNumber}}
+                                    </td>
+                                    <td>
+                                        {{flightDetail.landingTime}}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="passenger-detail">
+                    <h4 class="modal-title">Hành khách</h4>
+                    <p>Người lớn: <span class="text-red">{{viewItem.people.adult}}</span>, trẻ em: <span class="text-red">{{viewItem.people.child}}</span>, em bé: <span class="text-red">{{viewItem.people.infant}}</span></p>
+                    <div class="table-wraper">
+                        <table class="table text-black" style="background-color: #ffffff">
+                            <thead>
+                            <tr>
+                                <td></td>
+                                <td>Họ và tên</td>
+                                <td>Năm sinh</td>
+                                <td>Địa chỉ</td>
+                                <td>Tỉnh/thành phố</td>
+                                <td>Quốc gia</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="adult in viewItem.passengersDetail.adult">
+                                <td>
+                                    <span ng-if="adult.title == 'MR'">Ông</span>
+                                    <span ng-if="adult.title == 'MRS'">Bà</span>
+                                </td>
+                                <td>{{adult.name}}</td>
+                                <td>{{adult.birth}}</td>
+                                <td>{{adult.address}}</td>
+                                <td>{{adult.city}}</td>
+                                <td>{{adult.country}}</td>
+                            </tr>
+                            <tr ng-repeat="child in viewItem.passengersDetail.child">
+                                <td>
+                                    <span ng-if="child.title == 'MR'">Anh</span>
+                                    <span ng-if="child.title == 'MRS'">Chị</span>
+                                </td>
+                                <td>{{child.name}}</td>
+                                <td>{{child.birth}}</td>
+                                <td>{{child.address}}</td>
+                                <td>{{child.city}}</td>
+                                <td>{{child.country}}</td>
+                            </tr>
+                            <tr ng-repeat="infant in viewItem.passengersDetail.infant">
+                                <td>
+                                    <span ng-if="infant.title == 'MR'">Bé trai</span>
+                                    <span ng-if="infant.title == 'MRS'">Bé gái</span>
+                                </td>
+                                <td>{{infant.name}}</td>
+                                <td>{{infant.birth}}</td>
+                                <td>{{infant.address}}</td>
+                                <td>{{infant.city}}</td>
+                                <td>{{infant.country}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="baggage-detail">
+                    <h4 class="modal-title">Hành lý</h4>
+                    <span ng-show="!viewItem.baggages.depart && !viewItem.baggages.return" class="text-red">Hành lý xách tay</span>
+                    <div class="baggage-depart" ng-show="viewItem.baggages.depart">
+                        <p>Chặng: <strong>{{viewItem.ticketsDetail.depart.ticket.fromPlace}} - {{viewItem.ticketsDetail.depart.ticket.toPlace}}</strong></p>
+                        <div class="table-wraper">
+                            <table class="table text-black" style="background-color: #ffffff">
+                                <thead>
+                                <tr>
+                                    <td>Loại</td>
+                                    <td>Số lượng</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="bg in viewItem.baggages.depart">
+                                    <td>{{bg.description}}</td>
+                                    <td>{{bg.quantity}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="baggage-return" ng-show="viewItem.baggages.return">
+                        <p>Chặng: <strong>{{viewItem.ticketsDetail.return.ticket.fromPlace}} - {{viewItem.ticketsDetail.return.ticket.toPlace}}</strong></p>
+                        <div class="table-wraper">
+                            <table class="table text-black" style="background-color: #ffffff">
+                                <thead>
+                                <tr>
+                                    <td>Loại</td>
+                                    <td>Số lượng</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="bg in viewItem.baggages.return">
+                                    <td>{{bg.description}}</td>
+                                    <td>{{bg.quantity}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

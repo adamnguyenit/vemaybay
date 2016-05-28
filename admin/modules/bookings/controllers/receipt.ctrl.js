@@ -4,6 +4,7 @@ angular.module('com.module.bookings')
         $scope.searchText = '';
         ApiService.find('bookings/new-bill', localStorage.accessToken, function (response) {
             $scope.receipts = response.data;
+            console.log($scope.receipts)
             $scope.myOrder = '';
             $scope.myReverse = true;
             $scope.loading = false;

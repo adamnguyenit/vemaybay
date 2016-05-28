@@ -53,6 +53,24 @@ class BookingController extends Controller
         return $bookings;
     }
 
+    public function actionUpdateStatus($identity)
+    {
+        $model = Booking::find()->where(['identity' => $identity])->limit(1)->one();
+        if ($model === null || !$model->delete()) {
+            throw new BadRequestHttpException();
+        }
+        $status = \Yii::$app->request->post('status');
+        if ($status === null) {
+            throw new BadRequestHttpException();
+        }
+        $model->status = $status;
+        if (!$model->save()) {
+            throw new BadRequestHttpException();
+        }
+
+        return $model;
+    }
+
     public function actionListCompleted()
     {
         $bookings = Booking::find()->where(['status' => 1])->orderBy(['created_at' => SORT_DESC])->all();

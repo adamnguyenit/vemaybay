@@ -38,6 +38,7 @@ return [
     'GET bookings/count-new-bill' => 'booking/count-new-bill',
     'GET bookings/new-bill' => 'booking/list-new-bill',
     'GET bookings/<identity>' => 'booking/info',
+    'PUT bookings/<identity>/status' => 'booking/update-status',
     'DELETE bookings/<identity>' => 'booking/delete',
     'DELETE bookings/<identity>/bill' => 'booking/delete-bill',
 ];

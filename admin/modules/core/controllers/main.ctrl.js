@@ -32,7 +32,6 @@ angular.module('com.module.core')
         }
 
         $rootScope.stateStarter = $state.current;
-        console.log($rootScope.stateStarter)
 
         $scope.menuoptions = [{
             "menuList": [
@@ -52,9 +51,6 @@ angular.module('com.module.core')
                     }, {
                         "name": "Tạo tài khoản",
                         "sref": "app.users.add"
-                    }, {
-                        "name": "Thống kê",
-                        "sref": ""
                     }]
                 }, {
                     "name": "Khuyến mãi",

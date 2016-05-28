@@ -104,7 +104,10 @@ th {
 }
 td {
   color: #777;
-  word-break: break-all;
+}
+
+.text-black td{
+  color: #333;
 }
 
 td span{
@@ -148,6 +151,34 @@ td span{
 .text-center ul.pagination {
   margin-bottom: 30px;
 }
+.receipt-info, .contact-info, .ticket-info, .price-detail, .passenger-detail, .payment-method {
+  border-bottom: 1px solid silver;
+}
+.basic-info, .receipt-info, .contact-info, .ticket-info h4{
+  margin-bottom: 15px;
+}
+.basic-info, .receipt-info, .contact-info, .ticket-info p{
+  line-height: 10px;
+}
+.depart-time, .flight-number, .landing-time{
+  display: inline-block;
+  padding-right: 5%;
+}
+.table-wraper{
+  width: 100%;
+}
+.total-price{
+  position: relative;
+  height: 30px;
+}
+.total-price-text{
+  position: absolute;
+  right: 20px;
+}
+.total-price-text span{
+  font-size: 18px;
+}
+
 /*responsive*/
 @media screen and (max-width: 460px){
   .show-image{
@@ -178,9 +209,10 @@ td span{
   .select-item-perpage{
     margin-bottom: 15px;
   }
-}
-@media screen and (max-width: 991px){
   html, body{
     overflow-x: hidden!important;
+  }
+  .table-wraper{
+    overflow-x: scroll;
   }
 }
