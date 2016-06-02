@@ -9,7 +9,7 @@ class CheapestTicketController extends Controller
 {
     public function actionList()
     {
-        $models = CheapestTicket::findAll();
+        $models = CheapestTicket::find()->orderBy(['created_at' => SORT_DESC])->all();
         return $models;
     }
 
