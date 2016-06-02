@@ -5,7 +5,7 @@ angular.module('com.module.panel')
         $scope.loading = true;
         $scope.searchText = '';
         ApiService.find('slides', localStorage.accessToken, function (response) {
-
+    console.log(response.data)
             $scope.slides = response.data;
             $scope.myOrder = '';
             $scope.myReverse = true;
@@ -28,7 +28,7 @@ angular.module('com.module.panel')
             };
             $scope.deleteSlide = function (id) {
                 CoreService.confirm('Xác nhận', 'Bạn có thực sự muốn xóa', function () {
-                    ApiService.deleteById('slides', localStorage.accessToken, id, function () {
+                    ApiService.deleteSP('slides', localStorage.accessToken, id, function () {
                         ApiService.find('slides', localStorage.accessToken, function (response) {
                             CoreService.toastSuccess('Success!');
                             $scope.slides = response.data;
@@ -45,7 +45,7 @@ angular.module('com.module.panel')
                 $scope.editItem = item;
             }
             $scope.editSlide = function(item){
-                ApiService.update('slides', localStorage.accessToken, item, function(){
+                ApiService.editSP('slides', localStorage.accessToken, item.id, item, function(){
                     ApiService.find('slides', localStorage.accessToken, function (response) {
                         CoreService.toastSuccess('Success!');
                         $scope.slides = response.data;

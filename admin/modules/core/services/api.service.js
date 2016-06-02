@@ -6,7 +6,6 @@ app.service('ApiService', function ($http, $window, $location, CoreService, $sta
 
 
     function error(response) {
-        console.log(response)
         if (response.status == 401) {
             var config = {
                 title: 'Thông báo',
@@ -114,8 +113,7 @@ app.service('ApiService', function ($http, $window, $location, CoreService, $sta
             url: apiURL + endPoint,
             data: data,
             headers: {
-                'Authorization': 'Bearer ' + token,
-                'contentType': undefined
+                'Authorization': 'Bearer ' + token
             }
         })
             .then(function successCallback(response) {
@@ -217,5 +215,72 @@ app.service('ApiService', function ($http, $window, $location, CoreService, $sta
             });
     }
 
-    
+    this.updateStatusBooking = function(token, item, successCb){
+        $http({
+            method: 'PUT',
+            url: apiURL + 'bookings/' + item.identity + '/status',
+            data: {status: item.status},
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+            .then(function successCallback(response) {
+                successCb(response);
+                return;
+            }, function errorCallback(response) {
+                error(response);
+                return;
+            });
+    }
+
+    this.addSP = function (endpoint, token, data, successCb, errorCb) {
+        $http({
+            method: 'POST',
+            url: apiURL + endpoint,
+            data: data,
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': undefined
+            }
+        })
+            .then(function successCallback(response) {
+                successCb(response);
+            }, function errorCallback(response) {
+                error(response);
+            });
+    }
+
+    this.editSP = function (endpoint, token, id, data, successCb, errorCb) {
+        $http({
+            method: 'PUT',
+            url: apiURL + endpoint + '/' + id,
+            data: data,
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': undefined
+            }
+        })
+            .then(function successCallback(response) {
+                successCb(response);
+            }, function errorCallback(response) {
+                error(response);
+            });
+    }
+
+    this.deleteSP = function (endpoint, token, id, successCb, errorCb) {
+        $http({
+            method: 'DELETE',
+            url: apiURL + endpoint + '/' + id,
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+            .then(function successCallback(response) {
+                successCb(response);
+            }, function errorCallback(response) {
+                error(response);
+            });
+    }
+
+
 });

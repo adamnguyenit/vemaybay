@@ -48,5 +48,25 @@ angular.module('com.module.bookings')
                     }
                 }
             }
+            $scope.showUpdateModal = function(item){
+                switch (item.status) {
+                    case 0: $scope.statusBooking = 'Chưa xuất vé'; break;
+                    case 1: $scope.statusBooking = 'Đã xuất vé'; break;
+                    case -1: $scope.statusBooking = 'Đã huỷ'; break;
+                }
+                $scope.updateStatusBooking = function(status){
+                    switch (status) {
+                        case 'Chưa xuất vé': item.status = 0; break;
+                        case 'Đã xuất vé': item.status = 1; break;
+                        case 'Đã huỷ': item.status = -1; break;
+                    }
+                    ApiService.updateStatusBooking(localStorage.accessToken, item, function(){
+                        ApiService.find('bookings/completed', localStorage.accessToken, function(result){
+                            $scope.bookings = result.data;
+                            CoreService.toastSuccess('Success!');
+                        })
+                    })
+                }
+            }
         })
 	})

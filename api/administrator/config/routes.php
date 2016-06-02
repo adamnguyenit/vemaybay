@@ -41,4 +41,8 @@ return [
     'PUT bookings/<identity>/status' => 'booking/update-status',
     'DELETE bookings/<identity>' => 'booking/delete',
     'DELETE bookings/<identity>/bill' => 'booking/delete-bill',
+    'GET cheapest' => 'cheapest-ticket/list',
+    'POST cheapest' => 'cheapest-ticket/create',
+    'PUT cheapest/<id>' => 'cheapest-ticket/update',
+    'DELETE cheapest/<id>' => 'cheapest-ticket/delete',
 ];

@@ -61,7 +61,7 @@
                     {{items.indexOf(item) + 1}}
                 </td>
                 <td>
-                    <img src="{{item.image}}" class="image-table">
+                    <img ng-src="{{item.image}}" class="image-table">
                     <button class="btn btn-default show-image" data-toggle="modal" data-target="#viewImage">Show</button>
                     <div class="modal fade" id="viewImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
@@ -71,7 +71,7 @@
                                             aria-hidden="true">&times;</span></button>
                                 </div>
                                 <div class="modal-body">
-                                    <img src="{{item.image}}" style="width: 100%">
+                                    <img ng-src="{{item.image}}" style="width: 100%">
                                 </div>
                             </div>
                         </div>

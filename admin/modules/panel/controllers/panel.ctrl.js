@@ -27,7 +27,7 @@ angular.module('com.module.panel')
             };
             $scope.deletePanel = function (id) {
                 CoreService.confirm('Xác nhận', 'Bạn có thực sự muốn xóa', function () {
-                    ApiService.deleteById('panels', localStorage.accessToken, id, function () {
+                    ApiService.deleteSP('panels', localStorage.accessToken, id, function () {
                         ApiService.find('panels', localStorage.accessToken, function (response) {
                             CoreService.toastSuccess('Success!');
                             $scope.panels = response.data;
@@ -44,7 +44,7 @@ angular.module('com.module.panel')
                 $scope.editItem = item;
             }
             $scope.editPanel = function(item){
-                ApiService.update('panels', localStorage.accessToken, item, function(){
+                ApiService.editSP('panels', localStorage.accessToken, item.id, item, function(){
                     ApiService.find('panels', localStorage.accessToken, function (response) {
                         CoreService.toastSuccess('Success!');
                         $scope.panels = response.data;

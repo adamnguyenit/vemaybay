@@ -21,14 +21,14 @@ angular.module('com.module.news')
                 $scope.loading = false;
                 $scope.news = response.data;
                 $('#editor').html(response.data.content)
+                $scope.onSubmit = function () {
+                    $scope.news.content = $('#editor').cleanHtml();
+                    ApiService.update('newses', localStorage.accessToken, $stateParams.id, $scope.news, function (response) {
+                        CoreService.toastSuccess('Success!');
+                        $state.go('app.news.list');
+                    })
+                }
             })
-            $scope.onSubmit = function () {
-                $scope.news.content = $('#editor').cleanHtml();
-                ApiService.update('newses', localStorage.accessToken, $scope.news, function (response) {
-                    CoreService.toastSuccess('Success!');
-                    $state.go('app.news.list');
-                })
-            }
         } else {
             $scope.loading = false;
             $scope.news = {};

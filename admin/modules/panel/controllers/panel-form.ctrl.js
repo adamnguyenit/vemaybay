@@ -12,7 +12,7 @@ angular.module('com.module.panel')
             formData.append('image', image);
             formData.append('link', link);
             formData.append('index', index);
-            ApiService.create('panels', localStorage.accessToken, formData, function (response) {
+            ApiService.addSP('panels', localStorage.accessToken, formData, function (response) {
                 CoreService.toastSuccess('Success!');
                 $state.go('app.panel.list');
             })

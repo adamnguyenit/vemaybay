@@ -24,7 +24,7 @@ angular.module('com.module.promo')
             })
             $scope.onSubmit = function () {
                 $scope.promo.content = $('#editor').cleanHtml();
-                ApiService.update('promotions-news', localStorage.accessToken, $scope.promo, function (response) {
+                ApiService.update('promotions-news', localStorage.accessToken, $stateParams.id, $scope.promo, function (response) {
                     CoreService.toastSuccess('Success!');
                     $state.go('app.promo.list');
                 })
