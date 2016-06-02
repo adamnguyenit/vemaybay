@@ -13,6 +13,7 @@ class m160602_134052_cheapest extends Migration
             'date_depart' => $this->string(),
             'expect' => $this->integer(),
             'price' => $this->integer(),
+            'source' => $this->string(),
             'created_at' => $this->integer(),
             'updated_at'=> $this->integer(),
         ]);

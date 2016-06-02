@@ -20,6 +20,7 @@ class CheapestTicketController extends Controller
         $model->to = \Yii::$app->request->post('to');
         $model->date_depart = \Yii::$app->request->post('date_depart');
         $model->expect = \Yii::$app->request->post('expect');
+        $model->created_at = time();
         if (!$model->save()) {
             throw new BadRequestHttpException();
         }
