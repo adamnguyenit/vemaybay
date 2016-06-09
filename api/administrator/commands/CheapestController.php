@@ -12,9 +12,10 @@ class CheapestController extends \yii\console\Controller
     public function actionFind()
     {
         $count = 0;
+        $titles = [];
         $models = CheapestTicket::find()->all();
         foreach ($models as $model) {
-            $cheapest = empty($model->price) ? null : $model->price;
+            $cheapest = null;
             $cheapestSource = null;
             $realDepartDate = $this->_convertDate($model->date_depart);
             $data = [
@@ -43,13 +44,14 @@ class CheapestController extends \yii\console\Controller
                 $model->updated_at = time();
                 $model->save();
                 if ($cheapest <= $model->expect) {
+                    $titles[] = $model->title;
                     $count++;
                 }
             }
         }
         echo "$count\n";
         if ($count > 0) {
-            $this->sendMail("Bạn có $count chặng vé rẻ đạt yêu cầu", 'cheapest/notice', ['total' => $count]);
+            $this->sendMail("Bạn có $count chặng vé rẻ đạt yêu cầu", 'cheapest/notice', ['total' => $count, 'titles' => $titles]);
         }
     }
 
