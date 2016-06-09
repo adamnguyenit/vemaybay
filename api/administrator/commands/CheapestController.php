@@ -44,7 +44,7 @@ class CheapestController extends \yii\console\Controller
                 $model->source = $cheapestSource;
                 $model->updated_at = time();
                 $model->save();
-                if (($current !== null || $cheapest != $current) && $cheapest <= $model->expect) {
+                if (($current === null || $cheapest != $current) && $cheapest <= $model->expect) {
                     $result[] = $model;
                     $count++;
                 }
