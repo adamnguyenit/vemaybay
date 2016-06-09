@@ -15,6 +15,7 @@ class CheapestController extends \yii\console\Controller
         $result = [];
         $models = CheapestTicket::find()->all();
         foreach ($models as $model) {
+            $current = $model->price !== null ? $model->price : null;
             $cheapest = null;
             $cheapestSource = null;
             $realDepartDate = $this->_convertDate($model->date_depart);
@@ -43,7 +44,7 @@ class CheapestController extends \yii\console\Controller
                 $model->source = $cheapestSource;
                 $model->updated_at = time();
                 $model->save();
-                if ($cheapest <= $model->expect) {
+                if (($current !== null && $cheapest != $current) && $cheapest <= $model->expect) {
                     $result[] = $model;
                     $count++;
                 }
